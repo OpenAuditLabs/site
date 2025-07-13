@@ -78,6 +78,59 @@ This project follows Next.js best practices and modern development standards:
 - **Performance**: Optimized images, fonts, and assets
 - **Accessibility**: WCAG 2.1 AA compliance standards
 
+## Folder Structure
+
+Below is the main folder structure of the project:
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── favicon.ico
+│   ├── globals.css         # Global styles
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Homepage
+│
+├── components/             # Reusable components
+│   ├── animations/         # Motion/animation components (client-side only)
+│   │   ├── FadeIn.tsx
+│   │   ├── StaggerAnimation.tsx
+│   │   └── index.ts
+│   │
+│   ├── layout/             # Layout components (SSR-friendly)
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Layout.tsx
+│   │   └── index.ts
+│   │
+│   ├── sections/           # Page sections (SSR-friendly)
+│   │   ├── HeroSection.tsx
+│   │   ├── ServicesSection.tsx
+│   │   ├── TechnologySection.tsx
+│   │   ├── PricingSection.tsx
+│   │   ├── ContactSection.tsx
+│   │   └── index.ts
+│   │
+│   └── ui/                 # Basic UI components (SSR-friendly)
+│       ├── Button.tsx
+│       ├── Badge.tsx
+│       ├── Card.tsx
+│       └── index.ts
+│
+├── constants/              # Static data and configuration
+│   └── index.ts
+│
+├── hooks/                  # Custom React hooks (client-side only)
+│   └── index.ts
+│
+├── lib/                    # Utility functions
+│   └── utils.ts
+│
+└── types/                  # TypeScript type definitions
+    └── index.ts
+```
+
+This structure ensures a clean and organized codebase, making it easier to maintain and scale the project.
+
 ## License
 
 This project is licensed under the [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/agpl-3.0.en.html). See the [LICENSE](LICENSE) file for details.
