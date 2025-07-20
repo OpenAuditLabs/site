@@ -32,7 +32,7 @@ OpenAuditLabs/Site serves as the digital front door for the OpenAuditLabs projec
 ### Prerequisites
 
 - Node.js 18.0 or later
-- npm package manager
+- pnpm package manager
 
 ### Installation
 
@@ -47,14 +47,14 @@ OpenAuditLabs/Site serves as the digital front door for the OpenAuditLabs projec
 2. **Install dependencies**
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 
 3. **Run the development server**
 
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 4. **Open your browser**
@@ -65,8 +65,8 @@ OpenAuditLabs/Site serves as the digital front door for the OpenAuditLabs projec
 ### Building for Production
 
 ```bash
-npm run build
-npm start
+pnpm run build
+pnpm start
 ```
 
 ## Development
