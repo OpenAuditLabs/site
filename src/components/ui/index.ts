@@ -5,3 +5,4 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
 export { Input, inputVariants, type InputProps } from './input';
 export { Select } from './select';
 export { Dialog, DialogTitle, DialogDescription, DialogActions } from './dialog';
+export { Breadcrumb } from './breadcrumb';
