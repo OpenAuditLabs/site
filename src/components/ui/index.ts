@@ -6,3 +6,4 @@ export { Input, inputVariants, type InputProps } from './input';
 export { Select } from './select';
 export { Dialog, DialogTitle, DialogDescription, DialogActions } from './dialog';
 export { Breadcrumb } from './breadcrumb';
+export { Table, type TableProps, type Column } from './table';
