@@ -142,5 +142,5 @@ For questions, issues, or feature requests, please use the GitHub Issues tracker
 ---
 
 <div align="center">
-  <strong>OpenAuditLabs</strong> - Making government audit data accessible and actionable.
+  <strong>OpenAuditLabs</strong> - Securing the Future of Smart Contracts with AI
 </div>
