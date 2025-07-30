@@ -33,7 +33,7 @@ function sortData<T>(data: T[], key: keyof T, direction: 'asc' | 'desc') {
   });
 }
 
-export function Table<T extends Record<string, any>>({ 
+export function Table<T extends Record<string, unknown>>({ 
   columns, 
   data, 
   pageSize = 10 
@@ -103,7 +103,7 @@ export function Table<T extends Record<string, any>>({
               </tr>
             ) : (
               paginatedData.map((row, index) => {
-                const rowKey = row.id || row.key || index;
+                const rowKey: React.Key = row.id ? String(row.id) : row.key ? String(row.key) : index;
                 return (
                   <tr 
                     key={rowKey} 
