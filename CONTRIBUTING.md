@@ -326,4 +326,7 @@ pnpm test:coverage
 
 By contributing to OpenAuditLabs/Site, you agree that your contributions will be licensed under the AGPL 3.0 License.
 
-Thank you for contributing to OpenAuditLabs/Site! Your efforts help make government audit data more accessible and useful for everyone.
+Thank you for contributing to OpenAuditLabs/Site!
+<div align="center">
+  <strong>OpenAuditLabs</strong> - Securing the Future of Smart Contracts with AI
+</div>
