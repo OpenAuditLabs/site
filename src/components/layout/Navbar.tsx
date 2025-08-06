@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { ThemeToggleDropdown } from "@/components/ui";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
@@ -20,18 +21,21 @@ export default function Navbar() {
         <Link href="/">Hashpalk</Link>
       </div>
       {/* Desktop nav */}
-      <ul className="hidden md:flex gap-8 items-center">
-        {navLinks.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className="text-foreground hover:text-primary transition-colors"
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="hidden md:flex gap-8 items-center">
+        <ul className="flex gap-8 items-center">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <ThemeToggleDropdown />
+      </div>
       {/* Mobile menu button */}
       <button
         className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-primary"
@@ -54,7 +58,7 @@ export default function Navbar() {
                 <X size={24} />
               </button>
             </div>
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-4 mb-4">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -67,6 +71,7 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
+            <ThemeToggleDropdown />
           </div>
           {/* Overlay click closes drawer */}
           <div
