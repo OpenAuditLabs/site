@@ -12,6 +12,7 @@ export function useContactForm() {
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string>("");
 
   // Zod schema for validation
   const schema = z.object({
@@ -47,6 +48,11 @@ export function useContactForm() {
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+
+    // Clear submit error when user starts typing
+    if (submitError) {
+      setSubmitError("");
     }
   };
 
@@ -92,25 +98,30 @@ export function useContactForm() {
       return;
     }
 
-    // Log the form data as an object when validation passes
-    // console.log({ ...formData });
-
+    // Clear any previous submit errors
+    setSubmitError("");
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Simulate API call with random failure
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // 30% chance of failure for testing purposes
+          if (Math.random() < 0.3) {
+            reject(new Error("Network error"));
+          } else {
+            resolve(undefined);
+          }
+        }, 2000);
+      });
 
       // Reset form on success
       setFormData({ name: "", email: "", message: "" });
       setErrors({});
       setTouched({});
       setIsSuccess(true);
-
-      // Remove the alert since we'll show UI feedback instead
-      // alert("Thank you for your message! We will get back to you soon.");
     } catch (error) {
-      alert("Something went wrong. Please try again.");
+      setSubmitError("Something went wrong. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -122,6 +133,7 @@ export function useContactForm() {
     touched,
     isSubmitting,
     isSuccess,
+    submitError,
     isFormValid: isFormValid(),
     handleChange,
     handleBlur,
