@@ -1,4 +1,5 @@
 import { ContactForm } from "@/components/ContactForm";
+import { SocialMediaLinks } from "@/components/ui";
 
 export default function Contact() {
   return (
@@ -17,6 +18,19 @@ export default function Contact() {
 
         {/* Contact Form */}
         <ContactForm />
+
+        {/* Social Media Links Section */}
+        <div className="mt-16 text-center">
+          <h2 className="text-2xl font-semibold text-foreground mb-4">
+            Connect With Us
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+            Follow us on social media for the latest updates on smart contract
+            security, industry insights, and company news.
+          </p>
+
+          <SocialMediaLinks className="justify-center" />
+        </div>
       </div>
     </div>
   );
