@@ -37,7 +37,7 @@ export function ContactForm() {
           {/* Name Field */}
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium">
-              Name <span className="text-red-500">*</span>
+              Name <span className="text-destructive">*</span>
             </label>
             <Input
               id="name"
@@ -48,21 +48,21 @@ export function ContactForm() {
               onBlur={() => handleBlur("name")}
               className={
                 errors.name && touched.name
-                  ? "border-red-500 focus-visible:ring-red-500/20"
-                  : ""
+                  ? "border-destructive focus-visible:ring-destructive/20 focus-visible:border-destructive"
+                  : "transition-all duration-200 ease-in-out hover:border-ring/70 hover:shadow-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:shadow-sm"
               }
               disabled={isSubmitting}
               required
             />
             {errors.name && touched.name && (
-              <p className="text-sm text-red-500">{errors.name}</p>
+              <p className="text-sm text-destructive">{errors.name}</p>
             )}
           </div>
 
           {/* Email Field */}
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium">
-              Email <span className="text-red-500">*</span>
+              Email <span className="text-destructive">*</span>
             </label>
             <Input
               id="email"
@@ -73,21 +73,21 @@ export function ContactForm() {
               onBlur={() => handleBlur("email")}
               className={
                 errors.email && touched.email
-                  ? "border-red-500 focus-visible:ring-red-500/20"
-                  : ""
+                  ? "border-destructive focus-visible:ring-destructive/20 focus-visible:border-destructive"
+                  : "transition-all duration-200 ease-in-out hover:border-ring/70 hover:shadow-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:shadow-sm"
               }
               disabled={isSubmitting}
               required
             />
             {errors.email && touched.email && (
-              <p className="text-sm text-red-500">{errors.email}</p>
+              <p className="text-sm text-destructive">{errors.email}</p>
             )}
           </div>
 
           {/* Message Field */}
           <div className="space-y-2">
             <label htmlFor="message" className="text-sm font-medium">
-              Message <span className="text-red-500">*</span>
+              Message <span className="text-destructive">*</span>
             </label>
             <Textarea
               id="message"
@@ -95,25 +95,24 @@ export function ContactForm() {
               value={formData.message}
               onChange={(e) => handleChange("message", e.target.value)}
               onBlur={() => handleBlur("message")}
-              className={`min-h-[120px] resize-none ${
+              className={`min-h-[120px] resize-none transition-all duration-200 ease-in-out ${
                 errors.message && touched.message
-                  ? "border-red-500 focus-visible:ring-red-500/20"
-                  : ""
+                  ? "border-destructive focus-visible:ring-destructive/20 focus-visible:border-destructive"
+                  : "hover:border-ring/70 hover:shadow-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:shadow-sm"
               }`}
               disabled={isSubmitting}
               required
             />
             {errors.message && touched.message && (
-              <p className="text-sm text-red-500">{errors.message}</p>
+              <p className="text-sm text-destructive">{errors.message}</p>
             )}
           </div>
 
-          {/* Submit Button */}
           <div className="flex justify-center pt-4">
             <Button
               type="submit"
               disabled={!isFormValid || isSubmitting}
-              className="w-full sm:w-auto min-w-[140px]"
+              className="w-full sm:w-auto min-w-[140px] transition-all duration-200 ease-in-out cursor-pointer hover:shadow-lg hover:scale-[1.02] hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98] disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none disabled:opacity-50"
               size="lg"
             >
               {isSubmitting ? (
