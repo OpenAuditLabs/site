@@ -57,11 +57,11 @@ export function SocialMediaLinks({
   const getVariantClasses = () => {
     switch (variant) {
       case "minimal":
-        return "text-muted-foreground hover:text-foreground transition-colors duration-200";
+        return "text-muted-foreground hover:text-foreground focus:text-foreground transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background";
       case "filled":
-        return "bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 hover:shadow-lg hover:scale-110";
+        return "bg-primary text-primary-foreground hover:bg-primary/90 focus:bg-primary/90 transition-all duration-200 hover:shadow-lg hover:scale-110 focus:shadow-lg focus:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background";
       default:
-        return "bg-background border border-border hover:border-primary transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:shadow-lg hover:scale-110";
+        return "bg-background border border-border hover:border-primary focus:border-primary transition-all duration-200 hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground hover:shadow-lg hover:scale-110 focus:shadow-lg focus:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background";
     }
   };
 
@@ -74,6 +74,8 @@ export function SocialMediaLinks({
           <li key={link.platform}>
             <a
               href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={link.label}
               className={cn(
                 "group flex items-center justify-center rounded-full transition-all duration-200",
@@ -85,7 +87,7 @@ export function SocialMediaLinks({
               <Icon
                 className={cn(
                   iconSizeClasses[iconSize],
-                  "transition-transform duration-200 group-hover:scale-110"
+                  "transition-transform duration-200 group-hover:scale-110 group-focus:scale-110"
                 )}
               />
               {showLabels && (
