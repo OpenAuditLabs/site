@@ -11,6 +11,7 @@ export function useContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   // Zod schema for validation
   const schema = z.object({
@@ -104,8 +105,10 @@ export function useContactForm() {
       setFormData({ name: "", email: "", message: "" });
       setErrors({});
       setTouched({});
+      setIsSuccess(true);
 
-      alert("Thank you for your message! We will get back to you soon.");
+      // Remove the alert since we'll show UI feedback instead
+      // alert("Thank you for your message! We will get back to you soon.");
     } catch (error) {
       alert("Something went wrong. Please try again.");
     } finally {
@@ -118,6 +121,7 @@ export function useContactForm() {
     errors,
     touched,
     isSubmitting,
+    isSuccess,
     isFormValid: isFormValid(),
     handleChange,
     handleBlur,
