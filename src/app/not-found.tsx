@@ -29,7 +29,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6 mx-2 px-2">
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-6 py-3 mr-2 text-black text-sm font-bold bg-gradient-to-r from-blue-500 to-chart-4 transition"
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-6 py-3 mr-2 text-black text-sm font-bold bg-gradient-to-r from-blue-500 to-chart-4 transition font-sans"
             aria-label="Back to Home"
           >
             <HiArrowLeft size={20} />
@@ -38,7 +38,7 @@ export default function NotFound() {
 
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 rounded-md border-3 border-blue-300 px-6 py-3 text-blue-200 font-semibold hover:bg-white/10 transition"
+            className="inline-flex items-center justify-center gap-2 rounded-md border-3 border-blue-300 px-6 py-3 text-blue-200 font-semibold hover:bg-white/10 transition font-sans"
             aria-label="Explore our work"
           >
             <MdOutlineExplore size={20} />
