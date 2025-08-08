@@ -29,7 +29,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6 mx-2 px-2">
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-6 py-3 mr-2 text-black text-sm font-bold bg-gradient-to-r from-blue-500 to-chart-4 transition font-sans"
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-blue-600 px-6 py-3 mr-2 text-white text-sm font-bold bg-gradient-to-r from-blue-500 to-chart-4 transition font-sans"
             aria-label="Back to Home"
           >
             <HiArrowLeft size={20} />
