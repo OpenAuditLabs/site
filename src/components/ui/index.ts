@@ -22,3 +22,4 @@ export {
 } from "./dialog";
 export { Breadcrumb } from "./breadcrumb";
 export { Table, type TableProps, type Column } from "./table";
+export { SocialMediaLinks } from "./social-media-links";
