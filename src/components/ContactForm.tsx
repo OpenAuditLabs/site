@@ -18,6 +18,7 @@ export function ContactForm() {
     touched,
     isSubmitting,
     isSuccess,
+    submitError,
     isFormValid,
     handleChange,
     handleBlur,
@@ -143,7 +144,7 @@ export function ContactForm() {
             </div>
 
             {/* Submit Button */}
-            <div className="flex justify-center pt-4">
+            <div className="flex flex-col items-center pt-4 w-full">
               <Button
                 type="submit"
                 disabled={!isFormValid || isSubmitting}
@@ -159,6 +160,14 @@ export function ContactForm() {
                   "Send Message"
                 )}
               </Button>
+              {/* Error Message */}
+              {submitError && (
+                <div className="mt-3 w-full flex justify-center">
+                  <p className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800/30 rounded-md px-3 py-2 text-center">
+                    {submitError}
+                  </p>
+                </div>
+              )}
             </div>
           </form>
         )}
