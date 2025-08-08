@@ -12,6 +12,7 @@ export {
   CardContent,
 } from "./card";
 export { Input, inputVariants, type InputProps } from "./input";
+export { Textarea } from "./textarea";
 export { Select } from "./select";
 export {
   Dialog,

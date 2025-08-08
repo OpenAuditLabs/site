@@ -1,3 +1,3 @@
 // Custom React hooks will be defined here
 
-export {};
+export { useContactForm } from "./useContactForm";
