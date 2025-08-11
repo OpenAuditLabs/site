@@ -59,6 +59,35 @@ const HeroSection: React.FC = () => {
               </Link>
             </Button>
           </div>
+          {/* Stats row below the buttons, matching the picture, aligned left */}
+          <div className="mt-8">
+            <div className="flex gap-16 md:gap-24 lg:gap-32 text-left">
+              <div>
+                <div className="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-cyan-500 bg-clip-text text-transparent">
+                  300+
+                </div>
+                <div className="text-sm text-muted-foreground mt-1">
+                  Projects Secured
+                </div>
+              </div>
+              <div>
+                <div className="text-2xl font-extrabold bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
+                  $50M+
+                </div>
+                <div className="text-sm text-muted-foreground mt-1">
+                  Value Protected
+                </div>
+              </div>
+              <div>
+                <div className="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text text-transparent">
+                  24/7
+                </div>
+                <div className="text-sm text-muted-foreground mt-1">
+                  Support
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
