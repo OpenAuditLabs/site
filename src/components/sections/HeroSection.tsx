@@ -1,4 +1,7 @@
 import React from "react";
+import Link from "next/link";
+import { ArrowRight, FileText } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const HeroSection: React.FC = () => {
   return (
@@ -22,6 +25,40 @@ const HeroSection: React.FC = () => {
               analysis.
             </span>
           </p>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            {/* Animated gradient Request Audit button with soft glowing border for both themes */}
+            <div className="relative group">
+              <span className="pointer-events-none absolute -inset-1 rounded-lg bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500 opacity-30 blur-sm transition-opacity duration-700 group-hover:opacity-50 animate-[borderGlow_2s_ease-in-out_infinite]" />
+              <Button
+                asChild
+                size="lg"
+                className="relative rounded-lg bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-black dark:text-white font-semibold shadow-md hover:brightness-105 focus-visible:ring-0 border-2 border-transparent"
+                style={{
+                  backgroundSize: "200% 200%",
+                  backgroundPosition: "0% 50%",
+                }}
+              >
+                <Link href="/audits" aria-label="Request an audit">
+                  <span className="flex items-center gap-2">
+                    Request Audit <ArrowRight className="size-4" />
+                  </span>
+                </Link>
+              </Button>
+            </div>
+            {/* Outline View Reports button with improved hover text visibility for dark mode */}
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="rounded-lg border-cyan-400 text-cyan-700 dark:text-cyan-200 hover:text-cyan-950 dark:hover:text-white hover:border-cyan-300 hover:bg-cyan-400/20 transition-colors"
+            >
+              <Link href="/reports" aria-label="View audit reports">
+                <span className="flex items-center gap-2">
+                  <FileText className="size-4" /> View Reports
+                </span>
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

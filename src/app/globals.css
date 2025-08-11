@@ -112,6 +112,18 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+@keyframes borderGlow {
+  0%,
+  100% {
+    opacity: 0.3;
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.5;
+    filter: blur(8px);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
