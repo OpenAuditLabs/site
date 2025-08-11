@@ -103,6 +103,11 @@ const Header = () => {
                       {link.label}
                     </a>
                   ))}
+                  <Button asChild className="w-full mt-2">
+                    <Link href="/requestAudit" onClick={toggleMenu}>
+                      Request Audit
+                    </Link>
+                  </Button>
                 </div>
                 <div className="py-6">
                   <ThemeToggleDropdown />
