@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { ThemeToggleDropdown } from "@/components/ui";
+import { Button, ThemeToggleDropdown } from "@/components/ui";
+import Link from "next/link";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,6 +16,7 @@ const Header = () => {
     { href: "/about", label: "About" },
     { href: "/audits", label: "Audits" },
     { href: "/process", label: "Process" },
+    { href: "/team", label: "Team" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -43,6 +45,9 @@ const Header = () => {
                 {link.label}
               </a>
             ))}
+            <Button asChild>
+              <Link href="/requestAudit">Request Audit</Link>
+            </Button>
             <ThemeToggleDropdown />
           </nav>
 
