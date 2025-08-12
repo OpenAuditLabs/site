@@ -1,5 +1,10 @@
-import { HeroSection } from "@/components/sections";
+import { HeroSection, PortfolioStats } from "@/components/sections";
 
 export default function Home() {
-  return <HeroSection />;
+  return (
+    <>
+      <HeroSection />
+      <PortfolioStats />
+    </>
+  );
 }

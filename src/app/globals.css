@@ -147,3 +147,122 @@
     border: 0;
   }
 }
+
+/* Portfolio Stats Custom Styles */
+.portfolio-stats-section {
+  background: var(--background);
+  position: relative;
+}
+
+.portfolio-stats-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 50%,
+      var(--primary) / 0.05 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      var(--primary) / 0.03 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      var(--primary) / 0.04 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.portfolio-stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.portfolio-stat-card:hover {
+  transform: translateY(-8px);
+  border-color: #06b6d4; /* cyan-500 */
+  box-shadow: 0 20px 40px var(--foreground) / 0.1, 0 0 0 1px #06b6d4,
+    0 0 20px #06b6d4 / 0.3, 0 0 40px #06b6d4 / 0.2, 0 0 60px #06b6d4 / 0.1,
+    inset 0 1px 0 var(--muted);
+}
+
+.portfolio-stat-content {
+  position: relative;
+  z-index: 2;
+}
+
+.portfolio-stat-icon {
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.portfolio-stat-card:hover .portfolio-stat-icon {
+  background: var(--accent);
+  border-color: #06b6d4; /* cyan-500 */
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #06b6d4 / 0.4;
+}
+
+.portfolio-stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--foreground);
+  text-shadow: 0 0 20px var(--primary) / 0.3;
+}
+
+.portfolio-stat-label {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.portfolio-stat-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    #06b6d4 / 0.05 0%,
+    #8b5cf6 / 0.03 50%,
+    #06b6d4 / 0.02 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.portfolio-stat-card:hover .portfolio-stat-glow {
+  opacity: 1;
+}
+
+/* Animation for count up numbers */
+@keyframes countUpGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 20px var(--primary) / 0.3;
+  }
+  50% {
+    text-shadow: 0 0 30px var(--primary) / 0.5;
+  }
+}
+
+.portfolio-stat-number {
+  animation: countUpGlow 3s ease-in-out infinite;
+}
