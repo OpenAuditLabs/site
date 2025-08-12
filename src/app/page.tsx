@@ -1,10 +1,11 @@
-import { HeroSection, PortfolioStats } from "@/components/sections";
+import { HeroSection, PortfolioStats, JoinMission } from "@/components/sections";
 
 export default function Home() {
   return (
     <>
       <HeroSection />
       <PortfolioStats />
+      <JoinMission />
     </>
   );
 }
