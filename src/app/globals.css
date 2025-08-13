@@ -307,6 +307,136 @@
   animation: countUpGlow 3s ease-in-out infinite;
 }
 
+/* Team Member Section Styles */
+.team-section {
+  background: var(--background);
+  position: relative;
+}
+
+.team-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 25% 30%,
+      #06b6d4 / 0.03 0%,
+      transparent 40%
+    ),
+    radial-gradient(circle at 75% 70%, #8b5cf6 / 0.02 0%, transparent 40%),
+    radial-gradient(
+      circle at 50% 50%,
+      var(--primary) / 0.01 0%,
+      transparent 60%
+    );
+  pointer-events: none;
+}
+
+.dark .team-section::before {
+  background: radial-gradient(
+      circle at 25% 30%,
+      #06b6d4 / 0.05 0%,
+      transparent 40%
+    ),
+    radial-gradient(circle at 75% 70%, #8b5cf6 / 0.03 0%, transparent 40%),
+    radial-gradient(
+      circle at 50% 50%,
+      var(--primary) / 0.02 0%,
+      transparent 60%
+    );
+}
+
+.team-member-card {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.team-member-card:hover {
+  transform: translateY(-4px);
+}
+
+.team-member-avatar {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-member-avatar::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  background: conic-gradient(
+    from 0deg,
+    #06b6d4,
+    #8b5cf6,
+    #06b6d4,
+    #8b5cf6,
+    #06b6d4
+  );
+  border-radius: 50%;
+  opacity: 0;
+  animation: spin 3s linear infinite;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.team-member-card:hover .team-member-avatar::before {
+  opacity: 0.6;
+}
+
+.dark .team-member-card:hover .team-member-avatar::before {
+  opacity: 0.8;
+}
+
+.team-member-avatar::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background: var(--background);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.team-member-glow {
+  filter: drop-shadow(0 0 20px #06b6d4 / 0.3);
+  transition: filter 0.3s ease;
+}
+
+.team-member-card:hover .team-member-glow {
+  filter: drop-shadow(0 0 30px #06b6d4 / 0.5)
+    drop-shadow(0 0 50px #8b5cf6 / 0.3);
+}
+
+.dark .team-member-glow {
+  filter: drop-shadow(0 0 25px #06b6d4 / 0.4);
+}
+
+.dark .team-member-card:hover .team-member-glow {
+  filter: drop-shadow(0 0 35px #06b6d4 / 0.6)
+    drop-shadow(0 0 60px #8b5cf6 / 0.4);
+}
+
+/* Enhanced light mode styling */
+:root .team-member-card {
+  --team-shadow-color: #06b6d4;
+  --team-glow-intensity: 0.15;
+}
+
+.dark .team-member-card {
+  --team-shadow-color: #06b6d4;
+  --team-glow-intensity: 0.4;
+}
+
 /* ReadyToSecure Section Styles */
 .ready-secure-container {
   display: flex;
