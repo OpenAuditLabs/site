@@ -1,3 +1,43 @@
+.ready-secure-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px var(--foreground) / 0.12;
+  border: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  max-width: 98vw;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .ready-secure-card {
+    max-width: 900px;
+    padding: 3rem 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ready-secure-card {
+    max-width: 1200px;
+    padding: 3.5rem 3rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .ready-secure-card {
+    max-width: 640px;
+    padding: 3rem 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ready-secure-card {
+    max-width: 820px;
+    padding: 3.5rem 3rem;
+  }
+}
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -265,4 +305,80 @@
 
 .portfolio-stat-number {
   animation: countUpGlow 3s ease-in-out infinite;
+}
+
+/* ReadyToSecure Section Styles */
+.ready-secure-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 320px;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.ready-secure-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px var(--foreground) / 0.12;
+  border: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.ready-secure-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+}
+
+.ready-secure-desc {
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.ready-secure-actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.ready-secure-btn {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+  outline: none;
+}
+
+.ready-secure-btn.gradient {
+  background: linear-gradient(90deg, #06b6d4 0%, #8b5cf6 100%);
+  color: var(--card);
+  box-shadow: 0 0 16px #06b6d4 / 0.2;
+}
+
+.ready-secure-btn.gradient:hover {
+  box-shadow: 0 0 32px #06b6d4 / 0.3;
+  filter: brightness(1.08);
+}
+
+.ready-secure-btn.outline {
+  background: transparent;
+  color: #06b6d4;
+  border: 2px solid #06b6d4;
+}
+
+.ready-secure-btn.outline:hover {
+  background: #06b6d4;
+  color: var(--card);
+  box-shadow: 0 0 24px #06b6d4 / 0.2;
 }
