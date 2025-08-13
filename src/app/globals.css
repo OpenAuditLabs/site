@@ -382,3 +382,94 @@
   color: var(--card);
   box-shadow: 0 0 24px #06b6d4 / 0.2;
 }
+
+/* TrustedLeadingProtocols Section Styles */
+.trusted-protocols-section {
+  background: var(--background);
+  position: relative;
+}
+
+.trusted-protocols-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 25% 25%,
+      var(--primary) / 0.03 0%,
+      transparent 50%
+    ),
+    radial-gradient(circle at 75% 75%, var(--accent) / 0.02 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Light mode overrides for TrustedLeadingProtocols */
+:root .trusted-protocols-light {
+  --section-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+}
+
+.dark .trusted-protocols-dark {
+  --section-bg: #0f172a;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+}
+
+/* Protocol badge animations */
+@keyframes protocolFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes statSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility enhancements */
+@media (prefers-reduced-motion: reduce) {
+  .protocol-badge,
+  .stat-card {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Focus styles for accessibility */
+.protocol-badge:focus,
+.stat-card:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .protocol-badge {
+    border-width: 2px;
+  }
+
+  .stat-card {
+    border-width: 2px;
+  }
+}
