@@ -5,6 +5,7 @@ import {
   TrustedLeadingProtocols,
   PricingSection,
   AuditProcess,
+  LatestBlogSection,
 } from "@/components/sections";
 import ReadyToSecure from "@/components/sections/ReadyToSecure";
 
@@ -17,6 +18,7 @@ export default function Home() {
       <AuditProcess />
       <ReadyToSecure />
       <TrustedLeadingProtocols />
+      <LatestBlogSection/>
       <JoinMission />
     </>
   );

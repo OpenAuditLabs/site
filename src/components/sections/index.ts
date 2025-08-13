@@ -5,3 +5,4 @@ export { JoinMission } from "./JoinMission";
 export { default as TrustedLeadingProtocols } from "./TrustedLeadingProtocols";
 export { default as PricingSection } from "./PricingSection";
 export { default as AuditProcess } from './AuditProcess';
+export { default as LatestBlogSection } from "./LatestBlogSection";
