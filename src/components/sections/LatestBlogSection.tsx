@@ -51,7 +51,7 @@ const posts: PostCard[] = [
   },
 ];
 
-export default function LatestBlogSection() {
+export function LatestBlogSection() {
   return (
     <section
       aria-labelledby="latest-blog-heading"

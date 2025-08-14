@@ -1,8 +1,10 @@
 // export all sections from here
-export { default as HeroSection } from "./HeroSection";
+export { HeroSection } from "./HeroSection";
 export { PortfolioStats } from "./PortfolioStats";
 export { JoinMission } from "./JoinMission";
-export { default as TrustedLeadingProtocols } from "./TrustedLeadingProtocols";
-export { default as PricingSection } from "./PricingSection";
-export { default as AuditProcess } from './AuditProcess';
-export { default as LatestBlogSection } from "./LatestBlogSection";
+export { TrustedLeadingProtocols } from "./TrustedLeadingProtocols";
+export { PricingSection } from "./PricingSection";
+export { AuditProcess } from "./AuditProcess";
+export { LatestBlogSection } from "./LatestBlogSection";
+export { ReadyToSecure } from "./ReadyToSecure";
+export { TeamMemberSection } from "./TeamMemberSection";

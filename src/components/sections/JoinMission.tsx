@@ -32,3 +32,5 @@ export function JoinMission() {
     </section>
   );
 }
+
+export default JoinMission;

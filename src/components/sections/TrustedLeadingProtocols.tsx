@@ -118,7 +118,7 @@ const StatCard: React.FC<StatCardProps> = ({
   );
 };
 
-const TrustedLeadingProtocols: React.FC = () => {
+export function TrustedLeadingProtocols() {
   const protocols = [
     "Ethereum",
     "Polygon",
@@ -241,6 +241,4 @@ const TrustedLeadingProtocols: React.FC = () => {
       </div>
     </section>
   );
-};
-
-export default TrustedLeadingProtocols;
+}

@@ -168,7 +168,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ plan, index }) => {
   );
 };
 
-const PricingSection: React.FC = () => {
+export function PricingSection() {
   return (
     <section
       className="py-20 px-4 bg-background relative overflow-hidden"
@@ -215,6 +215,4 @@ const PricingSection: React.FC = () => {
       </div>
     </section>
   );
-};
-
-export default PricingSection;
+}
