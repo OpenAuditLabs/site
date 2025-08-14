@@ -15,13 +15,13 @@ export default function Home() {
     <>
       <HeroSection />
       <PortfolioStats />
-      <PricingSection />
       <AuditProcess />
-      <ReadyToSecure />
-      <TrustedLeadingProtocols />
-      <LatestBlogSection />
+      <PricingSection />
       <TeamMemberSection />
       <JoinMission />
+      <LatestBlogSection />
+      <TrustedLeadingProtocols />
+      <ReadyToSecure />
     </>
   );
 }
