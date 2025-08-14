@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const HeroSection: React.FC = () => {
+export function HeroSection() {
   return (
     <section className="relative w-full bg-background">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:py-24 lg:py-32">
@@ -92,6 +92,4 @@ const HeroSection: React.FC = () => {
       </div>
     </section>
   );
-};
-
-export default HeroSection;
+}

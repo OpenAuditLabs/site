@@ -40,7 +40,7 @@ const TEAM_MEMBERS: TeamMember[] = [
   },
 ];
 
-export default function TeamMemberSection() {
+export function TeamMemberSection() {
   return (
     <section
       className="team-section relative py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"

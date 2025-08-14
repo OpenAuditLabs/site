@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ReadyToSecure() {
+export function ReadyToSecure() {
   return (
     <section className="ready-secure-container bg-background ">
       <div className="ready-secure-card ">
