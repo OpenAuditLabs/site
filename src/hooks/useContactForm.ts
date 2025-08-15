@@ -120,7 +120,7 @@ export function useContactForm() {
       setErrors({});
       setTouched({});
       setIsSuccess(true);
-    } catch (error) {
+  } catch {
       setSubmitError("Something went wrong. Please try again later.");
     } finally {
       setIsSubmitting(false);

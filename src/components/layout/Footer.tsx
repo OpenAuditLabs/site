@@ -59,7 +59,7 @@ const Footer = () => {
               contract at a time.
             </p>
             <div className="flex gap-5 mt-2 mb-4">
-              {socialLinks.map((link, idx) => (
+              {socialLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.url}

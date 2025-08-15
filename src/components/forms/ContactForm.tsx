@@ -2,7 +2,7 @@
 
 import React from "react";
 import { z } from "zod";
-import { useFormValidation } from "@/hooks";
+import { useFormValidation } from "@/hooks/useFormValidation";
 import {
   Input,
   Textarea,
@@ -11,7 +11,7 @@ import {
   CardContent,
   CardHeader,
 } from "@/components/ui";
-import { Mail, User, MessageSquare, Send } from "lucide-react";
+import { Send } from "lucide-react";
 
 // Zod validation schema
 const contactFormSchema = z.object({
@@ -67,8 +67,7 @@ export function ContactForm() {
           Get in Touch
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mt-2">
-          We'd love to hear from you. Send us a message and we'll respond as
-          soon as possible.
+          We would love to hear from you. Send us a message and we will respond as soon as possible.
         </p>
       </CardHeader>
       <CardContent>
@@ -146,8 +145,7 @@ export function ContactForm() {
           {/* Form Info */}
           <div className="text-center">
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              All fields marked with <span className="text-red-500">*</span> are
-              required.
+              All fields marked with <span className="text-red-500">*</span> are required.
             </p>
           </div>
         </form>

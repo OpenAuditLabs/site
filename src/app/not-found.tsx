@@ -22,8 +22,7 @@ export default function NotFound() {
           </span>
         </h1>
         <p className="text-sm text-gray-300 font-sans">
-          The page you're looking for doesn't exist, has been moved, or is
-          temporarily unavailable.
+          The page you are looking for does not exist, has been moved, or is temporarily unavailable.
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6 mx-2 px-2">
