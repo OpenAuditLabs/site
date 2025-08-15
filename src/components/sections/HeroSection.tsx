@@ -1,90 +1,94 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, FileText } from "lucide-react";
+import { ArrowRight, FileText, Shield, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
   return (
-    <section className="relative w-full bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:py-24 lg:py-32">
-        <div className="max-w-3xl">
-          <h1 className="font-bold tracking-tight text-4xl sm:text-5xl lg:text-6xl leading-tight text-foreground">
-            <span className="block ">Secure Your</span>
-            <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500 bg-clip-text text-transparent">
-              Smart Contracts
+    <section
+      aria-label="OpenAuditLabs hero"
+      className="hero-section w-full bg-background min-h-screen pb-[100px]"
+    >
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:py-28 lg:py-36 flex items-start">
+        <div className="max-w-3xl mx-auto text-center -mt-16">
+          <h1 className="font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight text-foreground">
+            <span className="block">Open-source</span>
+            <span
+              className="block hero-heading-gradient-cta font-extrabold"
+              aria-hidden="true"
+            >
+              smart contract
             </span>
-            <span className="block">with</span>
-            <span className="block">OpenAuditLabs</span>
+            <span className="block">security,</span>
+            <span
+              className="block hero-heading-cta font-extrabold"
+              aria-hidden="true"
+            >
+              built in the open.
+            </span>
           </h1>
-          <p className="mt-8 text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl space-y-2">
-            <span className="block">
-              Transparent audits built on open-source best practices.
-            </span>
-            <span className="block">
-              Protect your blockchain projects with comprehensive security
-              analysis.
-            </span>
+
+          <p className="mt-6 text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+            OpenAuditLabs provides community-driven audits, reproducible
+            methodologies, and transparent reporting for Ethereum and EVM
+            ecosystems.
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            {/* Animated gradient Request Audit button with soft glowing border for both themes */}
-            <div className="relative group">
-              <span className="pointer-events-none absolute -inset-1 rounded-lg bg-gradient-to-r from-cyan-400 via-blue-500 to-fuchsia-500 opacity-30 blur-sm transition-opacity duration-700 group-hover:opacity-50 animate-[borderGlow_2s_ease-in-out_infinite]" />
+
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="relative inline-flex">
+              <span className="hero-cta-glow rounded-lg" aria-hidden="true" />
               <Button
                 asChild
                 size="lg"
-                className="relative rounded-lg bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-black dark:text-white font-semibold shadow-md hover:brightness-105 focus-visible:ring-0 border-2 border-transparent"
+                className="relative z-10 rounded-lg px-6 py-3 font-semibold shadow-md"
                 style={{
-                  backgroundSize: "200% 200%",
-                  backgroundPosition: "0% 50%",
+                  backgroundColor: "var(--hero-cta-bg)",
+                  color: "var(--hero-cta-text)",
                 }}
               >
                 <Link href="/audits" aria-label="Request an audit">
-                  <span className="flex items-center gap-2">
-                    Request Audit <ArrowRight className="size-4" />
+                  <span className="flex items-center gap-3">
+                    <span>Request an Audit</span>
+                    <ArrowRight size={18} aria-hidden="true" />
                   </span>
                 </Link>
               </Button>
             </div>
-            {/* Outline View Reports button with improved hover text visibility for dark mode */}
+
             <Button
               asChild
               variant="outline"
               size="lg"
-              className="rounded-lg border-cyan-400 text-cyan-700 dark:text-cyan-200 hover:text-cyan-950 dark:hover:text-white hover:border-cyan-300 hover:bg-cyan-400/20 transition-colors"
+              className="rounded-lg px-5 py-3 border-[1.5px] text-foreground/90"
             >
-              <Link href="/reports" aria-label="View audit reports">
+              <Link href="/" aria-label="View on GitHub">
                 <span className="flex items-center gap-2">
-                  <FileText className="size-4" /> View Reports
+                  <FileText size={18} aria-hidden="true" />
+                  View on GitHub
                 </span>
               </Link>
             </Button>
           </div>
-          {/* Stats row below the buttons, matching the picture, aligned left */}
+
           <div className="mt-8">
-            <div className="flex gap-16 md:gap-24 lg:gap-32 text-left">
-              <div>
-                <div className="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-cyan-500 bg-clip-text text-transparent">
-                  300+
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  Projects Secured
-                </div>
+            <div className="flex items-center justify-center gap-8">
+              <div className="flex items-center gap-3">
+                <Shield
+                  size={18}
+                  aria-hidden="true"
+                  style={{ color: "var(--primary)" }}
+                />
+                <span className="text-sm text-muted-foreground">OSS ethos</span>
               </div>
-              <div>
-                <div className="text-2xl font-extrabold bg-gradient-to-r from-fuchsia-500 to-pink-500 bg-clip-text text-transparent">
-                  $50M+
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  Value Protected
-                </div>
-              </div>
-              <div>
-                <div className="text-2xl font-extrabold bg-gradient-to-r from-cyan-400 to-fuchsia-500 bg-clip-text text-transparent">
-                  24/7
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  Support
-                </div>
+              <div className="flex items-center gap-3">
+                <BookOpen
+                  size={18}
+                  aria-hidden="true"
+                  style={{ color: "var(--chart-5)" }}
+                />
+                <span className="text-sm text-muted-foreground">
+                  Transparent reports
+                </span>
               </div>
             </div>
           </div>
