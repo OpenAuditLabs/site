@@ -14,7 +14,7 @@ export function HeroSection() {
               Smart Contracts
             </span>
             <span className="block">with</span>
-            <span className="block">OpenTestingLabs</span>
+            <span className="block">OpenAuditLabs</span>
           </h1>
           <p className="mt-8 text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl space-y-2">
             <span className="block">
