@@ -85,16 +85,51 @@
 
 :root {
   --radius: 0.625rem;
-    /* Navbar custom variables */
-    --navbar-bg: #fff;
-    --navbar-link: #4B5563;
-    --navbar-link-hover: #2456F4;
-    --navbar-logo-blue: #2456F4;
-    --navbar-btn-bg: #2456F4;
-    --navbar-btn-text: #fff;
-    --navbar-github-bg: #fff;
-    --navbar-github-border: #E5E7EB;
-  --navbar-github-shadow: 0 8px 20px rgba(2,6,23,0.06);
+  /* Hero section variables (light) */
+  --hero-gradient-start: var(--chart-2);
+  --hero-gradient-end: var(--chart-5);
+  /* hero text gradient: use navbar CTA + chart colors to match design */
+  --hero-text-gradient: linear-gradient(
+    90deg,
+    var(--navbar-btn-bg),
+    var(--hero-gradient-start),
+    var(--hero-gradient-end)
+  );
+  /* CTA color should match navbar CTA */
+  --hero-cta-bg: var(--navbar-btn-bg);
+  --hero-cta-text: var(--navbar-btn-text);
+  /* CTA -> cyan gradient used for 'smart contract' */
+  --hero-cta-to-cyan: linear-gradient(
+    90deg,
+    var(--hero-cta-bg),
+    var(--hero-gradient-start)
+  );
+  --hero-bg: radial-gradient(
+      circle at 8% 12%,
+      var(--hero-gradient-start) / 0.06 0%,
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 78%,
+      var(--hero-gradient-end) / 0.06 0%,
+      transparent 28%
+    ),
+    var(--background);
+  --hero-cta-glow: radial-gradient(
+    60% 40% at 10% 80%,
+    var(--hero-gradient-start) / 0.18,
+    transparent 40%
+  );
+  /* Navbar custom variables */
+  --navbar-bg: #fff;
+  --navbar-link: #4b5563;
+  --navbar-link-hover: #2456f4;
+  --navbar-logo-blue: #2456f4;
+  --navbar-btn-bg: #2456f4;
+  --navbar-btn-text: #fff;
+  --navbar-github-bg: #fff;
+  --navbar-github-border: #e5e7eb;
+  --navbar-github-shadow: 0 8px 20px rgba(2, 6, 23, 0.06);
   --background: oklch(1 0 0);
   --foreground: oklch(0.13 0.028 261.692);
   --card: oklch(1 0 0);
@@ -130,16 +165,16 @@
 
 .dark {
   --background: oklch(0.13 0.028 261.692);
-    /* Navbar custom variables for dark mode */
-    --navbar-bg: #000000; /* force fully black navbar bg */
-    --navbar-link: #A1A1AA;
-    --navbar-link-hover: #2456F4; /* keep hover consistent with blue */
-    --navbar-logo-blue: #2456F4; /* use same blue as light mode */
-    --navbar-btn-bg: #2456F4; /* CTA same blue in dark */
-    --navbar-btn-text: #ffffff; /* white text on blue CTA */
-    --navbar-github-bg: #000000;
-    --navbar-github-border: #27272A;
-  --navbar-github-shadow: 0 8px 20px rgba(2,6,23,0.36);
+  /* Navbar custom variables for dark mode */
+  --navbar-bg: #000000; /* force fully black navbar bg */
+  --navbar-link: #a1a1aa;
+  --navbar-link-hover: #2456f4; /* keep hover consistent with blue */
+  --navbar-logo-blue: #2456f4; /* use same blue as light mode */
+  --navbar-btn-bg: #2456f4; /* CTA same blue in dark */
+  --navbar-btn-text: #ffffff; /* white text on blue CTA */
+  --navbar-github-bg: #000000;
+  --navbar-github-border: #27272a;
+  --navbar-github-shadow: 0 8px 20px rgba(2, 6, 23, 0.36);
   --foreground: oklch(0.985 0.002 247.839);
   --card: oklch(0.21 0.034 264.665);
   --card-foreground: oklch(0.985 0.002 247.839);
@@ -170,6 +205,38 @@
   --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  /* Hero section variables (dark) */
+  --hero-gradient-start-dark: var(--chart-2);
+  --hero-gradient-end-dark: var(--chart-5);
+  --hero-text-gradient-dark: linear-gradient(
+    90deg,
+    var(--navbar-btn-bg),
+    var(--hero-gradient-start-dark),
+    var(--hero-gradient-end-dark)
+  );
+  --hero-cta-bg-dark: var(--navbar-btn-bg);
+  --hero-cta-text-dark: var(--navbar-btn-text);
+  --hero-cta-to-cyan-dark: linear-gradient(
+    90deg,
+    var(--hero-cta-bg-dark),
+    var(--hero-gradient-start-dark)
+  );
+  --hero-bg-dark: radial-gradient(
+      circle at 8% 12%,
+      var(--hero-gradient-start-dark) / 0.06 0%,
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 92% 78%,
+      var(--hero-gradient-end-dark) / 0.06 0%,
+      transparent 28%
+    ),
+    var(--background);
+  --hero-cta-glow-dark: radial-gradient(
+    60% 40% at 10% 80%,
+    var(--hero-gradient-start-dark) / 0.18,
+    transparent 40%
+  );
 }
 
 @keyframes borderGlow {
@@ -182,6 +249,64 @@
     opacity: 0.5;
     filter: blur(8px);
   }
+}
+
+/* Hero specific utilities */
+.hero-section {
+  background: var(--hero-bg);
+  position: relative;
+}
+
+.hero-bg-dark {
+  background: var(--hero-bg-dark);
+}
+
+.hero-heading-gradient {
+  background-image: var(--hero-text-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-heading-gradient-dark {
+  background-image: var(--hero-text-gradient-dark);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient from CTA color to cyan for 'smart contract' line */
+.hero-heading-gradient-cta {
+  background-image: var(--hero-cta-to-cyan);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-heading-gradient-cta-dark {
+  background-image: var(--hero-cta-to-cyan-dark);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 'built in the open.' should use CTA color as text color */
+.hero-heading-cta {
+  color: var(--hero-cta-bg);
+}
+
+.dark .hero-heading-cta {
+  color: var(--hero-cta-bg-dark);
+}
+
+.hero-cta-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 0.75rem;
+  background-image: var(--hero-cta-glow);
+  filter: blur(10px);
+  opacity: 0.28;
+  pointer-events: none;
 }
 
 @layer base {
