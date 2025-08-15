@@ -1,20 +1,21 @@
 import { useState, useCallback } from "react";
-import { z } from "zod";
+import { z, ZodObject, ZodRawShape, ZodTypeAny } from "zod";
 
 type FormErrors<T> = Partial<Record<keyof T, string>>;
 type TouchedFields<T> = Partial<Record<keyof T, boolean>>;
 
-export interface UseFormValidationOptions<T> {
-  schema: z.ZodSchema<T>;
-  initialValues: T;
-  onSubmit?: (data: T) => void | Promise<void>;
+export interface UseFormValidationOptions<S extends ZodObject<ZodRawShape>> {
+  schema: S;
+  initialValues: z.infer<S>;
+  onSubmit?: (data: z.infer<S>) => void | Promise<void>;
 }
 
-export function useFormValidation<T extends Record<string, any>>({
+export function useFormValidation<S extends ZodObject<ZodRawShape>>({
   schema,
   initialValues,
   onSubmit,
-}: UseFormValidationOptions<T>) {
+}: UseFormValidationOptions<S>) {
+  type T = z.infer<S>;
   const [values, setValues] = useState<T>(initialValues);
   const [errors, setErrors] = useState<FormErrors<T>>({});
   const [touched, setTouched] = useState<TouchedFields<T>>({});
@@ -22,15 +23,16 @@ export function useFormValidation<T extends Record<string, any>>({
 
   // Validate a single field
   const validateField = useCallback(
-    (field: keyof T, value: any): string | undefined => {
+    (field: keyof T, value: unknown): string | undefined => {
       try {
-        // Create a partial schema for the specific field
-        const fieldSchema = schema.pick({ [field]: true } as any);
-        fieldSchema.parse({ [field]: value });
+        const fieldName = field as string;
+        const fieldSchema = (schema.shape as Record<string, ZodTypeAny>)[fieldName];
+        if (!fieldSchema) return undefined; // Unknown field
+        fieldSchema.parse(value);
         return undefined;
       } catch (error) {
         if (error instanceof z.ZodError) {
-          return error.errors[0]?.message || "Invalid value";
+          return error.issues[0]?.message || "Invalid value";
         }
         return "Invalid value";
       }
@@ -47,9 +49,9 @@ export function useFormValidation<T extends Record<string, any>>({
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: FormErrors<T> = {};
-        error.errors.forEach((err) => {
-          if (err.path[0]) {
-            newErrors[err.path[0] as keyof T] = err.message;
+        error.issues.forEach((issue) => {
+          if (issue.path[0]) {
+            newErrors[issue.path[0] as keyof T] = issue.message;
           }
         });
         setErrors(newErrors);
@@ -70,7 +72,7 @@ export function useFormValidation<T extends Record<string, any>>({
 
   // Handle field change
   const setValue = useCallback(
-    (field: keyof T, value: any) => {
+    (field: keyof T, value: unknown) => {
       setValues((prev) => ({ ...prev, [field]: value }));
 
       // Validate field if it has been touched
@@ -83,12 +85,10 @@ export function useFormValidation<T extends Record<string, any>>({
   );
 
   // Handle field blur
-  const setTouched = useCallback(
+  const markTouched = useCallback(
     (field: keyof T) => {
       if (!touched[field]) {
         setTouched((prev) => ({ ...prev, [field]: true }));
-
-        // Validate field on first blur
         const error = validateField(field, values[field]);
         setErrors((prev) => ({ ...prev, [field]: error }));
       }
@@ -138,9 +138,9 @@ export function useFormValidation<T extends Record<string, any>>({
     errors,
     touched,
     isSubmitting,
-    isValid: isValid(),
-    setValue,
-    setTouched,
+  isValid: isValid(),
+  setValue,
+  setTouched: markTouched,
     handleSubmit,
     reset,
   };

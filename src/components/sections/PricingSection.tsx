@@ -70,10 +70,9 @@ const pricingPlans = [
 
 interface PricingCardProps {
   plan: (typeof pricingPlans)[0];
-  index: number;
 }
 
-const PricingCard: React.FC<PricingCardProps> = ({ plan, index }) => {
+const PricingCard: React.FC<PricingCardProps> = ({ plan }) => {
   return (
     <Card
       className={cn(
@@ -187,7 +186,7 @@ export function PricingSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
           >
             <span className="text-cyan-500 dark:text-cyan-400">
-              Choose What's Best for{" "}
+              Choose What is Best for{" "}
             </span>
             <span className="text-transparent bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text">
               You
@@ -200,8 +199,8 @@ export function PricingSection() {
 
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6 xl:gap-8">
-          {pricingPlans.map((plan, index) => (
-            <PricingCard key={plan.id} plan={plan} index={index} />
+          {pricingPlans.map((plan) => (
+            <PricingCard key={plan.id} plan={plan} />
           ))}
         </div>
 

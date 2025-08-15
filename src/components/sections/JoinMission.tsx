@@ -10,8 +10,7 @@ export function JoinMission() {
             Join Our Mission
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            We're always looking for talented security researchers and
-            blockchain experts to join our growing team.
+            We are always looking for talented security researchers and blockchain experts to join our growing team.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
