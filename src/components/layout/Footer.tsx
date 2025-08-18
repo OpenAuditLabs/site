@@ -43,20 +43,7 @@ const Footer = () => {
             <p className="text-[var(--muted-foreground)] text-sm mb-6 max-w-md">
               Open-source smart contract security auditing.
             </p>
-            <div className="flex gap-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  {link.icon}
-                </a>
-              ))}
-            </div>
+            {/* social icons removed from brand section per design */}
           </div>
 
           {/* Product section */}
@@ -184,12 +171,26 @@ const Footer = () => {
         </div>
 
         {/* Bottom section */}
-        <div className="border-t border-[var(--border)] mt-12 pt-8 flex flex-col md:flex-row md:justify-between items-center gap-4">
-          <div className="flex items-center gap-1 text-sm text-[var(--muted-foreground)]">
-            <span>
+        <div className="border-t border-[var(--border)] mt-12 pt-8">
+          <div className="flex w-full items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                >
+                  {link.icon}
+                </a>
+              ))}
+            </div>
+            <div className="text-sm text-[var(--muted-foreground)]">
               © 2025 OpenAuditLabs. Open-source under permissive licenses where
               noted.
-            </span>
+            </div>
           </div>
         </div>
       </div>
