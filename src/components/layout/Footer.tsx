@@ -172,8 +172,9 @@ const Footer = () => {
 
         {/* Bottom section */}
         <div className="border-t border-[var(--border)] mt-12 pt-8">
-          <div className="flex w-full items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
+          <div className="flex w-full flex-col md:flex-row items-center md:justify-between gap-4">
+            {/* Icons block: left on md+, top on mobile */}
+            <div className="flex items-center gap-3 order-1 md:order-1">
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
@@ -187,9 +188,10 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-            <div className="text-sm text-[var(--muted-foreground)]">
-              © 2025 OpenAuditLabs. Open-source under permissive licenses where
-              noted.
+
+            {/* Copyright: right on md+, below on mobile */}
+            <div className="text-sm text-[var(--muted-foreground)] order-2 md:order-2 text-center md:text-right">
+              © 2025 OpenAuditLabs. Open-source under permissive licenses where noted.
             </div>
           </div>
         </div>
