@@ -2,6 +2,7 @@ import {
   HeroSection,
   FeaturePills,
   FeatureCards,
+  WorkingProcess,
   PortfolioStats,
   JoinMission,
   TrustedLeadingProtocols,
@@ -24,6 +25,7 @@ export default function Home() {
       <TeamMemberSection />
       <JoinMission />
       <LatestBlogSection />
+      <WorkingProcess />
       <TrustedLeadingProtocols />
       <ReadyToSecure />
     </>
