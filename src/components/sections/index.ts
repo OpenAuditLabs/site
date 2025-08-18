@@ -9,3 +9,4 @@ export { LatestBlogSection } from "./LatestBlogSection";
 export { ReadyToSecure } from "./ReadyToSecure";
 export { TeamMemberSection } from "./TeamMemberSection";
 export { FeaturePills } from "./FeaturePills";
+export { default as FeatureCards } from "./FeatureCardsSection";
