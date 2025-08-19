@@ -3,6 +3,7 @@ import {
   FeaturePills,
   FeatureCards,
   ServiceSection,
+  FeaturedReports,
   WorkingProcess,
   PortfolioStats,
   JoinMission,
@@ -23,6 +24,7 @@ export default function Home() {
       <FeatureCards />
       <ServiceSection />
       <MethodologySection />
+      <FeaturedReports />
       <PortfolioStats />
       <AuditProcess />
       <PricingSection />
