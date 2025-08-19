@@ -501,6 +501,10 @@
 }
 
 /* Header specific styles to match design */
+.feature-cards-bg {
+  background: var(--feature-cards-bg) !important;
+}
+
 .site-header {
   border-bottom: none !important;
   background: var(--navbar-bg) !important;
