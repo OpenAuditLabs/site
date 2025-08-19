@@ -1,6 +1,7 @@
 import {
   HeroSection,
   FeaturePills,
+  FeatureCards,
   PortfolioStats,
   JoinMission,
   TrustedLeadingProtocols,
@@ -16,6 +17,7 @@ export default function Home() {
     <>
       <HeroSection />
       <FeaturePills />
+      <FeatureCards />
       <PortfolioStats />
       <AuditProcess />
       <PricingSection />
