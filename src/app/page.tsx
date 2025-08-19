@@ -7,6 +7,7 @@ import {
   PortfolioStats,
   JoinMission,
   TrustedLeadingProtocols,
+  MethodologySection,
   PricingSection,
   AuditProcess,
   LatestBlogSection,
@@ -21,6 +22,7 @@ export default function Home() {
       <FeaturePills />
       <FeatureCards />
       <ServiceSection />
+      <MethodologySection />
       <PortfolioStats />
       <AuditProcess />
       <PricingSection />
