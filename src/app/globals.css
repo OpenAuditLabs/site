@@ -166,6 +166,14 @@
     0 0 0 1px rgba(0, 0, 0, 0.03) inset;
   /* Feature cards section background (light) and hover border color variables */
   --feature-cards-bg: #f7f8fa;
+  /* Service section badge colors */
+  --service-badge-bg: rgba(
+    36,
+    86,
+    244,
+    0.08
+  ); /* subtle blue background by default */
+  --service-badge-text: var(--navbar-btn-bg);
   --feature-card-border-hover: #06b6d4; /* cyan-500 fallback for hover */
   --feature-card-icon-bg: rgba(6, 182, 212, 0.08);
   --sidebar: oklch(0.985 0.002 247.839);
@@ -218,6 +226,9 @@
     0 0 0 1px rgba(255, 255, 255, 0.03) inset;
   /* Dark equivalents for feature cards */
   --feature-cards-bg: oklch(0.13 0.028 261.692); /* reuse dark background */
+  /* Service section badge colors (dark) */
+  --service-badge-bg: rgba(36, 86, 244, 0.08);
+  --service-badge-text: var(--navbar-btn-text);
   --feature-card-border-hover: #0891b2; /* slightly darker cyan for dark mode */
   --feature-card-icon-bg: rgba(8, 145, 178, 0.08);
   --sidebar: oklch(0.21 0.034 264.665);
