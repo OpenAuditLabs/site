@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import {
   ClipboardList,
   Search,
@@ -64,7 +65,10 @@ const CARDS: Card[] = [
 
 export function MethodologySection() {
   return (
-    <section aria-label="Methodology" className="w-full my-20 py-12 md:py-20">
+    <section
+      aria-label="Methodology"
+      className="w-full my-20 py-12 md:py-20 feature-cards-bg"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl">
           <span
@@ -143,6 +147,20 @@ export function MethodologySection() {
               </div>
             </article>
           ))}
+        </div>
+        {/* CTA button (placed after cards) */}
+        <div className="mt-8 flex justify-start">
+          <Link
+            href="/process"
+            className="navbar__cta inline-flex items-center px-4 py-2 rounded-lg font-semibold text-base shadow-sm transition-colors duration-150"
+            aria-label="Read the full methodology"
+            style={{
+              background: "var(--navbar-btn-bg)",
+              color: "var(--navbar-btn-text)",
+            }}
+          >
+            Read the Full Methodology
+          </Link>
         </div>
       </div>
     </section>
