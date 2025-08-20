@@ -132,6 +132,9 @@
   --navbar-logo-blue: #2456f4;
   --navbar-btn-bg: #2456f4;
   --navbar-btn-text: #fff;
+  /* Open source stat tile colors - light: card with foreground text and border; dark: overridden in .dark */
+  --opensource-stat-bg: var(--card);
+  --opensource-stat-text: var(--foreground);
   --navbar-github-bg: #fff;
   --navbar-github-border: #e5e7eb;
   --navbar-github-shadow: 0 8px 20px rgba(2, 6, 23, 0.06);
@@ -202,6 +205,9 @@
   --navbar-logo-blue: #2456f4; /* use same blue as light mode */
   --navbar-btn-bg: #2456f4; /* CTA same blue in dark */
   --navbar-btn-text: #ffffff; /* white text on blue CTA */
+  /* Open source stat tile colors (dark) - CTA blue background with white text */
+  --opensource-stat-bg: var(--navbar-btn-bg);
+  --opensource-stat-text: var(--navbar-btn-text);
   --navbar-github-bg: #000000;
   --navbar-github-border: #27272a;
   --navbar-github-shadow: 0 8px 20px rgba(2, 6, 23, 0.36);

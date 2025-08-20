@@ -216,15 +216,31 @@ export function OpenSourceSection() {
                   return (
                     <div
                       key={stat.id}
-                      className="rounded-md border bg-background p-4 text-center"
+                      className="rounded-md p-4 text-center"
+                      style={{
+                        background: "var(--opensource-stat-bg)",
+                        color: "var(--opensource-stat-text)",
+                        border: "1px solid var(--border)",
+                      }}
                     >
-                      <div className="flex justify-center mb-2 text-muted-foreground">
+                      <div
+                        className="flex justify-center mb-2"
+                        style={{ color: "var(--opensource-stat-text)" }}
+                      >
                         <Icon className="w-5 h-5" />
                       </div>
-                      <div className="text-xs text-muted-foreground">
+                      <div
+                        className="text-xs"
+                        style={{ color: "var(--opensource-stat-text)" }}
+                      >
                         {stat.label}
                       </div>
-                      <div className="mt-2 font-bold">{stat.value ?? 0}</div>
+                      <div
+                        className="mt-2 font-bold"
+                        style={{ color: "var(--opensource-stat-text)" }}
+                      >
+                        {stat.value ?? 0}
+                      </div>
                     </div>
                   );
                 })}
