@@ -2,6 +2,73 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+// --- GitHub stats data shapes and placeholders -------------------------------------------------
+// We export simple, well-typed arrays so the UI can render the stats card and notes.
+// Values are intentionally left empty/null here — the live data will be filled in elsewhere.
+
+export type GitHubStatKey = "stars" | "forks" | "issues" | string;
+
+export interface GitHubStat {
+  id: string; // unique id for iteration
+  key: GitHubStatKey; // canonical key used when wiring live data
+  label: string; // short label shown above the numeric value (e.g. "Stars")
+  value?: number | null; // numeric value (left null until fetched)
+  description?: string; // optional extra text for accessibility or tooltips
+  iconName?: string; // lightweight reference to an icon (string), UI can map to actual icon component
+  href?: string; // optional link (e.g. to the repo metrics)
+}
+
+export interface GitHubNote {
+  id: string;
+  text: string; // message shown in the notes area
+  variant?: "info" | "warning" | "muted"; // optional styling hint
+}
+
+// Default list of stats to display (values intentionally not populated here)
+export const GITHUB_STATS: GitHubStat[] = [
+  {
+    id: "stars",
+    key: "stars",
+    label: "Stars",
+    value: null,
+    description: "Number of stars on the repository",
+    iconName: "star",
+    href: "",
+  },
+  {
+    id: "forks",
+    key: "forks",
+    label: "Forks",
+    value: null,
+    description: "Number of forks",
+    iconName: "fork",
+    href: "",
+  },
+  {
+    id: "issues",
+    key: "issues",
+    label: "Issues",
+    value: null,
+    description: "Open issues count",
+    iconName: "issue",
+    href: "",
+  },
+];
+
+// Default notes shown under the stats card (structure only)
+export const GITHUB_NOTES: GitHubNote[] = [
+  {
+    id: "note-1",
+    text: "Open issues welcome for report feedback, methodology proposals, and tooling improvements.",
+    variant: "info",
+  },
+  {
+    id: "note-2",
+    text: "For sensitive findings, use our responsible disclosure workflow.",
+    variant: "muted",
+  },
+];
+
 /**
  * OpenSourceSection
  *
