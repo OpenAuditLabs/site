@@ -41,20 +41,27 @@ export function OpenSourceSection() {
           <div className="lg:col-span-7">
             {/* Small badge / label */}
             <div className="mb-3">
-              {/* Badge placeholder: insert small label/pill (e.g. "Open Source") */}
-              <span className="inline-block rounded-full px-3 py-1 text-xs font-medium bg-slate-100 text-slate-700">
-                {/* TODO: insert badge text or component */}
+              {/* Use CSS variables from globals.css for badge background and text color */}
+              <span
+                className="inline-block rounded-full px-3 py-1 text-xs font-medium"
+                style={{
+                  background: "var(--service-badge-bg)",
+                  color: "var(--service-badge-text)",
+                }}
+              >
+                Open Source
               </span>
             </div>
 
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight text-foreground">
-              {/* TODO: Insert heading/title for the Open Source section */}
+              Built in public. Contributions welcome.
             </h2>
 
             {/* Intro paragraph */}
             <p className="mt-3 text-sm sm:text-base text-muted-foreground max-w-prose">
-              {/* TODO: Insert intro paragraph or short description */}
+              We value transparency and reproducibility. Read our guidelines,
+              open issues, submit PRs, and help shape open auditing practices.
             </p>
 
             {/* Action buttons */}
