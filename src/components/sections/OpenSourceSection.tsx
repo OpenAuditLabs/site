@@ -66,10 +66,18 @@ export function OpenSourceSection() {
 
             {/* Action buttons */}
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              {/* Primary CTA - Contribute on GitHub */}
-              <Button asChild size="default" className="rounded-md">
-                <Link href="#" aria-label="Primary action">
-                  {/* TODO: Primary CTA label (e.g. "Contribute on GitHub") */}
+              {/* Primary CTA - Contribute on GitHub (uses navbar CTA CSS variables) */}
+              <Button
+                asChild
+                size="default"
+                className="rounded-md"
+                style={{
+                  background: "var(--navbar-btn-bg)",
+                  color: "var(--navbar-btn-text)",
+                }}
+              >
+                <Link href="#" aria-label="Contribute on GitHub">
+                  Contribute on GitHub
                 </Link>
               </Button>
 
@@ -80,8 +88,8 @@ export function OpenSourceSection() {
                 size="default"
                 className="rounded-md"
               >
-                <Link href="#" aria-label="Secondary action">
-                  {/* TODO: Secondary CTA label (e.g. "Security Policy") */}
+                <Link href="#" aria-label="Security Policy">
+                  Security Policy
                 </Link>
               </Button>
 
@@ -91,17 +99,24 @@ export function OpenSourceSection() {
                 size="default"
                 className="rounded-md"
               >
-                <Link href="#" aria-label="Secondary action">
-                  {/* TODO: Secondary CTA label (e.g. "Responsible Disclosure") */}
+                <Link href="#" aria-label="Responsible Disclosure">
+                  Responsible Disclosure
                 </Link>
               </Button>
 
-              {/* Tertiary small button */}
-              <Button asChild variant="ghost" size="sm" className="mt-2">
-                <Link href="#" aria-label="Tertiary action">
-                  {/* TODO: Tertiary CTA label (e.g. "Join the Discussion") */}
-                </Link>
-              </Button>
+              {/* Tertiary button: same outline style as other secondary actions, placed on its own line */}
+              <div className="w-full mt-2">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="default"
+                  className="rounded-md"
+                >
+                  <Link href="#" aria-label="Join the Discussion">
+                    Join the Discussion
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
 
