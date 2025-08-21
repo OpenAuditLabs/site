@@ -50,12 +50,7 @@ export default function FeaturedReports() {
         </div>
 
         <div className="mt-8">
-          {/*
-            Grid layout: cards are displayed in a responsive grid. The
-            horizontal scroller has been removed; a scroller can be added in a
-            follow-up PR if desired. Styling still uses existing CSS variables
-            and utility classes (no new globals or hard-coded colors).
-          */}
+        
 
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {reports.map((r) => (
