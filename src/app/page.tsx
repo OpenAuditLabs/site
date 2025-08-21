@@ -14,6 +14,7 @@ import {
   LatestBlogSection,
   ReadyToSecure,
   TeamMemberSection,
+  OpenSourceSection,
 } from "@/components/sections";
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
       <ServiceSection />
       <MethodologySection />
       <FeaturedReports />
+      <OpenSourceSection />
       <PortfolioStats />
       <AuditProcess />
       <PricingSection />
