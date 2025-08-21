@@ -1,25 +1,34 @@
-import React from "react";
+export type Report = {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  href?: string;
+};
 
 export default function FeaturedReports() {
-  const reports = [
+  const reports: Report[] = [
     {
       id: "deltaswap-v2",
       title: "DeltaSwap v2",
-      desc: "DEX core contracts, AMM math review, fee invariants, oracle integration.",
+      description:
+        "DEX core contracts, AMM math review, fee invariants, oracle integration.",
       tags: ["DeFi", "Oracle", "L2"],
       href: "#",
     },
     {
       id: "musenft-launchpad",
       title: "MuseNFT Launchpad",
-      desc: "Minting flows, metadata integrity, royalties handling, marketplace hooks.",
+      description:
+        "Minting flows, metadata integrity, royalties handling, marketplace hooks.",
       tags: ["NFT"],
       href: "#",
     },
     {
       id: "civicdao-treasury",
       title: "CivicDAO Treasury",
-      desc: "Governance modules, timelock correctness, proposer/queue constraints.",
+      description:
+        "Governance modules, timelock correctness, proposer/queue constraints.",
       tags: ["DAO", "Governance"],
       href: "#",
     },
@@ -50,14 +59,11 @@ export default function FeaturedReports() {
         </div>
 
         <div className="mt-8">
-        
-
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {reports.map((r) => (
               <article
                 key={r.id}
                 aria-labelledby={`${r.id}-title`}
-                tabIndex={0}
                 className="feature-card bg-card border border-border rounded-lg p-6 shadow-sm transition-transform duration-300 will-change-transform focus:outline-none focus-visible:ring"
                 style={{
                   background: "var(--feature-pill-bg)",
@@ -79,12 +85,12 @@ export default function FeaturedReports() {
                       className="mt-3 text-sm leading-6 max-w-prose"
                       style={{ color: "var(--muted-foreground)" }}
                     >
-                      {r.desc}
+                      {r.description}
                     </p>
 
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <ul className="mt-4 flex flex-wrap gap-2" role="list">
                       {r.tags.map((t) => (
-                        <span
+                        <li
                           key={t}
                           className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
                           style={{
@@ -94,20 +100,22 @@ export default function FeaturedReports() {
                           }}
                         >
                           {t}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   </div>
 
                   <div className="mt-4 flex justify-end">
                     <a
                       href={r.href}
-                      target="_blank"
-                      rel="noreferrer"
+                      {...(r.href && r.href !== "#"
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      aria-label={`Read report: ${r.title}`}
                       className="text-sm font-medium"
                       style={{ color: "var(--navbar-btn-bg)" }}
                     >
-                      Read Report ↗
+                      Read Report 
                     </a>
                   </div>
                 </div>
