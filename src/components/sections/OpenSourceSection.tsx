@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Star, GitBranch, Bug, MessageSquare, Shield } from "lucide-react";
 
 // --- GitHub stats data shapes and placeholders -------------------------------------------------
 // We export simple, well-typed arrays so the UI can render the stats card and notes.
@@ -196,46 +197,58 @@ export function OpenSourceSection() {
                 className="text-sm font-semibold mb-4"
                 style={{ color: "var(--foreground)" }}
               >
-                {/* TODO: Card title (e.g. "GitHub Stats") */}
+                GitHub Stats
               </h3>
 
-              {/* Stats grid placeholder: structure only, numeric content removed */}
+              {/* Stats grid: render labels and values from GITHUB_STATS */}
               <div className="grid grid-cols-3 gap-3 mb-4">
-                <div className="rounded-md border bg-background p-4 text-center">
-                  <div className="text-xs text-muted-foreground">
-                    {/* TODO: metric label */}
-                  </div>
-                  <div className="mt-2 font-bold">
-                    {/* TODO: metric value */}
-                  </div>
-                </div>
-                <div className="rounded-md border bg-background p-4 text-center">
-                  <div className="text-xs text-muted-foreground">
-                    {/* TODO: metric label */}
-                  </div>
-                  <div className="mt-2 font-bold">
-                    {/* TODO: metric value */}
-                  </div>
-                </div>
-                <div className="rounded-md border bg-background p-4 text-center">
-                  <div className="text-xs text-muted-foreground">
-                    {/* TODO: metric label */}
-                  </div>
-                  <div className="mt-2 font-bold">
-                    {/* TODO: metric value */}
-                  </div>
-                </div>
+                {/** Small map from iconName/key to a Lucide icon component */}
+                {GITHUB_STATS.map((stat) => {
+                  const ICON_MAP: Record<string, React.ComponentType<any>> = {
+                    star: Star,
+                    fork: GitBranch,
+                    issue: Bug,
+                    // fallback: use Star for unknown keys
+                  };
+
+                  const Icon = ICON_MAP[stat.iconName || stat.key] || Star;
+
+                  return (
+                    <div
+                      key={stat.id}
+                      className="rounded-md border bg-background p-4 text-center"
+                    >
+                      <div className="flex justify-center mb-2 text-muted-foreground">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {stat.label}
+                      </div>
+                      <div className="mt-2 font-bold">{stat.value ?? 0}</div>
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Notes / bullets structure only */}
+              {/* Notes / bullets rendered from GITHUB_NOTES */}
               <div className="space-y-3">
-                <div className="rounded-md border bg-background p-3 text-sm text-muted-foreground">
-                  {/* TODO: short note or bullet */}
-                </div>
+                {GITHUB_NOTES.map((note) => {
+                  // choose an icon for the note variant (info -> MessageSquare, muted -> Shield)
+                  const NoteIcon =
+                    note.variant === "muted" ? Shield : MessageSquare;
 
-                <div className="rounded-md border bg-background p-3 text-sm text-muted-foreground">
-                  {/* TODO: short note or bullet */}
-                </div>
+                  return (
+                    <div
+                      key={note.id}
+                      className="rounded-md border bg-background p-3 text-sm text-muted-foreground flex items-start gap-3"
+                    >
+                      <div className="mt-1">
+                        <NoteIcon className="w-5 h-5" />
+                      </div>
+                      <div className="text-sm leading-snug">{note.text}</div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
