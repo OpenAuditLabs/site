@@ -1,13 +1,6 @@
 "use client";
 
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
 import { Code, Target, Cpu, Wrench } from "lucide-react";
 
 export function ServiceSection() {
@@ -71,46 +64,58 @@ export function ServiceSection() {
 
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((s, i) => (
-            <Card
+            <article
               key={s.id}
-              className={`animate-in fade-in slide-in-from-bottom-6`}
+              tabIndex={0}
+              aria-labelledby={`${s.id}-title`}
+              className="feature-card bg-card border border-border rounded-lg p-6 shadow-sm transition-transform duration-300 will-change-transform focus:outline-none focus-visible:ring"
               style={{
-                animationDelay: `${i * 120 + 100}ms`,
-                animationFillMode: "both",
-                animationDuration: "700ms",
+                background: "var(--feature-pill-bg)",
+                boxShadow: "var(--feature-pill-shadow)",
+                borderRadius: "var(--radius-lg)",
               }}
             >
-              <CardHeader className="items-start gap-4">
+              <div className="flex flex-col gap-4 h-full">
                 <div
-                  className="w-10 h-10 flex items-center justify-center rounded-lg"
-                  style={{
-                    background: "var(--service-card-icon-bg)",
-                    border: "1px solid var(--service-card-icon-border)",
-                  }}
+                  className="w-10 h-10 flex items-center justify-center rounded-md feature-card-icon-bg"
+                  style={{ background: "var(--feature-card-icon-bg)" }}
+                  aria-hidden="true"
                 >
                   <s.Icon
-                    width={16}
-                    height={16}
+                    className="feature-icon"
+                    width={20}
+                    height={20}
                     aria-hidden="true"
-                    style={{ color: "var(--service-card-icon)" }}
+                    style={{ color: "var(--feature-pill-icon)" }}
                   />
                 </div>
-                <CardTitle className="text-base">{s.title}</CardTitle>
-              </CardHeader>
 
-              <CardContent>
-                <CardDescription>{s.desc}</CardDescription>
-                <div className="mt-4">
-                  <a
-                    href="#"
-                    className="text-sm font-medium"
-                    style={{ color: "var(--navbar-btn-bg)" }}
+                <div className="flex-1">
+                  <h3
+                    id={`${s.id}-title`}
+                    className="text-lg font-semibold leading-6"
+                    style={{ color: "var(--foreground)" }}
                   >
-                    Learn more in Methodology →
-                  </a>
+                    {s.title}
+                  </h3>
+                  <p
+                    className="mt-3 text-sm leading-6 max-w-prose"
+                    style={{ color: "var(--muted-foreground)" }}
+                  >
+                    {s.desc}
+                  </p>
+                  <div className="mt-4">
+                    <a
+                      href="#"
+                      className="text-sm font-medium"
+                      style={{ color: "var(--navbar-btn-bg)" }}
+                    >
+                      Learn more in Methodology →
+                    </a>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </article>
           ))}
         </div>
       </div>
