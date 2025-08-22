@@ -7,11 +7,11 @@ export function HeroSection() {
   return (
     <section
       aria-label="OpenAuditLabs hero"
-      className="hero-section w-full bg-background min-h-screen pb-[100px]"
+      className="hero-section w-full bg-background min-h-screen pb-[100px] mb-5"
     >
       <div className="mx-auto max-w-7xl px-4 py-20 sm:py-28 lg:py-36 flex items-start">
         <div className="max-w-3xl mx-auto text-center -mt-16">
-          <h1 className="font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight text-foreground">
+          <h1 className="font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight text-foreground mt-22 md:mt-0 ">
             <span className="block">Open-source</span>
             <span
               className="block hero-heading-gradient-cta font-extrabold"
@@ -39,8 +39,8 @@ export function HeroSection() {
               <span className="hero-cta-glow rounded-lg" aria-hidden="true" />
               <Button
                 asChild
-                size="lg"
-                className="relative z-10 rounded-lg px-6 py-3 font-semibold shadow-md"
+                size="hero"
+                className="relative z-10 font-semibold shadow-md"
                 style={{
                   backgroundColor: "var(--hero-cta-bg)",
                   color: "var(--hero-cta-text)",
@@ -58,8 +58,8 @@ export function HeroSection() {
             <Button
               asChild
               variant="outline"
-              size="lg"
-              className="rounded-lg px-5 py-3 border-[1.5px] text-foreground/90"
+              size="heroOutlineMobile"
+              className="border-[1.5px] text-foreground/90"
             >
               <Link href="/" aria-label="View on GitHub">
                 <span className="flex items-center gap-2">
