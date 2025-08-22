@@ -12,16 +12,16 @@ export function ReadyToSecure() {
           </h2>
 
           <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-4 mt-2">
-            <Link href="/audits" aria-label="Request an audit">
-              <span
-                className="navbar__cta w-full sm:w-auto px-6 py-3 rounded-lg font-semibold text-base shadow-sm transition-colors duration-150 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--primary)]"
-                style={{
-                  background: "var(--navbar-btn-bg)",
-                  color: "var(--navbar-btn-text)",
-                }}
-              >
-                Request an Audit
-              </span>
+            <Link
+              href="/audits"
+              aria-label="Request an audit"
+              className="navbar__cta w-full sm:w-auto px-6 py-3 rounded-lg font-semibold text-base shadow-sm transition-colors duration-150 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--primary)]"
+              style={{
+                background: "var(--navbar-btn-bg)",
+                color: "var(--navbar-btn-text)",
+              }}
+            >
+              Request an Audit
             </Link>
 
             <a
