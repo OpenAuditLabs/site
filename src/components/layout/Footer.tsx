@@ -3,35 +3,84 @@
 import React from "react";
 import { Github, Twitter, MessageSquare, Mail } from "lucide-react";
 
-const socialLinks = [
+type FooterLink = { label: string; href: string };
+
+const columns: { title: string; links: FooterLink[] }[] = [
   {
-    icon: <Github size={20} />,
-    url: "https://github.com/OpenAuditLabs",
-    label: "GitHub",
+    title: "Product",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Services", href: "/services" },
+      { label: "Methodology", href: "/methodology" },
+      { label: "Reports", href: "/reports" },
+      { label: "Docs", href: "/docs" },
+    ],
   },
   {
-    icon: <Twitter size={20} />,
-    url: "https://twitter.com/OpenAuditLabs",
-    label: "Twitter",
+    title: "Community",
+    links: [
+      { label: "GitHub", href: "https://github.com/OpenAuditLabs" },
+      { label: "Contribute", href: "/contribute" },
+      { label: "Security Policy", href: "/security-policy" },
+      { label: "Disclosure", href: "/disclosure" },
+    ],
   },
   {
-    icon: <MessageSquare size={20} />,
-    url: "https://discord.gg/OpenAuditLabs",
-    label: "Discord",
-  },
-  {
-    icon: <Mail size={20} />,
-    url: "mailto:info@openauditlabs.xyz",
-    label: "Email",
+    title: "Company",
+    links: [
+      { label: "Contact", href: "/contact" },
+      { label: "Careers", href: "/careers" },
+      { label: "Media Kit", href: "/media-kit" },
+    ],
   },
 ];
 
-const Footer = () => {
+const socialLinks: {
+  Icon: React.ComponentType<any>;
+  url: string;
+  label: string;
+}[] = [
+  { Icon: Github, url: "https://github.com/OpenAuditLabs", label: "GitHub" },
+  { Icon: Twitter, url: "https://twitter.com/OpenAuditLabs", label: "Twitter" },
+  {
+    Icon: MessageSquare,
+    url: "https://discord.gg/OpenAuditLabs",
+    label: "Discord",
+  },
+  { Icon: Mail, url: "mailto:info@openauditlabs.xyz", label: "Email" },
+];
+
+const linkClass =
+  "text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors";
+
+function FooterColumn({
+  title,
+  links,
+}: {
+  title: string;
+  links: FooterLink[];
+}) {
+  return (
+    <div>
+      <h4 className="font-semibold text-[var(--foreground)] mb-4">{title}</h4>
+      <ul className="space-y-3 text-sm">
+        {links.map((l) => (
+          <li key={l.href}>
+            <a href={l.href} className={linkClass}>
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const Footer: React.FC = () => {
   return (
     <footer className="w-full bg-[var(--navbar-bg)] text-[var(--foreground)] border-t border-[var(--border)] py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Brand section */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl font-bold text-[var(--foreground)]">
@@ -43,155 +92,35 @@ const Footer = () => {
             <p className="text-[var(--muted-foreground)] text-sm mb-6 max-w-md">
               Open-source smart contract security auditing.
             </p>
-            {/* social icons removed from brand section per design */}
           </div>
 
-          {/* Product section */}
-          <div>
-            <h4 className="font-semibold text-[var(--foreground)] mb-4">
-              Product
-            </h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a
-                  href="/about"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/services"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Services
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/methodology"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Methodology
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/reports"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Reports
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/docs"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Docs
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Community section */}
-          <div>
-            <h4 className="font-semibold text-[var(--foreground)] mb-4">
-              Community
-            </h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a
-                  href="https://github.com/OpenAuditLabs"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/contribute"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Contribute
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/security-policy"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Security Policy
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/disclosure"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Disclosure
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company section */}
-          <div>
-            <h4 className="font-semibold text-[var(--foreground)] mb-4">
-              Company
-            </h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a
-                  href="/contact"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/careers"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/media-kit"
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                >
-                  Media Kit
-                </a>
-              </li>
-            </ul>
-          </div>
+          {columns.map((col) => (
+            <FooterColumn key={col.title} title={col.title} links={col.links} />
+          ))}
         </div>
 
-        {/* Bottom section */}
         <div className="border-t border-[var(--border)] mt-12 pt-8">
-          <div className="flex w-full flex-col md:flex-row items-center md:justify-between gap-4">
-            {/* Icons block: left on md+, top on mobile */}
+          <div className="flex w-full flex-col md:flex-row items-start md:items-center md:justify-between gap-4">
             <div className="flex items-center gap-3 order-1 md:order-1">
-              {socialLinks.map((link) => (
+              {socialLinks.map((s) => (
                 <a
-                  key={link.label}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                  key={s.label}
+                  href={s.url}
+                  target={s.url.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    s.url.startsWith("http") ? "noopener noreferrer" : undefined
+                  }
+                  aria-label={s.label}
+                  className={linkClass}
                 >
-                  {link.icon}
+                  <s.Icon size={20} />
                 </a>
               ))}
             </div>
 
-            {/* Copyright: right on md+, below on mobile */}
-            <div className="text-sm text-[var(--muted-foreground)] order-2 md:order-2 text-center md:text-right">
-              © 2025 OpenAuditLabs. Open-source under permissive licenses where noted.
+            <div className="text-sm text-[var(--muted-foreground)] order-2 md:order-2 text-left md:text-right">
+              © 2025 OpenAuditLabs. Open-source under permissive licenses where
+              noted.
             </div>
           </div>
         </div>
