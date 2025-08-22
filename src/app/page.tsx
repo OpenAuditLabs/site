@@ -4,6 +4,7 @@ import {
   FeatureCards,
   ServiceSection,
   FeaturedReports,
+  TrustedByTeamsSection,
   WorkingProcess,
   PortfolioStats,
   JoinMission,
@@ -26,6 +27,7 @@ export default function Home() {
       <ServiceSection />
       <MethodologySection />
       <FeaturedReports />
+      <TrustedByTeamsSection />
       <OpenSourceSection />
       <PortfolioStats />
       <AuditProcess />

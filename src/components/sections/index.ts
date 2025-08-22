@@ -14,4 +14,5 @@ export { default as WorkingProcess } from "./WorkingProcessSection";
 export { ServiceSection } from "./ServiceSection";
 export { MethodologySection } from "./MethodologySection";
 export { default as FeaturedReports } from "./FeaturedReports";
+export { default as TrustedByTeamsSection } from "./TrustedByTeamsSection";
 export { OpenSourceSection } from "./OpenSourceSection";
