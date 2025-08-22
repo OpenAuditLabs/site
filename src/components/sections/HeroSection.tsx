@@ -11,7 +11,7 @@ export function HeroSection() {
     >
       <div className="mx-auto max-w-7xl px-4 py-20 sm:py-28 lg:py-36 flex items-start">
         <div className="max-w-3xl mx-auto text-center -mt-16">
-          <h1 className="font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight text-foreground mt-22 md:mt-0 ">
+          <h1 className="font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-tight text-foreground mt-[5.5rem] md:mt-0 ">
             <span className="block">Open-source</span>
             <span
               className="block hero-heading-gradient-cta font-extrabold"
