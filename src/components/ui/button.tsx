@@ -26,6 +26,10 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
+        // hero sizes used for the site hero component
+        hero: "rounded-lg px-6 py-2 sm:py-3 text-base has-[>svg]:px-3",
+        heroOutlineMobile:
+          "rounded-lg px-5 py-4 sm:py-3 text-base has-[>svg]:px-3 w-full sm:w-auto",
       },
     },
     defaultVariants: {
