@@ -1,5 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import { Shield, FileText, Users, Columns } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Feature = {
   id: string;
@@ -15,7 +16,41 @@ const DEFAULT_FEATURES: Feature[] = [
   { id: "evm-focused", title: "EVM Focused", Icon: Columns },
 ];
 
-export function FeaturePills({
+const FeaturePill = ({ feature }: { feature: Feature }) => {
+  const { id, title, Icon, href } = feature;
+
+  return (
+    <li key={id}>
+      <a
+        href={href ?? "#"}
+        aria-label={title}
+        className={cn(
+          "feature-pill-link inline-flex items-center gap-3 px-6 py-3 rounded-lg border shadow-feature-pill"
+        )}
+        // Keep visual tokens as inline style so theming variables remain easy to override
+        style={{
+          background: "var(--feature-pill-bg)",
+          borderColor: "var(--feature-pill-border)",
+          color: "var(--feature-pill-text)",
+          minHeight: 44,
+        }}
+      >
+        <span className="flex items-center justify-center" aria-hidden="true">
+          <Icon
+            width={18}
+            height={18}
+            className="feature-pill-icon"
+            aria-hidden="true"
+          />
+        </span>
+
+        <span className="text-sm font-medium leading-none">{title}</span>
+      </a>
+    </li>
+  );
+};
+
+export const FeaturePills = memo(function FeaturePills({
   features = DEFAULT_FEATURES,
 }: {
   features?: Feature[];
@@ -28,38 +63,11 @@ export function FeaturePills({
         className="flex flex-wrap gap-6 items-center justify-center max-w-5xl px-4"
       >
         {features.map((f) => (
-          <li key={f.id}>
-            <a
-              href={f.href ?? "#"}
-              className="feature-pill-link inline-flex items-center gap-3 px-6 py-3 rounded-lg border shadow-feature-pill transition-shadow transform duration-200 ease-out hover:shadow-feature-pill-hover hover:-translate-y-1 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              style={{
-                background: "var(--feature-pill-bg)",
-                borderColor: "var(--feature-pill-border)",
-                color: "var(--feature-pill-text)",
-                minHeight: 44,
-              }}
-              aria-label={f.title}
-            >
-              <span
-                className="flex items-center justify-center"
-                aria-hidden="true"
-              >
-                <f.Icon
-                  width={18}
-                  height={18}
-                  aria-hidden="true"
-                  className="feature-pill-icon"
-                />
-              </span>
-              <span className="text-sm font-medium leading-none">
-                {f.title}
-              </span>
-            </a>
-          </li>
+          <FeaturePill key={f.id} feature={f} />
         ))}
       </ul>
     </div>
   );
-}
+});
 
 export default FeaturePills;
