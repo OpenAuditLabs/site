@@ -1,7 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Star, GitBranch, Bug, MessageSquare, Shield } from "lucide-react";
+import {
+  Star,
+  GitBranch,
+  Bug,
+  MessageSquare,
+  Shield,
+  Github,
+} from "lucide-react";
 
 // --- GitHub stats data shapes and placeholders -------------------------------------------------
 // We export simple, well-typed arrays so the UI can render the stats card and notes.
@@ -132,19 +139,24 @@ export function OpenSourceSection() {
               open issues, submit PRs, and help shape open auditing practices.
             </p>
 
-            {/* Action buttons */}
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              {/* Primary CTA - Contribute on GitHub (uses navbar CTA CSS variables) */}
+            {/* Action buttons: 2-column grid on small screens; lg uses a 3-column grid so Join sits on row 2 centered */}
+            <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-3 lg:items-center">
+              {/* Primary CTA - Contribute on GitHub (fills grid cell on mobile) */}
               <Button
                 asChild
                 size="default"
-                className="rounded-md"
+                className="w-full sm:w-auto rounded-md"
                 style={{
                   background: "var(--navbar-btn-bg)",
                   color: "var(--navbar-btn-text)",
                 }}
               >
-                <Link href="#" aria-label="Contribute on GitHub">
+                <Link
+                  href="#"
+                  aria-label="Contribute on GitHub"
+                  className="inline-flex items-center"
+                >
+                  <Github className="w-4 h-4 mr-2" />
                   Contribute on GitHub
                 </Link>
               </Button>
@@ -154,7 +166,7 @@ export function OpenSourceSection() {
                 asChild
                 variant="outline"
                 size="default"
-                className="rounded-md"
+                className="w-full sm:w-auto rounded-md"
               >
                 <Link href="#" aria-label="Security Policy">
                   Security Policy
@@ -165,26 +177,24 @@ export function OpenSourceSection() {
                 asChild
                 variant="outline"
                 size="default"
-                className="rounded-md"
+                className="w-full sm:w-auto rounded-md"
               >
                 <Link href="#" aria-label="Responsible Disclosure">
                   Responsible Disclosure
                 </Link>
               </Button>
 
-              {/* Tertiary button: same outline style as other secondary actions, placed on its own line */}
-              <div className="w-full mt-2">
-                <Button
-                  asChild
-                  variant="outline"
-                  size="default"
-                  className="rounded-md"
-                >
-                  <Link href="#" aria-label="Join the Discussion">
-                    Join the Discussion
-                  </Link>
-                </Button>
-              </div>
+              {/* Tertiary action - Join the Discussion (placed on row 2, centered column on lg) */}
+              <Button
+                asChild
+                variant="outline"
+                size="default"
+                className="w-full sm:w-auto rounded-md lg:col-start-1 lg:col-span-1 lg:mt-2 lg:justify-self-start"
+              >
+                <Link href="#" aria-label="Join the Discussion">
+                  Join the Discussion
+                </Link>
+              </Button>
             </div>
           </div>
 
