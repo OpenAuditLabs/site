@@ -20,12 +20,12 @@ const FeaturePill = ({ feature }: { feature: Feature }) => {
   const { id, title, Icon, href } = feature;
 
   return (
-    <li key={id}>
+    <li key={id} className="w-full sm:w-auto">
       <a
         href={href ?? "#"}
         aria-label={title}
         className={cn(
-          "feature-pill-link inline-flex items-center gap-3 px-6 py-3 rounded-lg border shadow-feature-pill"
+          "feature-pill-link flex items-center gap-3 px-4 py-3 rounded-lg border shadow-feature-pill w-full overflow-hidden"
         )}
         // Keep visual tokens as inline style so theming variables remain easy to override
         style={{
@@ -35,7 +35,10 @@ const FeaturePill = ({ feature }: { feature: Feature }) => {
           minHeight: 44,
         }}
       >
-        <span className="flex items-center justify-center" aria-hidden="true">
+        <span
+          className="flex items-center justify-center flex-none"
+          aria-hidden="true"
+        >
           <Icon
             width={18}
             height={18}
@@ -44,7 +47,9 @@ const FeaturePill = ({ feature }: { feature: Feature }) => {
           />
         </span>
 
-        <span className="text-sm font-medium leading-none">{title}</span>
+        <span className="text-xs sm:text-sm font-medium leading-none flex-1 text-center truncate">
+          {title}
+        </span>
       </a>
     </li>
   );
@@ -60,7 +65,7 @@ export const FeaturePills = memo(function FeaturePills({
       <ul
         role="list"
         aria-label="Feature highlights"
-        className="flex flex-wrap gap-6 items-center justify-center max-w-5xl px-4"
+        className="grid grid-cols-2 gap-6 justify-items-stretch items-center justify-center max-w-5xl px-4 sm:flex sm:flex-wrap sm:justify-center"
       >
         {features.map((f) => (
           <FeaturePill key={f.id} feature={f} />
