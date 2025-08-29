@@ -1,23 +1,28 @@
 import React from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   return (
     <nav
       aria-label="site-navigation"
-      className="hidden md:block w-full bg-background border-b border-border"
+      className="block sticky top-0 z-50 w-full bg-background border-b border-border"
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+        <div className="grid grid-cols-3 items-center">
           {/* Logo/Brand */}
-          <div className="flex items-center">
-            <span className="text-xl font-semibold text-foreground">
+          <div className="flex items-center justify-self-start">
+            <Link
+              href="/"
+              className="text-xl font-semibold text-foreground hover:text-primary transition-colors"
+              aria-label="OpenAudit home"
+            >
               OpenAudit
-            </span>
+            </Link>
           </div>
 
           {/* Navigation Links */}
-          <div className="flex items-center space-x-8">
+          <div className="flex items-center justify-self-center space-x-8">
             <a
               href="#features"
               className="text-sm font-medium text-foreground hover:text-primary transition-colors"
@@ -39,7 +44,7 @@ export default function Navbar() {
           </div>
 
           {/* Get Started Button */}
-          <div className="flex items-center">
+          <div className="flex items-center justify-self-end">
             <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
               Get Started
             </Button>
