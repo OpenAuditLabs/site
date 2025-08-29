@@ -73,23 +73,11 @@ export default function Navbar() {
                 onClick={toggleTheme}
                 variant="ghost"
                 size="icon"
-                aria-label={
-                  mounted
-                    ? `Switch to ${
-                        resolvedTheme === "dark" ? "light" : "dark"
-                      } mode`
-                    : "Toggle theme"
-                }
-                title={
-                  mounted
-                    ? `Switch to ${
-                        resolvedTheme === "dark" ? "light" : "dark"
-                      } mode`
-                    : "Toggle theme"
-                }
+                aria-label="Toggle dark mode"
+                title="Toggle dark mode"
                 className="p-2"
                 type="button"
-                aria-pressed={resolvedTheme === "dark"}
+                aria-pressed={mounted ? resolvedTheme === "dark" : undefined}
                 disabled={!mounted}
                 aria-disabled={!mounted}
               >
@@ -124,29 +112,14 @@ export default function Navbar() {
 
               {/* Mobile theme toggle to the right of menu icon */}
               <Button
-                onClick={() => {
-                  if (!mounted) return;
-                  toggleTheme();
-                }}
+                onClick={toggleTheme}
                 variant="ghost"
                 size="icon"
-                aria-label={
-                  mounted
-                    ? `Switch to ${
-                        resolvedTheme === "dark" ? "light" : "dark"
-                      } mode`
-                    : "Toggle theme"
-                }
-                title={
-                  mounted
-                    ? `Switch to ${
-                        resolvedTheme === "dark" ? "light" : "dark"
-                      } mode`
-                    : "Toggle theme"
-                }
+                aria-label="Toggle dark mode"
+                title="Toggle dark mode"
                 className="p-2"
                 type="button"
-                aria-pressed={resolvedTheme === "dark"}
+                aria-pressed={mounted ? resolvedTheme === "dark" : undefined}
                 disabled={!mounted}
                 aria-disabled={!mounted}
               >
