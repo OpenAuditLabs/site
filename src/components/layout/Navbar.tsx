@@ -50,8 +50,11 @@ export default function Navbar() {
           {/* Right: actions (Get Started + mobile toggle) */}
           <div className="flex items-center space-x-3">
             <div className="hidden md:block">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
-                Get Started
+              <Button
+                asChild
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+              >
+                <Link href="/#contact">Get Started</Link>
               </Button>
             </div>
 
@@ -108,10 +111,12 @@ export default function Navbar() {
 
           <div className="pt-2">
             <Button
-              onClick={() => setOpen(false)}
+              asChild
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
             >
-              Get Started
+              <Link href="/#contact" onClick={() => setOpen(false)}>
+                Get Started
+              </Link>
             </Button>
           </div>
         </div>
