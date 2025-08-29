@@ -28,7 +28,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="relative flex items-center justify-between">
-          {/* Left: Logo/Brand */}
+          {/* Left: Logo */}
           <div className="flex items-center">
             <Link
               href="/"
@@ -39,50 +39,45 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Center links: absolutely centered on md+ */}
-          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            <a
-              href="#features"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-            >
-              Features
-            </a>
-            <a
-              href="#pricing"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-            >
-              Pricing
-            </a>
-            <a
-              href="#contact"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-            >
-              Contact
-            </a>
-          </div>
-
-          {/* Right: actions (Get Started + mobile toggle) */}
+          {/* Right: Desktop nav links + actions, mobile controls stay visible on small screens */}
           <div className="flex items-center space-x-3">
-            <div className="hidden md:block">
+            {/* Desktop group: moves to the right of the navbar */}
+            <div className="hidden md:flex items-center space-x-6">
+              <a
+                href="#features"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                Features
+              </a>
+              <a
+                href="#pricing"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                Pricing
+              </a>
+              <a
+                href="#contact"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                Contact
+              </a>
+
               <Button
                 asChild
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
               >
                 <Link href="/#contact">Get Started</Link>
               </Button>
-            </div>
 
-            {/* Theme toggle for md+ placed after Get Started */}
-            <div className="hidden md:block">
               <Button
                 onClick={toggleTheme}
                 variant="ghost"
                 size="icon"
-                aria-label={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
-                title={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
+                aria-label="Toggle dark mode"
+                title="Toggle dark mode"
                 className="p-2"
                 type="button"
-                aria-pressed={resolvedTheme === "dark"}
+                aria-pressed={mounted ? resolvedTheme === "dark" : undefined}
                 disabled={!mounted}
                 aria-disabled={!mounted}
               >
@@ -98,7 +93,7 @@ export default function Navbar() {
               </Button>
             </div>
 
-            {/* Mobile menu button: visible on small screens */}
+            {/* Mobile menu button + mobile theme (visible on small screens) */}
             <div className="md:hidden flex items-center gap-2">
               <button
                 type="button"
@@ -117,17 +112,14 @@ export default function Navbar() {
 
               {/* Mobile theme toggle to the right of menu icon */}
               <Button
-                onClick={() => {
-                  if (!mounted) return;
-                  toggleTheme();
-                }}
+                onClick={toggleTheme}
                 variant="ghost"
                 size="icon"
-                aria-label={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
-                title={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
+                aria-label="Toggle dark mode"
+                title="Toggle dark mode"
                 className="p-2"
                 type="button"
-                aria-pressed={resolvedTheme === "dark"}
+                aria-pressed={mounted ? resolvedTheme === "dark" : undefined}
                 disabled={!mounted}
                 aria-disabled={!mounted}
               >
