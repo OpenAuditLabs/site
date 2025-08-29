@@ -1,12 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const toggleTheme = () => {
+    // resolvedTheme respects system preference when defaultTheme='system'
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
   return (
     <nav
       aria-label="site-navigation"
@@ -58,8 +70,29 @@ export default function Navbar() {
               </Button>
             </div>
 
+            {/* Theme toggle for md+ placed after Get Started */}
+            <div className="hidden md:block">
+              <Button
+                onClick={toggleTheme}
+                variant="ghost"
+                size="icon"
+                aria-label="Toggle theme"
+                className="p-2"
+              >
+                {mounted ? (
+                  resolvedTheme === "dark" ? (
+                    <Sun className="w-4 h-4" />
+                  ) : (
+                    <Moon className="w-4 h-4" />
+                  )
+                ) : (
+                  <Sun className="w-4 h-4 opacity-0" />
+                )}
+              </Button>
+            </div>
+
             {/* Mobile menu button: visible on small screens */}
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center gap-2">
               <button
                 type="button"
                 aria-controls="mobile-menu"
@@ -74,6 +107,25 @@ export default function Navbar() {
                   <Menu className="w-5 h-5" />
                 )}
               </button>
+
+              {/* Mobile theme toggle to the right of menu icon */}
+              <Button
+                onClick={toggleTheme}
+                variant="ghost"
+                size="icon"
+                aria-label="Toggle theme"
+                className="p-2"
+              >
+                {mounted ? (
+                  resolvedTheme === "dark" ? (
+                    <Sun className="w-4 h-4" />
+                  ) : (
+                    <Moon className="w-4 h-4" />
+                  )
+                ) : (
+                  <Sun className="w-4 h-4 opacity-0" />
+                )}
+              </Button>
             </div>
           </div>
         </div>
