@@ -16,8 +16,10 @@ export default function Navbar() {
   }, []);
 
   const toggleTheme = () => {
-    // resolvedTheme respects system preference when defaultTheme='system'
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    // avoid toggling before client mount to prevent unintended theme flips
+    if (!mounted) return;
+    const next = resolvedTheme === "dark" ? "light" : "dark";
+    setTheme(next);
   };
   return (
     <nav
@@ -76,8 +78,13 @@ export default function Navbar() {
                 onClick={toggleTheme}
                 variant="ghost"
                 size="icon"
-                aria-label="Toggle theme"
+                aria-label={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
+                title={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
                 className="p-2"
+                type="button"
+                aria-pressed={resolvedTheme === "dark"}
+                disabled={!mounted}
+                aria-disabled={!mounted}
               >
                 {mounted ? (
                   resolvedTheme === "dark" ? (
@@ -110,11 +117,19 @@ export default function Navbar() {
 
               {/* Mobile theme toggle to the right of menu icon */}
               <Button
-                onClick={toggleTheme}
+                onClick={() => {
+                  if (!mounted) return;
+                  toggleTheme();
+                }}
                 variant="ghost"
                 size="icon"
-                aria-label="Toggle theme"
+                aria-label={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
+                title={mounted ? `Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode` : "Toggle theme"}
                 className="p-2"
+                type="button"
+                aria-pressed={resolvedTheme === "dark"}
+                disabled={!mounted}
+                aria-disabled={!mounted}
               >
                 {mounted ? (
                   resolvedTheme === "dark" ? (
