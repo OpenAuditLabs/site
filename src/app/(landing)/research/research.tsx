@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Research(): React.ReactElement {
   return (
@@ -38,8 +39,27 @@ export default function Research(): React.ReactElement {
               projects. We don’t just use AI — we create it.
             </p>
 
-            {/* CTA buttons will be added here in the next PR. Example placeholder: */}
-            <div>{/* CTA button(s) will be added here in the next PR */}</div>
+            {/* CTA buttons - set design-system foreground token to --border via CSS var on wrapper (no inline color) */}
+            <div className="mt-6 [--primary-foreground:var(--foreground)]">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button asChild className="w-full sm:w-auto">
+                  <a
+                    href="https://openauditlabs.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visit OpenAuditLabs"
+                  >
+                    Visit OpenAuditLabs
+                  </a>
+                </Button>
+
+                <Button asChild variant="outline" className="w-full sm:w-auto">
+                  <a href="#" aria-label="Read Research Paper">
+                    Read Research Paper
+                  </a>
+                </Button>
+              </div>
+            </div>
           </div>
 
           <div className="flex items-center justify-center">
