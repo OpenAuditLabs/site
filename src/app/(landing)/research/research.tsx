@@ -1,9 +1,10 @@
 import React from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export default function Research(): React.ReactElement {
   return (
-    <section className="max-w-4xl mx-auto py-12 px-6">
+    <section className="max-w-7xl mx-auto py-12 px-6">
       <div className="px-6">
         <div className="text-center">
           <h2
@@ -28,15 +29,22 @@ export default function Research(): React.ReactElement {
         </div>
 
         {/* Two-column structure: left = description + CTA placeholder, right = image placeholder */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          <div>
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:items-stretch items-center">
+          <div className="flex flex-col justify-center lg:h-full">
             <p
-              className="text-base leading-relaxed mb-6"
+              className="text-lg lg:text-4xl leading-relaxed lg:leading-tight mb-6 font-medium"
               style={{ color: "var(--foreground)" }}
             >
-              Behind OpenAudit is a team of researchers and AI specialists who
-              have published studies, trained models, and worked on cutting-edge
-              projects. We don’t just use AI — we create it.
+              Behind OpenAudit is a team of
+              <br className="hidden lg:inline" />
+              researchers and AI specialists who
+              <br className="hidden lg:inline" />
+              have published studies, trained
+              <br className="hidden lg:inline" />
+              models, and worked on cutting-
+              <br className="hidden lg:inline" />
+              edge projects. We don’t just use AI
+              <br className="hidden lg:inline" /> — we create it.
             </p>
 
             {/* CTA buttons - set design-system foreground token to --border via CSS var on wrapper (no inline color) */}
@@ -62,8 +70,16 @@ export default function Research(): React.ReactElement {
             </div>
           </div>
 
-          <div className="flex items-center justify-center">
-            {/* Image placeholder — will be added in a future PR */}
+          <div className="flex items-center justify-start lg:justify-center">
+            <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[420px] xl:h-[520px] lg:max-w-lg">
+              <Image
+                src="/image/research_image.svg"
+                alt="Illustration showing research and AI development"
+                fill
+                className="object-contain"
+                priority={false}
+              />
+            </div>
           </div>
         </div>
       </div>
