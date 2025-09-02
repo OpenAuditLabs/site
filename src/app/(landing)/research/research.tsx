@@ -39,14 +39,10 @@ export default function Research(): React.ReactElement {
               projects. We don’t just use AI — we create it.
             </p>
 
-            {/* CTA buttons - use CSS variables from globals.css (no hardcoded colors) */}
-            <div className="mt-6">
+            {/* CTA buttons - set design-system foreground token to --border via CSS var on wrapper (no inline color) */}
+            <div className="mt-6 [--primary-foreground:var(--foreground)]">
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button
-                  asChild
-                  className="w-full sm:w-auto"
-                  style={{ color: "var(--foreground)" }}
-                >
+                <Button asChild className="w-full sm:w-auto">
                   <a
                     href="https://openauditlabs.com"
                     target="_blank"
