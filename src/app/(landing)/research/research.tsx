@@ -62,7 +62,7 @@ export default function Research(): React.ReactElement {
                 </Button>
 
                 <Button asChild variant="outline" className="w-full sm:w-auto">
-                  <a href="#" aria-label="Read Research Paper">
+                  <a href="/research#papers" aria-label="Read Research Paper">
                     Read Research Paper
                   </a>
                 </Button>
