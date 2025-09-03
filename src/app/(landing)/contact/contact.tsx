@@ -1,3 +1,5 @@
+import ContactForm from "@/components/landing/ContactForm";
+
 export default function Contact() {
   return (
     <section
@@ -19,9 +21,9 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Contact form will be added here  */}
-        <div className="mt-12">
-          {/* TODO: Contact form component will be implemented here */}
+        {/* Contact Form Section */}
+        <div className="mt-16 lg:mt-20">
+          <ContactForm />
         </div>
       </div>
     </section>
