@@ -96,9 +96,12 @@ export default function ContactForm(): React.JSX.Element {
           <div className="w-full max-w-xl mx-auto space-y-8">
             {/* Form Header */}
             <div className="space-y-3 text-center lg:text-left">
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">
+              <h2
+                id="contact-heading"
+                className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground"
+              >
                 Get In Touch
-              </h3>
+              </h2>
               <p className="text-muted-foreground text-sm lg:text-base">
                 Ready to start your project? Send us a message and we&apos;ll
                 get back to you as soon as possible.
