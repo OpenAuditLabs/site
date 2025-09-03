@@ -42,7 +42,6 @@ export default function ContactForm(): React.JSX.Element {
                 <a
                   href="tel:+10123456789"
                   className="flex items-center gap-4 text-sm lg:text-base underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
-                  aria-label="Call +1012 3456 789"
                 >
                   <Phone className="w-4 h-4 text-primary-foreground" />
                   <span>+1012 3456 789</span>
@@ -53,7 +52,6 @@ export default function ContactForm(): React.JSX.Element {
                 <a
                   href="mailto:demo@gmail.com"
                   className="flex items-center gap-4 text-sm lg:text-base underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
-                  aria-label="Email demo@gmail.com"
                 >
                   <Mail className="w-4 h-4 text-primary-foreground" />
                   <span>demo@gmail.com</span>
@@ -74,27 +72,27 @@ export default function ContactForm(): React.JSX.Element {
             {/* Social Links */}
             <div className="mt-auto">
               <div className="flex gap-3">
-                <a
-                  href="#"
+                <button
+                  type="button"
                   className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-primary-foreground/15 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/25 transition-all duration-200"
                   aria-label="Twitter"
                 >
-                  <Twitter className="w-4 h-4" />
-                </a>
-                <a
-                  href="#"
+                  <Twitter aria-hidden="true" className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
                   className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-primary-foreground/15 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/25 transition-all duration-200"
                   aria-label="LinkedIn"
                 >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-                <a
-                  href="#"
+                  <Linkedin aria-hidden="true" className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
                   className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-primary-foreground/15 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/25 transition-all duration-200"
                   aria-label="GitHub"
                 >
-                  <Github className="w-4 h-4" />
-                </a>
+                  <Github aria-hidden="true" className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
@@ -130,10 +128,12 @@ export default function ContactForm(): React.JSX.Element {
                     name="firstName"
                     type="text"
                     placeholder=" "
+                    aria-labelledby="label-firstName"
+                    autoComplete="given-name"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                    aria-label="First Name"
                   />
                   <label
+                    id="label-firstName"
                     htmlFor="firstName"
                     className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
                   >
@@ -147,10 +147,12 @@ export default function ContactForm(): React.JSX.Element {
                     name="lastName"
                     type="text"
                     placeholder=" "
+                    aria-labelledby="label-lastName"
+                    autoComplete="family-name"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                    aria-label="Last Name"
                   />
                   <label
+                    id="label-lastName"
                     htmlFor="lastName"
                     className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
                   >
@@ -166,10 +168,12 @@ export default function ContactForm(): React.JSX.Element {
                     name="email"
                     type="email"
                     placeholder=" "
+                    aria-labelledby="label-email2"
+                    autoComplete="email"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                    aria-label="Email"
                   />
                   <label
+                    id="label-email2"
                     htmlFor="email2"
                     className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
                   >
@@ -183,10 +187,12 @@ export default function ContactForm(): React.JSX.Element {
                     name="phone"
                     type="tel"
                     placeholder=" "
+                    aria-labelledby="label-phone2"
+                    autoComplete="tel"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                    aria-label="Phone Number"
                   />
                   <label
+                    id="label-phone2"
                     htmlFor="phone2"
                     className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
                   >
@@ -201,16 +207,21 @@ export default function ContactForm(): React.JSX.Element {
                   name="message"
                   rows={4}
                   placeholder=" "
+                  aria-labelledby="label-message2"
+                  aria-describedby="message-help"
                   className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
-                  aria-label="Message"
                 />
                 <label
+                  id="label-message2"
                   htmlFor="message2"
                   className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
                 >
                   Message
                 </label>
-                <p className="mt-2 text-xs text-muted-foreground">
+                <p
+                  id="message-help"
+                  className="mt-2 text-xs text-muted-foreground"
+                >
                   Write your message..
                 </p>
               </div>
@@ -219,12 +230,9 @@ export default function ContactForm(): React.JSX.Element {
                 <div className="flex-1" />
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center px-6 py-2 rounded-lg bg-primary text-primary-foreground shadow-lg hover:shadow-xl transform transition duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                  className="inline-flex items-center justify-center px-6 py-2 rounded-lg bg-primary text-primary-foreground shadow-lg hover:shadow-xl motion-safe:transform motion-safe:transition duration-200 motion-safe:hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
                 >
-                  <span className="sr-only">Send message</span>
-                  <span className="inline-block transform transition-transform duration-200 ease-out">
-                    Send Message
-                  </span>
+                  Send Message
                 </button>
               </div>
             </form>
