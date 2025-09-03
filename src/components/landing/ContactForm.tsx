@@ -14,10 +14,11 @@ export default function ContactForm(): React.JSX.Element {
           <div className="absolute inset-0">
             <Image
               src="/image/contactDesign.png"
-              alt="Contact Design Background"
+              alt=""
+              aria-hidden="true"
               fill
               className="object-cover"
-              priority
+              sizes="(min-width: 1024px) 40vw, 100vw"
             />
             {/* Clean gradient overlay */}
             <div className="absolute inset-0 bg-primary/85"></div>
@@ -35,20 +36,28 @@ export default function ContactForm(): React.JSX.Element {
               </p>
             </div>
 
-            {/* Contact Details */}
-            <div className="space-y-6 mb-8 lg:mb-12">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center w-5 h-5 text-primary-foreground">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <span className="text-sm lg:text-base">+1012 3456 789</span>
+            {/* Contact Details (semantic) */}
+            <address className="not-italic space-y-6 mb-8 lg:mb-12">
+              <div>
+                <a
+                  href="tel:+10123456789"
+                  className="flex items-center gap-4 text-sm lg:text-base underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                  aria-label="Call +1012 3456 789"
+                >
+                  <Phone className="w-4 h-4 text-primary-foreground" />
+                  <span>+1012 3456 789</span>
+                </a>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="flex items-center justify-center w-5 h-5 text-primary-foreground">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <span className="text-sm lg:text-base">demo@gmail.com</span>
+              <div>
+                <a
+                  href="mailto:demo@gmail.com"
+                  className="flex items-center gap-4 text-sm lg:text-base underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                  aria-label="Email demo@gmail.com"
+                >
+                  <Mail className="w-4 h-4 text-primary-foreground" />
+                  <span>demo@gmail.com</span>
+                </a>
               </div>
 
               <div className="flex items-start gap-4">
@@ -60,7 +69,7 @@ export default function ContactForm(): React.JSX.Element {
                   <p>Massachusetts 02156 United States</p>
                 </div>
               </div>
-            </div>
+            </address>
 
             {/* Social Links */}
             <div className="mt-auto">
