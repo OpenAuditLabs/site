@@ -3,8 +3,48 @@
 import React from "react";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Twitter, Linkedin, Github } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  email: z.string().email("Please enter a valid email"),
+  phone: z
+    .string()
+    .min(7, "Please enter a valid phone number")
+    .optional()
+    .or(z.literal("")),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormValues = z.infer<typeof contactSchema>;
 
 export default function ContactForm(): React.JSX.Element {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (data: ContactFormValues) => {
+    // Keep console.log to show what user has given input
+    console.log("Contact form submitted:", data);
+    // Here you could call an API or show a success state. We'll reset the form for now.
+    reset();
+  };
+
   return (
     <section aria-labelledby="contact-heading" className="w-full">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-0 min-h-[500px] lg:min-h-[600px]">
@@ -115,17 +155,18 @@ export default function ContactForm(): React.JSX.Element {
               </p>
             </div>
 
-            {/* Contact Form - styled visual only (no validation/submit) */}
+            {/* Contact Form - with Zod validation and react-hook-form */}
             <form
               className="w-full"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit(onSubmit)}
               aria-label="Contact form"
+              noValidate
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="relative">
                   <input
                     id="firstName"
-                    name="firstName"
+                    {...register("firstName")}
                     type="text"
                     placeholder=" "
                     aria-labelledby="label-firstName"
@@ -139,12 +180,17 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     First Name
                   </label>
+                  {errors.firstName && (
+                    <p className="mt-1 text-xs text-red-500" role="alert">
+                      {errors.firstName.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="relative">
                   <input
                     id="lastName"
-                    name="lastName"
+                    {...register("lastName")}
                     type="text"
                     placeholder=" "
                     aria-labelledby="label-lastName"
@@ -158,6 +204,11 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Last Name
                   </label>
+                  {errors.lastName && (
+                    <p className="mt-1 text-xs text-red-500" role="alert">
+                      {errors.lastName.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -165,7 +216,7 @@ export default function ContactForm(): React.JSX.Element {
                 <div className="relative">
                   <input
                     id="email2"
-                    name="email"
+                    {...register("email")}
                     type="email"
                     placeholder=" "
                     aria-labelledby="label-email2"
@@ -179,12 +230,17 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Email
                   </label>
+                  {errors.email && (
+                    <p className="mt-1 text-xs text-red-500" role="alert">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="relative">
                   <input
                     id="phone2"
-                    name="phone"
+                    {...register("phone")}
                     type="tel"
                     placeholder=" "
                     aria-labelledby="label-phone2"
@@ -198,13 +254,18 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Phone Number
                   </label>
+                  {errors.phone && (
+                    <p className="mt-1 text-xs text-red-500" role="alert">
+                      {errors.phone.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
               <div className="mt-6 relative">
                 <textarea
                   id="message2"
-                  name="message"
+                  {...register("message")}
                   rows={4}
                   placeholder=" "
                   aria-labelledby="label-message2"
@@ -224,13 +285,18 @@ export default function ContactForm(): React.JSX.Element {
                 >
                   Write your message..
                 </p>
+                {errors.message && (
+                  <p className="mt-1 text-xs text-red-500" role="alert">
+                    {errors.message.message}
+                  </p>
+                )}
               </div>
 
               <div className="mt-8 flex items-center">
                 <div className="flex-1" />
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center px-6 py-2 rounded-lg bg-primary text-primary-foreground shadow-lg hover:shadow-xl motion-safe:transform motion-safe:transition duration-200 motion-safe:hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                  className="inline-flex items-center justify-center px-3 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-lg bg-primary text-primary-foreground shadow-lg hover:shadow-xl motion-safe:transform motion-safe:transition duration-200 motion-safe:hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 shrink-0 whitespace-nowrap"
                 >
                   Send Message
                 </button>
