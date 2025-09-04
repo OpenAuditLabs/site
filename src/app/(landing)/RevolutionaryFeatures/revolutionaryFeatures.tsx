@@ -1,8 +1,10 @@
 import React from "react";
+import RevFeatureCard from "@/components/landing/revFeaturesCard";
+import { Cpu, Zap, DollarSign } from "lucide-react";
 
 export default function RevolutionaryFeatures(): React.ReactElement {
   return (
-    <section className="max-w-4xl mx-auto py-12 px-6">
+    <section className="max-w-6xl mx-auto py-12 px-6">
       <div className="px-6">
         <div className="text-center">
           <h2
@@ -27,7 +29,25 @@ export default function RevolutionaryFeatures(): React.ReactElement {
 
         {/* Placeholder area for feature cards */}
         <div className="mt-12">
-          {/* revolutionary Features Cards will be here */}
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <RevFeatureCard
+              title="AI Powered Analysis"
+              description="Advanced LLMs combined with static analysis detect vulnerabilities that traditional tools miss"
+              Icon={Cpu}
+            />
+
+            <RevFeatureCard
+              title="Instant Results"
+              description="Get comprehensive audit reports in minutes, not months. Integrate into your CI/CD pipeline"
+              Icon={Zap}
+            />
+
+            <RevFeatureCard
+              title="Cost Effective"
+              description="Professional audits at a fraction of the cost. No more choosing between security and budget."
+              Icon={DollarSign}
+            />
+          </div>
         </div>
       </div>
     </section>
