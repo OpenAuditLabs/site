@@ -42,7 +42,6 @@ export default function ContactForm(): React.JSX.Element {
                 <a
                   href="tel:+10123456789"
                   className="flex items-center gap-4 text-sm lg:text-base underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
-                  aria-label="Call +1012 3456 789"
                 >
                   <Phone className="w-4 h-4 text-primary-foreground" />
                   <span>+1012 3456 789</span>
@@ -53,7 +52,6 @@ export default function ContactForm(): React.JSX.Element {
                 <a
                   href="mailto:demo@gmail.com"
                   className="flex items-center gap-4 text-sm lg:text-base underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
-                  aria-label="Email demo@gmail.com"
                 >
                   <Mail className="w-4 h-4 text-primary-foreground" />
                   <span>demo@gmail.com</span>
@@ -74,27 +72,27 @@ export default function ContactForm(): React.JSX.Element {
             {/* Social Links */}
             <div className="mt-auto">
               <div className="flex gap-3">
-                <a
-                  href="#"
+                <button
+                  type="button"
                   className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-primary-foreground/15 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/25 transition-all duration-200"
                   aria-label="Twitter"
                 >
-                  <Twitter className="w-4 h-4" />
-                </a>
-                <a
-                  href="#"
+                  <Twitter aria-hidden="true" className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
                   className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-primary-foreground/15 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/25 transition-all duration-200"
                   aria-label="LinkedIn"
                 >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-                <a
-                  href="#"
+                  <Linkedin aria-hidden="true" className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
                   className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-primary-foreground/15 flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/25 transition-all duration-200"
                   aria-label="GitHub"
                 >
-                  <Github className="w-4 h-4" />
-                </a>
+                  <Github aria-hidden="true" className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
@@ -117,26 +115,127 @@ export default function ContactForm(): React.JSX.Element {
               </p>
             </div>
 
-            {/* Form Placeholder */}
-            <div className="space-y-6">
-              <div className="text-center text-muted-foreground">
-                {/* Form will be implemented here */}
-                <div className="bg-muted/30 rounded-xl p-8 lg:p-10 border border-dashed border-muted-foreground/30">
-                  <div className="space-y-3">
-                    <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-                      <Mail className="w-6 h-6 text-primary" />
-                    </div>
-                    <p className="text-base lg:text-lg font-semibold text-foreground">
-                      Form Section
-                    </p>
-                    <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-                      Contact form will be implemented here with proper
-                      validation and styling
-                    </p>
-                  </div>
+            {/* Contact Form - styled visual only (no validation/submit) */}
+            <form
+              className="w-full"
+              onSubmit={(e) => e.preventDefault()}
+              aria-label="Contact form"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="relative">
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    placeholder=" "
+                    aria-labelledby="label-firstName"
+                    autoComplete="given-name"
+                    className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                  />
+                  <label
+                    id="label-firstName"
+                    htmlFor="firstName"
+                    className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
+                  >
+                    First Name
+                  </label>
+                </div>
+
+                <div className="relative">
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    placeholder=" "
+                    aria-labelledby="label-lastName"
+                    autoComplete="family-name"
+                    className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                  />
+                  <label
+                    id="label-lastName"
+                    htmlFor="lastName"
+                    className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
+                  >
+                    Last Name
+                  </label>
                 </div>
               </div>
-            </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                <div className="relative">
+                  <input
+                    id="email2"
+                    name="email"
+                    type="email"
+                    placeholder=" "
+                    aria-labelledby="label-email2"
+                    autoComplete="email"
+                    className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                  />
+                  <label
+                    id="label-email2"
+                    htmlFor="email2"
+                    className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
+                  >
+                    Email
+                  </label>
+                </div>
+
+                <div className="relative">
+                  <input
+                    id="phone2"
+                    name="phone"
+                    type="tel"
+                    placeholder=" "
+                    aria-labelledby="label-phone2"
+                    autoComplete="tel"
+                    className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                  />
+                  <label
+                    id="label-phone2"
+                    htmlFor="phone2"
+                    className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
+                  >
+                    Phone Number
+                  </label>
+                </div>
+              </div>
+
+              <div className="mt-6 relative">
+                <textarea
+                  id="message2"
+                  name="message"
+                  rows={4}
+                  placeholder=" "
+                  aria-labelledby="label-message2"
+                  aria-describedby="message-help"
+                  className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
+                />
+                <label
+                  id="label-message2"
+                  htmlFor="message2"
+                  className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
+                >
+                  Message
+                </label>
+                <p
+                  id="message-help"
+                  className="mt-2 text-xs text-muted-foreground"
+                >
+                  Write your message..
+                </p>
+              </div>
+
+              <div className="mt-8 flex items-center">
+                <div className="flex-1" />
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center px-6 py-2 rounded-lg bg-primary text-primary-foreground shadow-lg hover:shadow-xl motion-safe:transform motion-safe:transition duration-200 motion-safe:hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
