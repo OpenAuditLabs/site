@@ -8,15 +8,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const contactSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
+  firstName: z.string().trim().min(1, "First name is required"),
+  lastName: z.string().trim().min(1, "Last name is required"),
   email: z.string().email("Please enter a valid email"),
   phone: z
     .string()
-    .min(7, "Please enter a valid phone number")
+    .trim()
     .optional()
-    .or(z.literal("")),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+    .refine((v) => v === undefined || v === "" || v.length >= 7, {
+      message: "Please enter a valid phone number",
+    }),
+  message: z.string().trim().min(10, "Message must be at least 10 characters"),
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -40,7 +42,7 @@ export default function ContactForm(): React.JSX.Element {
 
   const onSubmit = async (data: ContactFormValues) => {
     // Keep console.log to show what user has given input
-    console.log("Contact form submitted:", data);
+    // console.log("Contact form submitted:", data);
     // Here you could call an API or show a success state. We'll reset the form for now.
     reset();
   };
