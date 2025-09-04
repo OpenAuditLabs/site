@@ -14,13 +14,13 @@ export default function RevFeatureCard({
 }: RevFeatureCardProps): React.ReactElement {
   return (
     <article
-      className="bg-secondary text-secondary-foreground rounded-xl border border-border shadow-xs py-6 px-4"
+      className="bg-card text-card-foreground rounded-xl border border-border shadow-xs py-6 px-5"
       role="article"
       aria-label={title}
     >
       <div className="flex flex-col items-start">
         <div
-          className="w-12 h-12 rounded-md bg-card flex items-center justify-center mb-4"
+          className="w-12 h-12 rounded-md bg-muted flex items-center justify-center mb-4"
           aria-hidden
         >
           {Icon ? (
@@ -34,7 +34,7 @@ export default function RevFeatureCard({
           {title}
         </h3>
 
-        <p className="mt-4 text-sm text-muted-foreground m-0 leading-relaxed">
+        <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
           {description}
         </p>
       </div>

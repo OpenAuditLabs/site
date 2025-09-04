@@ -32,13 +32,13 @@ export default function RevolutionaryFeatures(): React.ReactElement {
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <RevFeatureCard
               title="AI Powered Analysis"
-              description="Advanced LLMs combined with static analysis detect vulnerabilities that traditional tools miss"
+              description="Advanced LLMs combined with static analysis detect vulnerabilities that traditional tools miss."
               Icon={Cpu}
             />
 
             <RevFeatureCard
               title="Instant Results"
-              description="Get comprehensive audit reports in minutes, not months. Integrate into your CI/CD pipeline"
+              description="Get comprehensive audit reports in minutes, not months. Integrate into your CI/CD pipeline."
               Icon={Zap}
             />
 
