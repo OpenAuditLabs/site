@@ -1,61 +1,61 @@
-import PricingCard from "@/components/landing/PricingTableCard";
+import PricingCard, { type Plan } from "@/components/landing/PricingTableCard";
+
+const plans: Plan[] = [
+  {
+    id: "p-lite",
+    name: "Lite",
+    subtitle: "Perfect for getting started",
+    price: 0.99,
+    credits: 1,
+    badge: null,
+    features: [
+      "Instant Credit Delivery",
+      "No Expiration Date",
+      "Basic support included",
+    ],
+  },
+  {
+    id: "p-pro",
+    name: "Pro",
+    subtitle: "Great for regular users",
+    price: 5.49,
+    credits: 5,
+    badge: "Most Popular",
+    features: [
+      "Instant Credit Delivery",
+      "No Expiration Date",
+      "Priority support",
+    ],
+  },
+  {
+    id: "p-plus",
+    name: "Plus",
+    subtitle: "For power users",
+    price: 9.49,
+    credits: 12,
+    badge: null,
+    features: [
+      "Instant Credit Delivery",
+      "No Expiration Date",
+      "Priority support",
+    ],
+  },
+  {
+    id: "p-premium",
+    name: "Premium",
+    subtitle: "Best for teams and power users",
+    price: 18.49,
+    credits: 25,
+    badge: "Best Value",
+    features: [
+      "Instant Credit Delivery",
+      "No Expiration Date",
+      "Dedicated support",
+    ],
+  },
+];
 
 export default function PricingSection() {
-  const plans = [
-    {
-      id: "p-lite",
-      name: "Lite",
-      subtitle: "Perfect for getting started",
-      price: "$0.99",
-      credits: 1,
-      badge: null,
-      features: [
-        "Instant Credit Delivery",
-        "No Expiration Date",
-        "Basic support included",
-      ],
-    },
-    {
-      id: "p-pro",
-      name: "Pro",
-      subtitle: "Great for regular users",
-      price: "$5.49",
-      credits: 5,
-      badge: "Most Popular",
-      features: [
-        "Instant Credit Delivery",
-        "No Expiration Date",
-        "Priority support",
-      ],
-    },
-    {
-      id: "p-plus",
-      name: "Plus",
-      subtitle: "For power users",
-      price: "$9.49",
-      credits: 12,
-      badge: null,
-      features: [
-        "Instant Credit Delivery",
-        "No Expiration Date",
-        "Priority support",
-      ],
-    },
-    {
-      id: "p-premium",
-      name: "Premium",
-      subtitle: "Best for teams and power users",
-      price: "$18.49",
-      credits: 25,
-      badge: "Best Value",
-      features: [
-        "Instant Credit Delivery",
-        "No Expiration Date",
-        "Dedicated support",
-      ],
-    },
-  ];
-
   return (
     <section
       id="pricing"
