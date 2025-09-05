@@ -56,14 +56,6 @@ export default function PricingSection() {
     },
   ];
 
-  function computePerCredit(priceStr: string, credits: number) {
-    // priceStr like "$5.49" -> parse number 5.49
-    const n = Number(priceStr.replace(/[^0-9.]/g, ""));
-    if (!isFinite(n) || credits <= 0) return "";
-    const per = n / credits;
-    return `$${per.toFixed(2)} per credit`;
-  }
-
   return (
     <section
       id="pricing"
