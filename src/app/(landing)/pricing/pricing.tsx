@@ -8,6 +8,7 @@ export default function PricingSection() {
         <div className="px-6">
           <div className="text-center">
             <h2
+              id="pricing-heading"
               className="mx-auto font-extrabold leading-tight"
               style={{
                 color: "var(--foreground)",
