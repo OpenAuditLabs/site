@@ -1,68 +1,60 @@
-import { Check } from "lucide-react";
+import PricingCard from "@/components/landing/PricingTableCard";
 
 export default function PricingSection() {
   const plans = [
     {
-      id: "p1",
-      name: "Basic",
-      subtitle: "Perfect for quick tasks",
+      id: "p-lite",
+      name: "Lite",
+      subtitle: "Perfect for getting started",
       price: "$0.99",
       credits: 1,
       badge: null,
       features: [
         "Instant Credit Delivery",
         "No Expiration Date",
-        "24/7 support included",
+        "Basic support included",
       ],
     },
     {
-      id: "p2",
+      id: "p-pro",
       name: "Pro",
       subtitle: "Great for regular users",
       price: "$5.49",
       credits: 5,
-      badge: null,
-      features: [
-        "Instant Credit Delivery",
-        "No Expiration Date",
-        "24/7 support included",
-      ],
-    },
-    {
-      id: "p3",
-      name: "Plus",
-      subtitle: "Most popular choice",
-      price: "$9.49",
-      credits: 12,
       badge: "Most Popular",
       features: [
         "Instant Credit Delivery",
         "No Expiration Date",
-        "24/7 support included",
+        "Priority support",
       ],
     },
     {
-      id: "p4",
-      name: "Enterprise",
-      subtitle: "Best value for power users",
+      id: "p-plus",
+      name: "Plus",
+      subtitle: "For power users",
+      price: "$9.49",
+      credits: 12,
+      badge: null,
+      features: [
+        "Instant Credit Delivery",
+        "No Expiration Date",
+        "Priority support",
+      ],
+    },
+    {
+      id: "p-premium",
+      name: "Premium",
+      subtitle: "Best for teams and power users",
       price: "$18.49",
       credits: 25,
       badge: "Best Value",
       features: [
         "Instant Credit Delivery",
         "No Expiration Date",
-        "24/7 support included",
+        "Dedicated support",
       ],
     },
   ];
-
-  function computePerCredit(priceStr: string, credits: number) {
-    // priceStr like "$5.49" -> parse number 5.49
-    const n = Number(priceStr.replace(/[^0-9.]/g, ""));
-    if (!isFinite(n) || credits <= 0) return "";
-    const per = n / credits;
-    return `$${per.toFixed(2)} per credit`;
-  }
 
   return (
     <section
@@ -94,96 +86,10 @@ export default function PricingSection() {
           </div>
 
           <div className="mt-12">
-            {/* Pricing cards grid: 1col on mobile, 2 on tablet, 4 on desktop */}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {plans.map((plan) => {
-                const isHighlighted = !!plan.badge;
-                return (
-                  <article
-                    key={plan.id}
-                    className={`flex flex-col rounded-2xl border p-6 shadow-sm relative ${
-                      isHighlighted ? "lg:border-2" : ""
-                    }`}
-                    style={{
-                      backgroundColor: "var(--card)",
-                      borderColor: "var(--border)",
-                    }}
-                    aria-labelledby={`plan-${plan.id}`}
-                  >
-                    {plan.badge ? (
-                      <span
-                        className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded-full text-sm font-medium"
-                        style={{
-                          background: "var(--primary)",
-                          color: "var(--primary-foreground)",
-                        }}
-                      >
-                        {plan.badge}
-                      </span>
-                    ) : null}
-
-                    <h3
-                      id={`plan-${plan.id}`}
-                      className="text-lg font-semibold mb-2 text-center"
-                      style={{ color: "var(--foreground)" }}
-                    >
-                      {plan.name}
-                    </h3>
-                    {plan.subtitle ? (
-                      <div
-                        className="text-sm text-center mb-3"
-                        style={{ color: "var(--muted-foreground)" }}
-                      >
-                        {plan.subtitle}
-                      </div>
-                    ) : null}
-
-                    <div className="mb-4 text-center">
-                      <div
-                        className="text-3xl font-extrabold"
-                        style={{ color: "var(--foreground)" }}
-                      >
-                        {plan.price}
-                      </div>
-                      <div
-                        className="text-sm mt-1"
-                        style={{ color: "var(--muted-foreground)" }}
-                      >
-                        {computePerCredit(plan.price, plan.credits)}
-                      </div>
-                    </div>
-
-                    <ul
-                      className="mb-6 space-y-2 text-sm"
-                      style={{ color: "var(--muted-foreground)" }}
-                    >
-                      {plan.features.map((f, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <Check
-                            className="mt-1 flex-shrink-0"
-                            size={16}
-                            style={{ color: "var(--primary)" }}
-                          />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-auto w-full">
-                      <button
-                        type="button"
-                        className="w-full rounded-md px-4 py-2 font-semibold"
-                        style={{
-                          background: "var(--primary)",
-                          color: "var(--primary-foreground)",
-                        }}
-                      >
-                        Start {plan.name}
-                      </button>
-                    </div>
-                  </article>
-                );
-              })}
+              {plans.map((p) => (
+                <PricingCard key={p.id} {...p} />
+              ))}
             </div>
           </div>
         </div>
