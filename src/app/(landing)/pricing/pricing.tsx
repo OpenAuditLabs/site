@@ -1,9 +1,9 @@
 export default function PricingSection() {
   const plans = [
-    { id: "p1", name: "Quickie", price: "$0.99", credits: "1 Credit" },
-    { id: "p2", name: "Edge", price: "$5.49", credits: "5 Credit" },
-    { id: "p3", name: "Goon", price: "$9.49", credits: "12 Credit" },
-    { id: "p4", name: "Segs", price: "$18.49", credits: "25 Credit" },
+    { id: "p1", name: "Quickie", price: "$0.99", credits: 1 },
+    { id: "p2", name: "Edge", price: "$5.49", credits: 5 },
+    { id: "p3", name: "Goon", price: "$9.49", credits: 12 },
+    { id: "p4", name: "Segs", price: "$18.49", credits: 25 },
   ];
 
   return (
@@ -67,7 +67,9 @@ export default function PricingSection() {
                       className="text-sm mt-1"
                       style={{ color: "var(--muted-foreground)" }}
                     >
-                      {plan.credits}
+                      {`${plan.credits} ${
+                        plan.credits === 1 ? "Credit" : "Credits"
+                      }`}
                     </div>
                   </div>
 
