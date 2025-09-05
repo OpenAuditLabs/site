@@ -8,7 +8,6 @@ export default function PricingSection() {
       subtitle: "Perfect for quick tasks",
       price: "$0.99",
       credits: 1,
-      perCredit: "$0.99 per credit",
       badge: null,
       features: [
         "Instant Credit Delivery",
@@ -22,7 +21,6 @@ export default function PricingSection() {
       subtitle: "Great for regular users",
       price: "$5.49",
       credits: 5,
-      perCredit: "$0.90 per credit",
       badge: null,
       features: [
         "Instant Credit Delivery",
@@ -36,7 +34,6 @@ export default function PricingSection() {
       subtitle: "Most popular choice",
       price: "$9.49",
       credits: 12,
-      perCredit: "$0.79 per credit",
       badge: "Most Popular",
       features: [
         "Instant Credit Delivery",
@@ -50,7 +47,6 @@ export default function PricingSection() {
       subtitle: "Best value for power users",
       price: "$18.49",
       credits: 25,
-      perCredit: "$0.74 per credit",
       badge: "Best Value",
       features: [
         "Instant Credit Delivery",
@@ -59,6 +55,14 @@ export default function PricingSection() {
       ],
     },
   ];
+
+  function computePerCredit(priceStr: string, credits: number) {
+    // priceStr like "$5.49" -> parse number 5.49
+    const n = Number(priceStr.replace(/[^0-9.]/g, ""));
+    if (!isFinite(n) || credits <= 0) return "";
+    const per = n / credits;
+    return `$${per.toFixed(2)} per credit`;
+  }
 
   return (
     <section
@@ -145,7 +149,7 @@ export default function PricingSection() {
                         className="text-sm mt-1"
                         style={{ color: "var(--muted-foreground)" }}
                       >
-                        {plan.perCredit}
+                        {computePerCredit(plan.price, plan.credits)}
                       </div>
                     </div>
 
