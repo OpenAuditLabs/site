@@ -1,33 +1,35 @@
-import { Card } from "@/components/ui/card";
-
 export default function PricingSection() {
   return (
-    <section className="py-16 px-4 bg-muted/30">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-foreground mb-4">
-          Pricing Plans
-        </h2>
-        <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Choose the perfect plan for your needs
-        </p>
-
-        <Card className="max-w-md mx-auto p-8 border-dashed border-2 border-border bg-card">
+    <section
+      aria-labelledby="pricing-heading"
+      className="relative overflow-hidden py-16 sm:py-20"
+    >
+      <div className="max-w-6xl mx-auto py-12 px-6">
+        <div className="px-6">
           <div className="text-center">
-            <div className="w-16 h-16 mx-auto mb-4 bg-muted rounded-full flex items-center justify-center">
-              <span className="text-2xl">🚧</span>
-            </div>
-            <h3 className="text-xl font-semibold text-card-foreground mb-2">
-              Pricing Section
-            </h3>
-            <p className="text-muted-foreground text-sm mb-4">
-              This is a placeholder component. Pricing plans and features will
-              be added here.
+            <h2
+              className="mx-auto font-extrabold leading-tight"
+              style={{
+                color: "var(--foreground)",
+                fontSize: "clamp(28px, 6.4vw, 48px)",
+                maxWidth: "900px",
+              }}
+            >
+              Choose The Best Pack for You
+            </h2>
+
+            <p
+              className="mt-4 mx-auto max-w-2xl text-base leading-relaxed"
+              style={{ color: "var(--muted-foreground)" }}
+            >
+              Use credits to scan your documents. 1 credit ≈ 1,000 characters.
             </p>
-            <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent text-accent-foreground">
-              🔨 Under Construction
-            </div>
           </div>
-        </Card>
+
+          <div className="mt-12">
+            {/* here pricing cards will be implemented */}
+          </div>
+        </div>
       </div>
     </section>
   );
