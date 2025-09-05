@@ -1,5 +1,15 @@
 import * as React from "react";
 import { Check } from "lucide-react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 type Plan = {
   id: string;
@@ -27,88 +37,79 @@ export default function PricingCard({
     return `$${per.toFixed(2)} per credit`;
   }
 
-  const isHighlighted = !!badge;
+  const label = (badge ?? "").trim();
+  const norm = label.toLowerCase();
+  const isBestValue = norm.includes("best value");
+  const isMostPopular = norm.includes("most popular");
 
   return (
-    <article
-      className={`flex flex-col rounded-2xl border p-6 shadow-sm relative ${
-        isHighlighted ? "lg:border-2" : ""
+    <Card
+      className={`relative h-full rounded-2xl ${
+        isMostPopular ? "lg:border-2 shadow-md" : ""
       }`}
-      style={{ backgroundColor: "var(--card)", borderColor: "var(--border)" }}
+      style={{ borderColor: isMostPopular ? "var(--ring)" : undefined }}
       aria-labelledby={`plan-${id}`}
     >
-      {badge ? (
-        <span
-          className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded-full text-sm font-medium"
+      {label ? (
+        <Badge
+          variant="outline"
+          className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-sm font-medium border"
           style={{
-            background: "var(--primary)",
-            color: "var(--primary-foreground)",
+            background: isBestValue ? "var(--chart-4)" : "var(--primary)",
+            color: isBestValue
+              ? "var(--foreground)"
+              : "var(--primary-foreground)",
+            borderColor: "var(--border)",
           }}
         >
-          {badge}
-        </span>
+          {label}
+        </Badge>
       ) : null}
 
-      <h3
-        id={`plan-${id}`}
-        className="text-lg font-semibold mb-2 text-center"
-        style={{ color: "var(--foreground)" }}
-      >
-        {name}
-      </h3>
-
-      {subtitle ? (
-        <div
-          className="text-sm text-center mb-3"
-          style={{ color: "var(--muted-foreground)" }}
+      <CardHeader className="items-center gap-2 pb-2">
+        <CardTitle
+          id={`plan-${id}`}
+          className="text-center text-lg font-semibold tracking-tight"
+          style={{ color: "var(--foreground)" }}
         >
-          {subtitle}
-        </div>
-      ) : null}
+          {name}
+        </CardTitle>
+        {subtitle ? (
+          <CardDescription className="text-center">{subtitle}</CardDescription>
+        ) : null}
+      </CardHeader>
 
-      <div className="mb-4 text-center">
+      <CardContent className="text-center">
         <div
-          className="text-3xl font-extrabold"
+          className="mb-1 text-3xl font-extrabold tracking-tight"
           style={{ color: "var(--foreground)" }}
         >
           {price}
         </div>
-        <div
-          className="text-sm mt-1"
-          style={{ color: "var(--muted-foreground)" }}
-        >
+        <div className="text-sm" style={{ color: "var(--muted-foreground)" }}>
           {computePerCredit(price, credits)}
         </div>
-      </div>
 
-      <ul
-        className="mb-6 space-y-2 text-sm"
-        style={{ color: "var(--muted-foreground)" }}
-      >
-        {features.map((f, idx) => (
-          <li key={idx} className="flex items-start gap-3">
-            <Check
-              className="mt-1 flex-shrink-0"
-              size={16}
-              style={{ color: "var(--primary)" }}
-            />
-            <span>{f}</span>
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-auto w-full">
-        <button
-          type="button"
-          className="w-full rounded-md px-4 py-2 font-semibold"
-          style={{
-            background: "var(--primary)",
-            color: "var(--primary-foreground)",
-          }}
+        <ul
+          className="mt-5 space-y-2 text-sm"
+          style={{ color: "var(--muted-foreground)" }}
         >
-          Start {name}
-        </button>
-      </div>
-    </article>
+          {features.map((f, idx) => (
+            <li key={idx} className="flex items-start justify-start gap-3">
+              <Check
+                className="mt-1 flex-shrink-0"
+                size={16}
+                style={{ color: "var(--primary)" }}
+              />
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+
+      <CardFooter className="mt-auto">
+        <Button className="w-full font-semibold">Start {name}</Button>
+      </CardFooter>
+    </Card>
   );
 }
