@@ -8,6 +8,7 @@ export default function PricingSection() {
 
   return (
     <section
+      id="pricing"
       aria-labelledby="pricing-heading"
       className="relative overflow-hidden py-16 sm:py-20"
     >
@@ -74,9 +75,9 @@ export default function PricingSection() {
                     className="mb-6 space-y-2 text-sm"
                     style={{ color: "var(--muted-foreground)" }}
                   >
-                    <li>• Placeholder benefit 1</li>
-                    <li>• Placeholder benefit 2</li>
-                    <li>• Placeholder benefit 3</li>
+                    <li>Placeholder benefit 1</li>
+                    <li>Placeholder benefit 2</li>
+                    <li>Placeholder benefit 3</li>
                   </ul>
 
                   <div className="mt-auto w-full">
