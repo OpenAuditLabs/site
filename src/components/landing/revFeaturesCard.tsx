@@ -5,20 +5,28 @@ type RevFeatureCardProps = {
   title: string;
   description: string;
   Icon?: React.ComponentType<LucideProps>;
+  href?: string;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 };
 
 export default function RevFeatureCard({
   title,
   description,
   Icon,
+  href,
+  onClick,
 }: RevFeatureCardProps): React.ReactElement {
-  return (
-    <article
-      className="group relative isolate overflow-hidden bg-card text-card-foreground rounded-2xl ring-1 ring-border shadow-xs py-6 px-5 cursor-pointer transition-all duration-500 ease-out motion-reduce:transition-none hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/15 hover:-translate-y-1 hover:ring-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-      role="article"
-      aria-label={title}
-      tabIndex={0}
-    >
+  const base =
+    "group relative isolate overflow-hidden bg-card text-card-foreground rounded-2xl ring-1 ring-neutral-200 dark:ring-neutral-700 shadow-sm py-6 px-5 transition-all duration-500 ease-out motion-reduce:transition-none motion-reduce:transform-none transform-gpu will-change-transform";
+
+  const interactive =
+    base +
+    " cursor-pointer hover:scale-[1.02] hover:shadow-lg hover:shadow-primary/15 hover:-translate-y-1 hover:ring-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
+  const nonInteractive = base;
+
+  const content = (
+    <>
       {/* Soft primary glow that follows theme; uses currentColor via text-primary, no hardcoded colors */}
       <div
         aria-hidden
@@ -29,7 +37,7 @@ export default function RevFeatureCard({
         {/* Dark mode: keep glow near the top for a vivid effect */}
         <div className="absolute inset-0 rounded-2xl text-primary blur-md hidden dark:block bg-[radial-gradient(70%_60%_at_50%_0%,currentColor_0%,transparent_60%)]" />
       </div>
-      <div className="flex flex-col items-start">
+  <div className="flex flex-col items-start">
         <div
           className="w-12 h-12 rounded-md bg-muted flex items-center justify-center mb-4 transition-all duration-500 ease-out group-hover:bg-primary/10 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-primary/25"
           aria-hidden
@@ -49,6 +57,30 @@ export default function RevFeatureCard({
           {description}
         </p>
       </div>
+    </>
+  );
+
+  // Render an interactive element when href or onClick is provided
+  if (href) {
+    return (
+      <a href={href} className={interactive} aria-label={title}>
+        {content}
+      </a>
+    );
+  }
+
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} className={interactive} aria-label={title}>
+        {content}
+      </button>
+    );
+  }
+
+  // Non-interactive fallback: presentational only
+  return (
+    <article className={nonInteractive} role="article" aria-label={title}>
+      {content}
     </article>
   );
 }
