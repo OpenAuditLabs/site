@@ -1,33 +1,98 @@
-import { Card } from "@/components/ui/card";
+import PricingCard from "@/components/landing/PricingTableCard";
 
 export default function PricingSection() {
-  return (
-    <section className="py-16 px-4 bg-muted/30">
-      <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-foreground mb-4">
-          Pricing Plans
-        </h2>
-        <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Choose the perfect plan for your needs
-        </p>
+  const plans = [
+    {
+      id: "p-lite",
+      name: "Lite",
+      subtitle: "Perfect for getting started",
+      price: "$0.99",
+      credits: 1,
+      badge: null,
+      features: [
+        "Instant Credit Delivery",
+        "No Expiration Date",
+        "Basic support included",
+      ],
+    },
+    {
+      id: "p-pro",
+      name: "Pro",
+      subtitle: "Great for regular users",
+      price: "$5.49",
+      credits: 5,
+      badge: "Most Popular",
+      features: [
+        "Instant Credit Delivery",
+        "No Expiration Date",
+        "Priority support",
+      ],
+    },
+    {
+      id: "p-plus",
+      name: "Plus",
+      subtitle: "For power users",
+      price: "$9.49",
+      credits: 12,
+      badge: null,
+      features: [
+        "Instant Credit Delivery",
+        "No Expiration Date",
+        "Priority support",
+      ],
+    },
+    {
+      id: "p-premium",
+      name: "Premium",
+      subtitle: "Best for teams and power users",
+      price: "$18.49",
+      credits: 25,
+      badge: "Best Value",
+      features: [
+        "Instant Credit Delivery",
+        "No Expiration Date",
+        "Dedicated support",
+      ],
+    },
+  ];
 
-        <Card className="max-w-md mx-auto p-8 border-dashed border-2 border-border bg-card">
+  return (
+    <section
+      id="pricing"
+      aria-labelledby="pricing-heading"
+      className="relative overflow-hidden py-16 sm:py-20"
+    >
+      <div className="max-w-6xl mx-auto py-12 px-6">
+        <div className="px-6">
           <div className="text-center">
-            <div className="w-16 h-16 mx-auto mb-4 bg-muted rounded-full flex items-center justify-center">
-              <span className="text-2xl">🚧</span>
-            </div>
-            <h3 className="text-xl font-semibold text-card-foreground mb-2">
-              Pricing Section
-            </h3>
-            <p className="text-muted-foreground text-sm mb-4">
-              This is a placeholder component. Pricing plans and features will
-              be added here.
+            <h2
+              id="pricing-heading"
+              className="mx-auto font-extrabold leading-tight"
+              style={{
+                color: "var(--foreground)",
+                fontSize: "clamp(28px, 6.4vw, 48px)",
+                maxWidth: "900px",
+              }}
+            >
+              Choose The Best Pack for You
+            </h2>
+
+            <p
+              className="mt-4 mx-auto max-w-2xl text-base leading-relaxed"
+              style={{ color: "var(--muted-foreground)" }}
+            >
+              Use credits to scan your documents. 1 credit ≈ 1,000 characters.
             </p>
-            <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent text-accent-foreground">
-              🔨 Under Construction
+          </div>
+
+          <div className="mt-12">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {plans.map((p) => (
+                <PricingCard key={p.id} {...p} />
+              ))}
             </div>
           </div>
-        </Card>
+        </div>
       </div>
     </section>
   );
