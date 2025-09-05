@@ -1,9 +1,63 @@
+import { Check } from "lucide-react";
+
 export default function PricingSection() {
   const plans = [
-    { id: "p1", name: "Basic", price: "$0.99", credits: 1 },
-    { id: "p2", name: "Pro", price: "$5.49", credits: 5 },
-    { id: "p3", name: "Plus", price: "$9.49", credits: 12 },
-    { id: "p4", name: "Enterprise", price: "$18.49", credits: 25 },
+    {
+      id: "p1",
+      name: "Basic",
+      subtitle: "Perfect for quick tasks",
+      price: "$0.99",
+      credits: 1,
+      perCredit: "$0.99 per credit",
+      badge: null,
+      features: [
+        "Instant Credit Delivery",
+        "No Expiration Date",
+        "24/7 support included",
+      ],
+    },
+    {
+      id: "p2",
+      name: "Pro",
+      subtitle: "Great for regular users",
+      price: "$5.49",
+      credits: 5,
+      perCredit: "$0.90 per credit",
+      badge: null,
+      features: [
+        "Instant Credit Delivery",
+        "No Expiration Date",
+        "24/7 support included",
+      ],
+    },
+    {
+      id: "p3",
+      name: "Plus",
+      subtitle: "Most popular choice",
+      price: "$9.49",
+      credits: 12,
+      perCredit: "$0.79 per credit",
+      badge: "Most Popular",
+      features: [
+        "Instant Credit Delivery",
+        "No Expiration Date",
+        "24/7 support included",
+      ],
+    },
+    {
+      id: "p4",
+      name: "Enterprise",
+      subtitle: "Best value for power users",
+      price: "$18.49",
+      credits: 25,
+      perCredit: "$0.74 per credit",
+      badge: "Best Value",
+      features: [
+        "Instant Credit Delivery",
+        "No Expiration Date",
+        "24/7 support included",
+      ],
+    },
   ];
 
   return (
@@ -38,64 +92,94 @@ export default function PricingSection() {
           <div className="mt-12">
             {/* Pricing cards grid: 1col on mobile, 2 on tablet, 4 on desktop */}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {plans.map((plan) => (
-                <article
-                  key={plan.id}
-                  className="flex flex-col rounded-2xl border p-6 shadow-sm"
-                  style={{
-                    backgroundColor: "var(--card)",
-                    borderColor: "var(--border)",
-                  }}
-                  aria-labelledby={`plan-${plan.id}`}
-                >
-                  <h3
-                    id={`plan-${plan.id}`}
-                    className="text-lg font-semibold mb-2"
-                    style={{ color: "var(--foreground)" }}
+              {plans.map((plan) => {
+                const isHighlighted = !!plan.badge;
+                return (
+                  <article
+                    key={plan.id}
+                    className={`flex flex-col rounded-2xl border p-6 shadow-sm relative ${
+                      isHighlighted ? "lg:border-2" : ""
+                    }`}
+                    style={{
+                      backgroundColor: "var(--card)",
+                      borderColor: "var(--border)",
+                    }}
+                    aria-labelledby={`plan-${plan.id}`}
                   >
-                    {plan.name}
-                  </h3>
+                    {plan.badge ? (
+                      <span
+                        className="absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded-full text-sm font-medium"
+                        style={{
+                          background: "var(--primary)",
+                          color: "var(--primary-foreground)",
+                        }}
+                      >
+                        {plan.badge}
+                      </span>
+                    ) : null}
 
-                  <div className="mb-4">
-                    <div
-                      className="text-3xl font-extrabold"
+                    <h3
+                      id={`plan-${plan.id}`}
+                      className="text-lg font-semibold mb-2 text-center"
                       style={{ color: "var(--foreground)" }}
                     >
-                      {plan.price}
+                      {plan.name}
+                    </h3>
+                    {plan.subtitle ? (
+                      <div
+                        className="text-sm text-center mb-3"
+                        style={{ color: "var(--muted-foreground)" }}
+                      >
+                        {plan.subtitle}
+                      </div>
+                    ) : null}
+
+                    <div className="mb-4 text-center">
+                      <div
+                        className="text-3xl font-extrabold"
+                        style={{ color: "var(--foreground)" }}
+                      >
+                        {plan.price}
+                      </div>
+                      <div
+                        className="text-sm mt-1"
+                        style={{ color: "var(--muted-foreground)" }}
+                      >
+                        {plan.perCredit}
+                      </div>
                     </div>
-                    <div
-                      className="text-sm mt-1"
+
+                    <ul
+                      className="mb-6 space-y-2 text-sm"
                       style={{ color: "var(--muted-foreground)" }}
                     >
-                      {`${plan.credits} ${
-                        plan.credits === 1 ? "Credit" : "Credits"
-                      }`}
+                      {plan.features.map((f, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <Check
+                            className="mt-1 flex-shrink-0"
+                            size={16}
+                            style={{ color: "var(--primary)" }}
+                          />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="mt-auto w-full">
+                      <button
+                        type="button"
+                        className="w-full rounded-md px-4 py-2 font-semibold"
+                        style={{
+                          background: "var(--primary)",
+                          color: "var(--primary-foreground)",
+                        }}
+                      >
+                        Start {plan.name}
+                      </button>
                     </div>
-                  </div>
-
-                  <ul
-                    className="mb-6 space-y-2 text-sm"
-                    style={{ color: "var(--muted-foreground)" }}
-                  >
-                    <li>Placeholder benefit 1</li>
-                    <li>Placeholder benefit 2</li>
-                    <li>Placeholder benefit 3</li>
-                  </ul>
-
-                  <div className="mt-auto w-full">
-                    <button
-                      type="button"
-                      className="w-full rounded-md px-4 py-2 font-semibold"
-                      style={{
-                        background: "var(--primary)",
-                        color: "var(--primary-foreground)",
-                      }}
-                    >
-                      Start {plan.name}
-                    </button>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </div>
