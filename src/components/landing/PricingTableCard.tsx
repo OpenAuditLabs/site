@@ -13,17 +13,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-type Plan = {
+export interface Plan {
   id: string;
   name: string;
   subtitle?: string | null;
-  price: string;
+  /** Price in dollars */
+  price: number;
   credits: number;
   badge?: string | null;
   features: string[];
-};
+}
 
-export default function PricingCard({
+const currencyFmt = new Intl.NumberFormat(undefined, {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+});
+
+const PricingCard = React.memo(function PricingCard({
   id,
   name,
   subtitle,
@@ -32,17 +39,21 @@ export default function PricingCard({
   badge,
   features,
 }: Plan) {
-  function computePerCredit(priceStr: string, credits: number) {
-    const n = Number(priceStr.replace(/[^0-9.]/g, ""));
-    if (!isFinite(n) || credits <= 0) return "";
-    const per = n / credits;
-    return `$${per.toFixed(2)} per credit`;
-  }
+  const perCredit = React.useMemo(() => {
+    if (!isFinite(price) || credits <= 0) return "";
+    const per = price / credits;
+    return `${currencyFmt.format(per)} per credit`;
+  }, [price, credits]);
 
-  const label = (badge ?? "").trim();
-  const norm = label.toLowerCase();
-  const isBestValue = norm.includes("best value");
-  const isMostPopular = norm.includes("most popular");
+  const { label, isBestValue, isMostPopular } = React.useMemo(() => {
+    const label = (badge ?? "").trim();
+    const norm = label.toLowerCase();
+    return {
+      label,
+      isBestValue: norm.includes("best value"),
+      isMostPopular: norm.includes("most popular"),
+    };
+  }, [badge]);
 
   return (
     <Card
@@ -117,10 +128,10 @@ export default function PricingCard({
           className="mb-1 text-3xl font-extrabold tracking-tight"
           style={{ color: "var(--foreground)" }}
         >
-          {price}
+          {currencyFmt.format(price)}
         </div>
         <div className="text-sm" style={{ color: "var(--muted-foreground)" }}>
-          {computePerCredit(price, credits)}
+          {perCredit}
         </div>
 
         <ul
@@ -141,10 +152,15 @@ export default function PricingCard({
       </CardContent>
 
       <CardFooter className="relative z-10 mt-auto">
-        <Button className="w-full font-semibold transition-all duration-300 group-hover:translate-y-[-1px] group-hover:shadow-sm">
+        <Button
+          className="w-full font-semibold transition-all duration-300 group-hover:translate-y-[-1px] group-hover:shadow-sm"
+          aria-label={`Start ${name}`}
+        >
           Start {name}
         </Button>
       </CardFooter>
     </Card>
   );
-}
+});
+
+export default PricingCard;
