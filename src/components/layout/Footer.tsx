@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -17,9 +18,33 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold">Quick Links</h4>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li className="cursor-default">Features</li>
-              <li className="cursor-default">Pricing</li>
-              <li className="cursor-default">OpenAuditLabs</li>
+              <li>
+                <Link
+                  href="/features"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded"
+                  aria-label="Features"
+                >
+                  Features
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/pricing"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded"
+                  aria-label="Pricing"
+                >
+                  Pricing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/openauditlabs"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded"
+                  aria-label="OpenAuditLabs"
+                >
+                  OpenAuditLabs
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -27,9 +52,39 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold">Socials</h4>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              <li className="cursor-default">Twitter</li>
-              <li className="cursor-default">YouTube</li>
-              <li className="cursor-default">Research Gate</li>
+              <li>
+                <a
+                  href="https://twitter.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded"
+                  aria-label="Open in new tab: Twitter"
+                >
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded"
+                  aria-label="Open in new tab: YouTube"
+                >
+                  YouTube
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.researchgate.net/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded"
+                  aria-label="Open in new tab: ResearchGate"
+                >
+                  Research Gate
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -39,7 +94,23 @@ export default function Footer() {
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} OpenAudit — All rights reserved.
             </p>
-            <p className="text-sm text-muted-foreground">Privacy · Terms</p>
+            <div className="flex items-center gap-3">
+              <Link
+                href="/privacy"
+                className="text-sm text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded"
+                aria-label="Privacy policy"
+              >
+                Privacy
+              </Link>
+              <span className="text-sm text-muted-foreground">·</span>
+              <Link
+                href="/terms"
+                className="text-sm text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring rounded"
+                aria-label="Terms of service"
+              >
+                Terms
+              </Link>
+            </div>
           </div>
         </div>
       </div>
