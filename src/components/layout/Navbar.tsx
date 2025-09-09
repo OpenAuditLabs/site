@@ -66,7 +66,7 @@ export default function Navbar() {
                 asChild
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
               >
-                <Link href="/#contact">Get Started</Link>
+                <Link href="/#open-audit-action">Get Started</Link>
               </Button>
 
               <Button
@@ -173,7 +173,7 @@ export default function Navbar() {
               asChild
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
             >
-              <Link href="/#contact" onClick={() => setOpen(false)}>
+              <Link href="/#open-audit-action" onClick={() => setOpen(false)}>
                 Get Started
               </Link>
             </Button>
