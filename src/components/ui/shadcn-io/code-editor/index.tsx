@@ -289,6 +289,7 @@ function CodeEditor({
               !isDone &&
               "[&_.line:last-of-type::after]:content-['|'] [&_.line:last-of-type::after]:animate-pulse [&_.line:last-of-type::after]:inline-block [&_.line:last-of-type::after]:w-[1ch] [&_.line:last-of-type::after]:-translate-px"
           )}
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: content is sanitized
           dangerouslySetInnerHTML={{ __html: highlightedCode }}
         />
       </div>
