@@ -1,38 +1,49 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { useInView, type UseInViewOptions } from 'motion/react';
-import { useTheme } from 'next-themes';
+import * as React from "react";
+import { useInView, type UseInViewOptions } from "motion/react";
+import { useTheme } from "next-themes";
+import DOMPurify from "isomorphic-dompurify";
 
-import { cn } from '@repo/shadcn-ui/lib/utils';
-import { Button } from '@repo/shadcn-ui/components/ui/button';
-import { Copy, Check } from 'lucide-react';
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Copy, Check } from "lucide-react";
 
 type CopyButtonProps = {
   content: string;
-  size?: 'sm' | 'default' | 'lg';
-  variant?: 'default' | 'ghost' | 'outline';
+  size?: "sm" | "default" | "lg";
+  variant?: "default" | "ghost" | "outline";
   className?: string;
   onCopy?: (content: string) => void;
 };
 
 function CopyButton({
   content,
-  size = 'default',
-  variant = 'default',
+  size = "default",
+  variant = "default",
   className,
   onCopy,
 }: CopyButtonProps) {
   const [copied, setCopied] = React.useState(false);
+  const resetTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
+
+  React.useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
+    };
+  }, []);
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(content);
       setCopied(true);
       onCopy?.(content);
-      setTimeout(() => setCopied(false), 2000);
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
+      resetTimerRef.current = setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy text: ', err);
+      console.error("Failed to copy text: ", err);
     }
   };
 
@@ -41,18 +52,16 @@ function CopyButton({
       size={size}
       variant={variant}
       onClick={handleCopy}
-      className={cn('h-8 w-8 p-0', className)}
+      className={cn("h-8 w-8 p-0", className)}
+      aria-label={copied ? "Copied" : "Copy code"}
+      title={copied ? "Copied" : "Copy code"}
     >
-      {copied ? (
-        <Check className="h-3 w-3" />
-      ) : (
-        <Copy className="h-3 w-3" />
-      )}
+      {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
     </Button>
   );
 }
 
-type CodeEditorProps = Omit<React.ComponentProps<'div'>, 'onCopy'> & {
+type CodeEditorProps = Omit<React.ComponentProps<"div">, "onCopy"> & {
   children: string;
   lang: string;
   themes?: {
@@ -66,7 +75,7 @@ type CodeEditorProps = Omit<React.ComponentProps<'div'>, 'onCopy'> & {
   icon?: React.ReactNode;
   cursor?: boolean;
   inView?: boolean;
-  inViewMargin?: UseInViewOptions['margin'];
+  inViewMargin?: UseInViewOptions["margin"];
   inViewOnce?: boolean;
   copyButton?: boolean;
   writing?: boolean;
@@ -79,8 +88,8 @@ function CodeEditor({
   children: code,
   lang,
   themes = {
-    light: 'github-light',
-    dark: 'github-dark',
+    light: "github-light",
+    dark: "github-dark",
   },
   duration = 5,
   delay = 0,
@@ -90,7 +99,7 @@ function CodeEditor({
   icon,
   cursor = false,
   inView = false,
-  inViewMargin = '0px',
+  inViewMargin = "0px",
   inViewOnce = true,
   copyButton = false,
   writing = true,
@@ -102,8 +111,8 @@ function CodeEditor({
   const { resolvedTheme } = useTheme();
 
   const editorRef = React.useRef<HTMLDivElement>(null);
-  const [visibleCode, setVisibleCode] = React.useState('');
-  const [highlightedCode, setHighlightedCode] = React.useState('');
+  const [visibleCode, setVisibleCode] = React.useState("");
+  const [highlightedCode, setHighlightedCode] = React.useState("");
   const [isDone, setIsDone] = React.useState(false);
 
   const inViewResult = useInView(editorRef, {
@@ -117,18 +126,41 @@ function CodeEditor({
 
     const loadHighlightedCode = async () => {
       try {
-        const { codeToHtml } = await import('shiki');
+        const { codeToHtml } = await import("shiki");
 
-        const highlighted = await codeToHtml(visibleCode, {
+        const highlightedUnsafe = await codeToHtml(visibleCode, {
           lang,
           themes: {
             light: themes.light,
             dark: themes.dark,
           },
-          defaultColor: resolvedTheme === 'dark' ? 'dark' : 'light',
+          defaultColor: resolvedTheme === "dark" ? "dark" : "light",
         });
 
-        setHighlightedCode(highlighted);
+        // Sanitize Shiki-generated HTML before storing in state
+        const sanitized = DOMPurify.sanitize(highlightedUnsafe, {
+          ALLOWED_TAGS: [
+            "pre",
+            "code",
+            "span",
+            "div",
+            "br",
+            "em",
+            "strong",
+            "a",
+            "p",
+          ],
+          ALLOWED_ATTR: [
+            "class",
+            "data-lang",
+            "style",
+            "href",
+            "rel",
+            "target",
+          ],
+        });
+
+        setHighlightedCode(sanitized);
       } catch (e) {
         console.error(`Language "${lang}" could not be loaded.`, e);
       }
@@ -159,7 +191,7 @@ function CodeEditor({
     let index = 0;
     const totalDuration = duration * 1000;
     const interval = totalDuration / characters.length;
-    let intervalId: NodeJS.Timeout;
+    let intervalId: ReturnType<typeof setInterval>;
 
     const timeout = setTimeout(() => {
       intervalId = setInterval(() => {
@@ -171,7 +203,7 @@ function CodeEditor({
           });
           editorRef.current?.scrollTo({
             top: editorRef.current?.scrollHeight,
-            behavior: 'smooth',
+            behavior: "smooth",
           });
         } else {
           clearInterval(intervalId);
@@ -191,8 +223,8 @@ function CodeEditor({
     <div
       data-slot="code-editor"
       className={cn(
-        'relative bg-muted/50 w-[600px] h-[400px] border border-border overflow-hidden flex flex-col rounded-xl',
-        className,
+        "relative bg-muted/50 w-[600px] h-[400px] border border-border overflow-hidden flex flex-col rounded-xl",
+        className
       )}
       {...props}
     >
@@ -209,19 +241,14 @@ function CodeEditor({
           {title && (
             <div
               className={cn(
-                'flex flex-row items-center gap-2',
+                "flex flex-row items-center gap-2",
                 dots &&
-                  'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
+                  "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
               )}
             >
               {icon ? (
-                <div
-                  className="text-muted-foreground [&_svg]:size-3.5"
-                  dangerouslySetInnerHTML={
-                    typeof icon === 'string' ? { __html: icon } : undefined
-                  }
-                >
-                  {typeof icon !== 'string' ? icon : null}
+                <div className="text-muted-foreground [&_svg]:size-3.5">
+                  {icon}
                 </div>
               ) : null}
               <figcaption className="flex-1 truncate text-muted-foreground text-[13px]">
@@ -257,10 +284,10 @@ function CodeEditor({
       >
         <div
           className={cn(
-            '[&>pre,_&_code]:!bg-transparent [&>pre,_&_code]:[background:transparent_!important] [&>pre,_&_code]:border-none [&_code]:!text-[13px]',
+            "[&>pre,_&_code]:!bg-transparent [&>pre,_&_code]:[background:transparent_!important] [&>pre,_&_code]:border-none [&_code]:!text-[13px]",
             cursor &&
               !isDone &&
-              "[&_.line:last-of-type::after]:content-['|'] [&_.line:last-of-type::after]:animate-pulse [&_.line:last-of-type::after]:inline-block [&_.line:last-of-type::after]:w-[1ch] [&_.line:last-of-type::after]:-translate-px",
+              "[&_.line:last-of-type::after]:content-['|'] [&_.line:last-of-type::after]:animate-pulse [&_.line:last-of-type::after]:inline-block [&_.line:last-of-type::after]:w-[1ch] [&_.line:last-of-type::after]:-translate-px"
           )}
           dangerouslySetInnerHTML={{ __html: highlightedCode }}
         />
