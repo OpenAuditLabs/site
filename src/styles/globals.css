@@ -202,13 +202,13 @@
     0px 8px 10px -1px hsl(0 0% 0% / 0.17);
   --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
 
-  /* Security Analysis Report severity colors (dark mode uses same brand values) */
-  --report-critical-bg: #FFE2E2;
-  --report-critical-stroke: #FF0000;
-  --report-medium-bg: #FFFAE2;
-  --report-medium-stroke: #FFCC00;
-  --report-small-bg: #E2E5FF;
-  --report-small-stroke: #0900FF;
+  /* Security Analysis Report severity colors (dark mode: higher contrast) */
+  --report-critical-bg: #4B1C1C;   /* deep red tint for critical */
+  --report-critical-stroke: #FF3B3B;
+  --report-medium-bg: #3A3217;    /* deep gold/brown tint for medium */
+  --report-medium-stroke: #FFD600;
+  --report-small-bg: #23244B;     /* deep blue tint for small */
+  --report-small-stroke: #3B5BFF;
 
   /* Security Analysis Report panel colors (dark mode) */
   --report-panel-bg: #232427; /* dark neutral */
