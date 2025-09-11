@@ -129,6 +129,18 @@
     0px 8px 10px -1px hsl(0 0% 0% / 0.17);
   --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
   --tracking-normal: 0.025em;
+
+  /* Security Analysis Report severity colors */
+  --report-critical-bg: #FFE2E2;
+  --report-critical-stroke: #FF0000;
+  --report-medium-bg: #FFFAE2;
+  --report-medium-stroke: #FFCC00;
+  --report-small-bg: #E2E5FF;
+  --report-small-stroke: #0900FF;
+
+  /* Security Analysis Report panel colors */
+  --report-panel-bg: #F3F4F6; /* light gray */
+  --report-panel-header-bg: #D1D5DB; /* gray-300 */
 }
 
 .dark {
@@ -189,6 +201,18 @@
   --shadow-xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.17),
     0px 8px 10px -1px hsl(0 0% 0% / 0.17);
   --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.43);
+
+  /* Security Analysis Report severity colors (dark mode uses same brand values) */
+  --report-critical-bg: #FFE2E2;
+  --report-critical-stroke: #FF0000;
+  --report-medium-bg: #FFFAE2;
+  --report-medium-stroke: #FFCC00;
+  --report-small-bg: #E2E5FF;
+  --report-small-stroke: #0900FF;
+
+  /* Security Analysis Report panel colors (dark mode) */
+  --report-panel-bg: #232427; /* dark neutral */
+  --report-panel-header-bg: #2F3136; /* slightly lighter for header */
 }
 
 @layer base {

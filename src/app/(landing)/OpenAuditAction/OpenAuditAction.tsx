@@ -1,5 +1,13 @@
 import Image from "next/image";
 import React from "react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function OpenAuditAction(): React.ReactElement {
   return (
@@ -26,7 +34,7 @@ export default function OpenAuditAction(): React.ReactElement {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
           <div className="rounded-lg">
             <Image
               src="/image/contractCode.svg"
@@ -37,25 +45,110 @@ export default function OpenAuditAction(): React.ReactElement {
             />
           </div>
           <div className="text-foreground">
-            <h3 className="mb-4 text-3xl font-bold">From Code to Clarity</h3>
-            <p className="mb-4 text-muted-foreground">
-              Our analysis engine scans smart contract code end-to-end, flagging
-              risky patterns like reentrancy, improper access control, unchecked
-              external calls, and arithmetic mistakes. Findings are grouped by
-              severity and accompanied by concise explanations, so engineers can
-              quickly understand the root cause and impact without digging
-              through stack traces.
-            </p>
-            <p className="text-muted-foreground">
-              Results include prioritized remediation steps, example fixes, and
-              gas-optimization suggestions to reduce costs while preserving
-              security. Designed for developer workflows, the output is
-              machine-readable for CI integration and human-friendly for code
-              review — enabling continuous auditing, faster triage, and fewer
-              false positives as the model learns from project-specific context.
-              Replace this copy with the final marketing or product content when
-              ready.
-            </p>
+            <Card
+              className="rounded-xl shadow-md overflow-hidden py-0 max-w-[560px] w-full mx-auto"
+              style={{
+                backgroundColor: "var(--report-panel-bg)",
+              }}
+            >
+              <CardHeader
+                className="py-4 rounded-t-xl"
+                style={{ backgroundColor: "var(--report-panel-header-bg)" }}
+              >
+                <CardTitle style={{ color: "var(--foreground)" }}>
+                  Security Analysis Report
+                </CardTitle>
+                <CardDescription>Found 3 issues in your code</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5 pt-6">
+                {/* Critical */}
+                <div
+                  className="rounded-2xl border p-5"
+                  style={{
+                    backgroundColor: "var(--report-critical-bg)",
+                    borderColor: "var(--report-critical-stroke)",
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="space-y-1">
+                      <span>
+                        Critical
+                      </span>
+                      <div
+                        className="text-sm font-semibold"
+                        style={{ color: "var(--foreground)" }}
+                      >
+                        Reentrancy Vulnerability
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        External call before state update allows reentrancy attacks
+                      </p>
+                    </div>
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">
+                      Line 11
+                    </span>
+                  </div>
+                </div>
+
+                {/* Medium */}
+                <div
+                  className="rounded-2xl border p-5"
+                  style={{
+                    backgroundColor: "var(--report-medium-bg)",
+                    borderColor: "var(--report-medium-stroke)",
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="space-y-1">
+                      <span>Medium</span>
+                      <div
+                        className="text-sm font-semibold"
+                        style={{ color: "var(--foreground)" }}
+                      >
+                        Missing Access Control
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Function lacks proper access control modifiers
+                      </p>
+                    </div>
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">
+                      Line 8
+                    </span>
+                  </div>
+                </div>
+
+                {/* Small */}
+                <div
+                  className="rounded-2xl border p-5"
+                  style={{
+                    backgroundColor: "var(--report-small-bg)",
+                    borderColor: "var(--report-small-stroke)",
+                  }}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="space-y-1">
+                      <span>Small</span>
+                      <div
+                        className="text-sm font-semibold"
+                        style={{ color: "var(--foreground)" }}
+                      >
+                        Gas Optimization
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Consider using unchecked block for gas savings
+                      </p>
+                    </div>
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">
+                      Line 15
+                    </span>
+                  </div>
+                </div>
+
+                <p className="pt-6 text-sm text-muted-foreground mb-8">
+                  Analysis completed in 0.8s
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
