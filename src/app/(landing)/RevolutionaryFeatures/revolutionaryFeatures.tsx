@@ -4,7 +4,7 @@ import { Cpu, Zap, DollarSign } from "lucide-react";
 
 export default function RevolutionaryFeatures(): React.ReactElement {
   return (
-    <section className="max-w-6xl mx-auto py-12 px-6">
+    <section id="features" className="max-w-6xl mx-auto py-12 px-6">
       <div className="px-6">
         <div className="text-center">
           <h2
