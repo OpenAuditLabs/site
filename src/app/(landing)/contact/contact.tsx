@@ -3,6 +3,7 @@ import ContactForm from "@/components/landing/ContactForm";
 export default function Contact() {
   return (
     <section
+      id="contact"
       aria-labelledby="contact-hero-heading"
       className="relative overflow-hidden py-16 sm:py-20"
     >

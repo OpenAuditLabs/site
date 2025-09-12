@@ -29,6 +29,19 @@ const DEFAULTS: Required<
   body: "Behind OpenAudit is a team of researchers and AI specialists who have published studies, trained models, and worked on cutting‑edge projects. We don’t just use AI — we create it.",
 };
 
+/**
+ * Renders the "Research" section: heading, subheading, body text, CTAs, and an illustrative image in a responsive two-column layout.
+ *
+ * The component accepts optional overrides for the image, heading, subheading, body text, and two CTAs. If a CTA is provided with `external: true`,
+ * its link is rendered as an external anchor that opens in a new tab (`target="_blank"` and `rel="noopener noreferrer"`). If a CTA is omitted,
+ * sensible defaults are rendered for both primary ("Visit OpenAuditLabs") and secondary ("Read Research Paper") actions.
+ *
+ * Accessibility:
+ * - The section is associated with its heading via `aria-labelledby`.
+ * - CTA links include `aria-label` when a `label` is provided.
+ *
+ * @returns A React element representing the Research section.
+ */
 export default function Research({
   imageSrc = DEFAULTS.imageSrc,
   heading = DEFAULTS.heading,
@@ -40,7 +53,7 @@ export default function Research({
   return (
     <section
       aria-labelledby="research-heading"
-      className="relative overflow-hidden py-16 sm:py-20"
+  className="relative overflow-hidden py-10 sm:py-12"
     >
       {/* Decorative gradient */}
       <div className="absolute inset-0 pointer-events-none -z-10">
@@ -52,24 +65,24 @@ export default function Research({
         <div className="text-center">
           <h2
             id="research-heading"
-            className="mx-auto font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight max-w-4xl text-center"
+            className="mx-auto font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight max-w-4xl text-center"
             style={{ color: "var(--foreground)" }}
           >
             {heading}
           </h2>
 
-          <p className="mt-4 mx-auto max-w-3xl text-base sm:text-lg md:text-xl text-muted-foreground font-medium text-center leading-snug">
+          <p className="mt-3 mx-auto max-w-3xl text-base sm:text-lg md:text-lg text-muted-foreground font-medium text-center leading-snug">
             {subheading}
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="flex flex-col justify-center">
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed text-foreground mb-6">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-large font-bold leading-relaxed text-foreground mb-20">
               {body}
             </p>
 
-            <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               {primaryCta ? (
                 primaryCta.external ? (
                   <Button asChild className="w-full sm:w-auto">
