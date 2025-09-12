@@ -29,6 +29,19 @@ const DEFAULTS: Required<
   body: "Behind OpenAudit is a team of researchers and AI specialists who have published studies, trained models, and worked on cutting‑edge projects. We don’t just use AI — we create it.",
 };
 
+/**
+ * Renders the "Research" section: heading, subheading, body text, CTAs, and an illustrative image in a responsive two-column layout.
+ *
+ * The component accepts optional overrides for the image, heading, subheading, body text, and two CTAs. If a CTA is provided with `external: true`,
+ * its link is rendered as an external anchor that opens in a new tab (`target="_blank"` and `rel="noopener noreferrer"`). If a CTA is omitted,
+ * sensible defaults are rendered for both primary ("Visit OpenAuditLabs") and secondary ("Read Research Paper") actions.
+ *
+ * Accessibility:
+ * - The section is associated with its heading via `aria-labelledby`.
+ * - CTA links include `aria-label` when a `label` is provided.
+ *
+ * @returns A React element representing the Research section.
+ */
 export default function Research({
   imageSrc = DEFAULTS.imageSrc,
   heading = DEFAULTS.heading,
