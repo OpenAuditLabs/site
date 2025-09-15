@@ -14,16 +14,13 @@ export default function Hero() {
         }}
       />
 
-  <div className="mx-auto w-full max-w-7xl px-4 py-10 md:py-16 lg:py-20">
+  <div className="mx-auto w-full max-w-7xl px-4 md:py-16 lg:py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="text-balance text-3xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
             Secure Your Smart Contracts with OpenAudit
           </h1>
         </div>
-
-        <div className="mt-8 md:mt-12">
           <HeroCarousel />
-        </div>
       </div>
     </section>
   );

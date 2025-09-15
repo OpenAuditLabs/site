@@ -1,6 +1,5 @@
 "use client";
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function HeroCarousel() {
@@ -11,61 +10,73 @@ export default function HeroCarousel() {
 	];
 
 	const baseWidths =
-		"w-[320px] sm:w-[560px] md:w-[880px] lg:w-[1180px] xl:w-[1320px] 2xl:w-[1400px]";
+	  "w-[320px] sm:w-[560px] md:w-[880px] lg:w-[1180px] xl:w-[1320px] 2xl:w-[1400px]";
 
-	const [index, setIndex] = React.useState(0);
-	const [paused, setPaused] = React.useState(false);
+	// Track the center slide index and auto-rotate
+	const [current, setCurrent] = useState(0);
 
-	React.useEffect(() => {
-		// Respect reduced motion
-		const m = typeof window !== "undefined" && window.matchMedia
-			? window.matchMedia("(prefers-reduced-motion: reduce)")
-			: undefined;
-		if (m && m.matches) return;
-
-		const id = window.setInterval(() => {
-			if (!paused) setIndex((i) => (i + 1) % slides.length);
-		}, 5000);
-		return () => window.clearInterval(id);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [paused, slides.length]);
-
-	const left = slides[(index + slides.length - 1) % slides.length];
-	const center = slides[index % slides.length];
-	const right = slides[(index + 1) % slides.length];
+	useEffect(() => {
+		const id = setInterval(() => {
+			setCurrent((c) => (c + 1) % slides.length);
+		}, 4000);
+		return () => clearInterval(id);
+	}, [slides.length]);
 
 	return (
-		<div
-			className="relative mx-auto mt-30 flex max-w-[1700px] items-end justify-center overflow-visible"
-			onMouseEnter={() => setPaused(true)}
-			onMouseLeave={() => setPaused(false)}
-			role="region"
-			aria-roledescription="carousel"
-			aria-label="Product previews"
-		>
-			{/* Left preview (90% scale, slightly behind) */}
-			<Slide
-				aria-hidden
-				className={`${baseWidths} pointer-events-none -mr-10 hidden translate-y-4 scale-[0.9] blur-[1px] sm:block opacity-60 z-0 transition-[transform,opacity,filter] duration-700 ease-out will-change-transform`}
-				src={left.src}
-				alt={left.alt}
-			/>
+		<div className="relative mx-auto max-w-[300px] overflow-visible">
+			{/* Sizer to reserve layout space (matches center slide size) */}
+			<div className={`${baseWidths} aspect-[16/9] invisible`} />
 
-			{/* Center main image (100%) */}
-			<Slide
-				className={`${baseWidths} z-10 shadow-sm ring-1 ring-black/5 scale-150 transition-transform duration-700 ease-out will-change-transform`}
-				src={center.src}
-				alt={center.alt}
-				priority
-			/>
+			{/* Animated slides layered absolutely; positions are derived from `current` */}
+			{slides.map((s, idx) => {
+				// Determine role of this slide relative to `current`
+				const isCenter = idx === current;
+				const isLeft = idx === (current + slides.length - 1) % slides.length; // previous
+				const isRight = idx === (current + 1) % slides.length; // next
 
-			{/* Right preview (90% scale, slightly behind) */}
-			<Slide
-				aria-hidden
-				className={`${baseWidths} pointer-events-none -ml-10 hidden translate-y-4 scale-[0.9] blur-[1px] sm:block opacity-60 z-0 transition-[transform,opacity,filter] duration-700 ease-out will-change-transform`}
-				src={right.src}
-				alt={right.alt}
-			/>
+				// Base transition styles so transforms/filters/opacity animate smoothly
+				const transition =
+					"transition-all duration-700 ease-in-out will-change-transform will-change-filter";
+
+				let posClasses = "";
+				if (isCenter) {
+					posClasses = [
+						"z-10 shadow-sm ring-1 ring-black/5 scale-50",
+						"left-1/2 -translate-x-1/2 top-0",
+					].join(" ");
+				} else if (isLeft) {
+					posClasses = [
+						"pointer-events-none opacity-60 z-0 scale-30 blur-[1px]",
+						"hidden sm:block",
+						"left-1/2 top-0 translate-y-4 translate-x-[-75%]",
+					].join(" ");
+				} else if (isRight) {
+					posClasses = [
+						"pointer-events-none opacity-60 z-0 scale-30 blur-[1px]",
+						"hidden sm:block",
+						"left-1/2 top-0 translate-y-4 translate-x-[-25%]",
+					].join(" ");
+				} else {
+					// Not visible (shouldn't happen with 3 slides), keep it offscreen
+					posClasses = "opacity-0 pointer-events-none left-1/2 -translate-x-1/2 top-0";
+				}
+
+				return (
+					<Slide
+						key={s.src}
+						className={[
+							baseWidths,
+							transition,
+							"absolute",
+							posClasses,
+						].join(" ")}
+						src={s.src}
+						alt={s.alt}
+						priority={isCenter}
+						aria-hidden={!isCenter}
+					/>
+				);
+			})}
 		</div>
 	);
 }
@@ -73,7 +84,7 @@ export default function HeroCarousel() {
 function Slide({ className = "", src, alt, priority, ...props }: React.ComponentProps<"div"> & { src: string; alt: string; priority?: boolean }) {
 	return (
 		<div
-			className={`relative aspect-[16/9] overflow-hidden rounded-2xl border bg-card ${className}`}
+			className={`aspect-[16/9] overflow-hidden rounded-2xl border bg-card ${className}`}
 			{...props}
 		>
 			<Image
