@@ -8,28 +8,31 @@ export default function HeroCarousel() {
 		{ src: "/PastAud.png", alt: "Past audits view" },
 	];
 
+	const baseWidths =
+	  "w-[320px] sm:w-[560px] md:w-[880px] lg:w-[1180px] xl:w-[1320px] 2xl:w-[1400px]";
+
 	return (
-		<div className="relative mx-auto flex max-w-[1700px] items-end justify-center">
-			{/* Left blurred preview */}
+		<div className="relative mx-auto mt-30 flex max-w-[1700px] items-end justify-center overflow-visible">
+			{/* Left preview (90% scale, slightly behind) */}
 			<Slide
 				aria-hidden
-				className="pointer-events-none -mr-14 hidden translate-y-6 scale-[1] blur-[1px] sm:block opacity-60 max-w-[1500px]"
+				className={`${baseWidths} pointer-events-none -mr-10 hidden translate-y-4 scale-[0.9] blur-[1px] sm:block opacity-60 z-0`}
 				src={slides[1].src}
 				alt={slides[1].alt}
 			/>
 
-			{/* Center main image */}
+			{/* Center main image (100%) */}
 			<Slide
-				className="z-10 w-[150vw] max-w-[1500px] shadow-sm ring-1 ring-black/5"
+				className={`${baseWidths} z-10 shadow-sm ring-1 ring-black/5 scale-150`}
 				src={slides[0].src}
 				alt={slides[0].alt}
 				priority
 			/>
 
-			{/* Right blurred preview */}
+			{/* Right preview (90% scale, slightly behind) */}
 			<Slide
 				aria-hidden
-				className="pointer-events-none -ml-14 hidden translate-y-6 scale-[1] blur-[1px] sm:block opacity-60 max-w-[1500px]"
+				className={`${baseWidths} pointer-events-none -ml-10 hidden translate-y-4 scale-[0.9] blur-[1px] sm:block opacity-60 z-0`}
 				src={slides[2].src}
 				alt={slides[2].alt}
 			/>
@@ -40,18 +43,17 @@ export default function HeroCarousel() {
 function Slide({ className = "", src, alt, priority, ...props }: React.ComponentProps<"div"> & { src: string; alt: string; priority?: boolean }) {
 	return (
 		<div
-			className={`relative aspect-[16/9] w-[100vw] max-w-[1900px] overflow-hidden rounded-2xl border bg-card ${className}`}
+			className={`relative aspect-[16/9] overflow-hidden rounded-2xl border bg-card ${className}`}
 			{...props}
 		>
 			<Image
 				src={src}
 				alt={alt}
-				width={1900}
-				height={1069}
+				width={1400}
+				height={788}
 				priority={priority}
-				sizes="(min-width: 1700px) 1500px, (min-width: 768px) 88vw, 95vw"
+				sizes="(min-width:1536px) 1400px, (min-width:1280px) 1320px, (min-width:1024px) 1180px, (min-width:768px) 880px, (min-width:640px) 560px, 320px"
 				className="h-full w-full object-cover"
-				// Next.js will optimize to the requested dimensions so all three are consistent
 				quality={90}
 			/>
 		</div>
