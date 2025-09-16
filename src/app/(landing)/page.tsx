@@ -25,8 +25,8 @@ export default function Home() {
       <OpenAuditAction />
       <Research />
       <PricingSection />
-      <About />
       <Contact />
+      <About />
       <Footer />
     </>
   );

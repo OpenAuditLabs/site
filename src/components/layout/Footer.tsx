@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer
       aria-label="site-footer"
-      className="relative border-t border-border/60 bg-gradient-to-br from-background via-background to-muted/30"
+      className="relative border-t border-border/60 bg-primary"
     >
       {/* Subtle backdrop pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.05),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_120%,rgba(80,200,160,0.15),transparent_60%)]" />

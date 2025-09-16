@@ -24,7 +24,7 @@ export default function Navbar() {
   return (
     <nav
       aria-label="site-navigation"
-      className="block sticky top-0 z-50 w-full bg-background border-b border-border"
+      className="block sticky top-0 z-50 w-full bg-background/50 border-b border-border backdrop-blur-sm"
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="relative flex items-center justify-between">
