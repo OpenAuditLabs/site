@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default function HeroCarousel() {
 	const slides = [
@@ -55,13 +56,13 @@ export default function HeroCarousel() {
 					].join(" ");
 				} else if (isLeft) {
 					posClasses = [
-						"pointer-events-none opacity-60 z-0 scale-30 blur-[1px]",
+						"opacity-60 z-0 scale-30 blur-[1px] cursor-pointer",
 						"hidden sm:block",
 						"left-1/2 top-0 translate-y-4 translate-x-[-75%]",
 					].join(" ");
 				} else if (isRight) {
 					posClasses = [
-						"pointer-events-none opacity-60 z-0 scale-30 blur-[1px]",
+						"opacity-60 z-0 scale-30 blur-[1px] cursor-pointer",
 						"hidden sm:block",
 						"left-1/2 top-0 translate-y-4 translate-x-[-25%]",
 					].join(" ");
@@ -83,9 +84,32 @@ export default function HeroCarousel() {
 						alt={s.alt}
 						priority={isCenter}
 						aria-hidden={!isCenter}
+						onClick={() => {
+							if (!isCenter) setCurrent(idx);
+						}}
 					/>
 				);
 			})}
+
+			{/* Controls */}
+			<div className="mt-3 flex items-center justify-center gap-3">
+				<Button
+					variant="outline"
+					size="sm"
+					aria-label="Previous slide"
+					onClick={() => setCurrent((c) => (c + slides.length - 1) % slides.length)}
+				>
+					Prev
+				</Button>
+				<Button
+					variant="outline"
+					size="sm"
+					aria-label="Next slide"
+					onClick={() => setCurrent((c) => (c + 1) % slides.length)}
+				>
+					Next
+				</Button>
+			</div>
 		</div>
 	);
 }
