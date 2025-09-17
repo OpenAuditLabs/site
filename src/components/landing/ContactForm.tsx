@@ -15,8 +15,8 @@ export default function ContactForm(): React.JSX.Element {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
-    message: "",
+  company: "",
+  projectDetails: "",
   });
 
   function onInputChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -28,7 +28,7 @@ export default function ContactForm(): React.JSX.Element {
     if (state?.ok) {
       // Reset the form inputs on success
       formRef.current?.reset();
-      setFormValues({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+  setFormValues({ firstName: "", lastName: "", email: "", company: "", projectDetails: "" });
       setShowSuccess(true);
       const t = setTimeout(() => setShowSuccess(false), 4000);
       return () => clearTimeout(t);
@@ -246,26 +246,26 @@ export default function ContactForm(): React.JSX.Element {
 
                 <div className="relative">
                   <input
-                    id="phone2"
-                    name="phone"
-                    type="tel"
+                    id="company2"
+                    name="company"
+                    type="text"
                     placeholder=" "
-                    aria-labelledby="label-phone2"
-                    autoComplete="tel"
+                    aria-labelledby="label-company2"
+                    autoComplete="organization"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                    value={formValues.phone}
+                    value={formValues.company}
                     onChange={onInputChange}
                   />
                   <label
-                    id="label-phone2"
-                    htmlFor="phone2"
+                    id="label-company2"
+                    htmlFor="company2"
                     className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
                   >
-                    Phone Number
+                    Company Name (optional)
                   </label>
-                  {state?.fieldErrors?.phone && (
+                  {state?.fieldErrors?.company && (
                     <p className="mt-1 text-xs text-red-500" role="alert">
-                      {state.fieldErrors.phone}
+                      {state.fieldErrors.company}
                     </p>
                   )}
                 </div>
@@ -273,32 +273,32 @@ export default function ContactForm(): React.JSX.Element {
 
               <div className="mt-6 relative">
                 <textarea
-                  id="message2"
-                  name="message"
+                  id="projectDetails2"
+                  name="projectDetails"
                   rows={4}
                   placeholder=" "
-                  aria-labelledby="label-message2"
-                  aria-describedby="message-help"
+                  aria-labelledby="label-projectDetails2"
+                  aria-describedby="projectDetails-help"
                   className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
-                  value={formValues.message}
+                  value={formValues.projectDetails}
                   onChange={onInputChange}
                 />
                 <label
-                  id="label-message2"
-                  htmlFor="message2"
+                  id="label-projectDetails2"
+                  htmlFor="projectDetails2"
                   className="absolute left-0 -top-2 text-xs text-muted-foreground peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:-top-2 peer-focus:text-xs transition-all"
                 >
-                  Message
+                  Project Details
                 </label>
                 <p
-                  id="message-help"
+                  id="projectDetails-help"
                   className="mt-2 text-xs text-muted-foreground"
                 >
-                  Write your message..
+                  Describe your project goals, scope, and timeline.
                 </p>
-                {state?.fieldErrors?.message && (
+                {state?.fieldErrors?.projectDetails && (
                   <p className="mt-1 text-xs text-red-500" role="alert">
-                    {state.fieldErrors.message}
+                    {state.fieldErrors.projectDetails}
                   </p>
                 )}
               </div>

@@ -7,7 +7,7 @@ export type ContactActionState = {
   ok: boolean;
   message: string;
   fieldErrors?: Partial<Record<
-    "firstName" | "lastName" | "email" | "phone" | "message",
+  "firstName" | "lastName" | "email" | "company" | "projectDetails",
     string
   >>;
 };
@@ -16,14 +16,17 @@ const contactSchema = z.object({
   firstName: z.string().trim().min(1, "First name is required"),
   lastName: z.string().trim().min(1, "Last name is required"),
   email: z.string().email("Please enter a valid email"),
-  phone: z
+  company: z
     .string()
     .trim()
     .optional()
-    .refine((v) => v === undefined || v === "" || v.length >= 7, {
-      message: "Please enter a valid phone number",
+    .refine((v) => v === undefined || v === "" || v.length >= 2, {
+      message: "Company name must be at least 2 characters",
     }),
-  message: z.string().trim().min(10, "Message must be at least 10 characters"),
+  projectDetails: z
+    .string()
+    .trim()
+    .min(10, "Project details must be at least 10 characters"),
 });
 
 export async function sendContactForm(
@@ -34,8 +37,8 @@ export async function sendContactForm(
     firstName: formData.get("firstName")?.toString() ?? "",
     lastName: formData.get("lastName")?.toString() ?? "",
     email: formData.get("email")?.toString() ?? "",
-    phone: formData.get("phone")?.toString() ?? "",
-    message: formData.get("message")?.toString() ?? "",
+  company: formData.get("company")?.toString() ?? "",
+  projectDetails: formData.get("projectDetails")?.toString() ?? "",
   };
 
   const parsed = contactSchema.safeParse(payload);
@@ -49,11 +52,19 @@ export async function sendContactForm(
         firstName: flat.fieldErrors.firstName?.[0],
         lastName: flat.fieldErrors.lastName?.[0],
         email: flat.fieldErrors.email?.[0],
-        phone: flat.fieldErrors.phone?.[0],
-        message: flat.fieldErrors.message?.[0],
+  company: flat.fieldErrors.company?.[0],
+  projectDetails: flat.fieldErrors.projectDetails?.[0],
       },
     };
   }
+
+  const name = `${parsed.data.firstName} ${parsed.data.lastName}`.trim();
+  const email = parsed.data.email;
+  const company = parsed.data.company?.trim() || "—";
+  const projectDetails = parsed.data.projectDetails.trim();
+
+  const truncate = (s: string, max: number) =>
+    s.length > max ? `${s.slice(0, max - 1)}…` : s;
 
   await fetch(process.env.DISCORD_WEBHOOK_URL as string, {
     method: "POST",
@@ -61,7 +72,27 @@ export async function sendContactForm(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      content: `New contact form submission:\n\`\`\`\n${JSON.stringify(parsed.data, null, 2)}\n\`\`\``,
+      content: null,
+      embeds: [
+        {
+          title: "New Contact Form Submission",
+          color: 0x4f46e5, // Indigo-600
+          timestamp: (() => {
+            const now = new Date();
+            // Get UTC time, then add 6 hours
+            const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
+            const plus6 = new Date(utcMs + 6 * 60 * 60 * 1000);
+            return plus6.toISOString();
+          })(),
+          fields: [
+            { name: "Name", value: name || "—", inline: true },
+            { name: "Email", value: email || "—", inline: true },
+            { name: "Company Name", value: company, inline: false },
+            { name: "Project Details", value: truncate(projectDetails, 1024), inline: false },
+          ],
+        },
+      ],
+      allowed_mentions: { parse: [] },
     }),
   });
 
