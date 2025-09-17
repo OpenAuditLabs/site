@@ -14,18 +14,27 @@ export default function HeroCarousel() {
 
 	// Track the center slide index and auto-rotate
 	const [current, setCurrent] = useState(0);
+  // Pause rotation on hover
+  const [paused, setPaused] = useState(false);
 
 	useEffect(() => {
+    if (paused) return;
 		const id = setInterval(() => {
 			setCurrent((c) => (c + 1) % slides.length);
 		}, 4000);
 		return () => clearInterval(id);
-	}, [slides.length]);
+	}, [slides.length, paused]);
 
 	return (
-		<div className="relative mx-auto max-w-[300px] overflow-visible">
-			{/* Sizer to reserve layout space (matches center slide size) */}
-			<div className={`${baseWidths} aspect-[16/9] invisible`} />
+		<div
+        className="relative mx-auto max-w-[300px] overflow-visible"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+			{/* Sizer to reserve layout space (matches scaled center slide height) */}
+			<div
+				className={`${baseWidths} invisible h-[150px] sm:h-[250px] md:h-[350px] lg:h-[450px] xl:h-[530px] 2xl:h-[600px]`}
+			/>
 
 			{/* Animated slides layered absolutely; positions are derived from `current` */}
 			{slides.map((s, idx) => {
