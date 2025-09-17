@@ -1,5 +1,6 @@
 "use server";
 
+import { col } from "motion/react-client";
 import { z } from "zod";
 
 
@@ -68,9 +69,10 @@ export async function sendContactForm(
 
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) {
+    console.error("DISCORD_WEBHOOK_URL is not set in environment");
     return {
       ok: false,
-      message: "Discord webhook URL is not configured. Please set DISCORD_WEBHOOK_URL in your environment.",
+      message: "We couldn't send your message right now. Please try again later.",
     };
   }
 

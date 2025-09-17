@@ -150,7 +150,7 @@ export default function TermsOfServicePage(): React.JSX.Element {
             changes become effective constitutes your acceptance of the updated Terms.
           </p>
 
-          <h2 id="contact" className="text-xl font-semibold">16. Contact Us</h2>
+          <h2 id="contact" className="scroll-mt-24 text-xl font-semibold">16. Contact Us</h2>
           <p>
             If you have any questions about these Terms or the Services, please contact us at
             <a className="underline decoration-dotted underline-offset-4" href="mailto:demo@gmail.com"> demo@gmail.com</a>.

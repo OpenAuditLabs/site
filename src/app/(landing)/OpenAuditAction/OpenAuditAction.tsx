@@ -10,7 +10,7 @@ import {
 
 export default function OpenAuditAction(): React.ReactElement {
   return (
-    <section id="open-audit-action" className="max-w-6xl mx-auto py-12 px-6">
+  <section id="open-audit-action" className="scroll-mt-24 max-w-6xl mx-auto py-12 px-6">
       <div className="px-6">
         <div className="text-center">
           <h2

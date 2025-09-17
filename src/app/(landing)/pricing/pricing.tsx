@@ -60,7 +60,7 @@ export default function PricingSection() {
     <section
       id="pricing"
       aria-labelledby="pricing-heading"
-      className="relative overflow-hidden py-16 sm:py-20"
+    className="scroll-mt-24 relative overflow-hidden py-16 sm:py-20"
     >
       <div className="max-w-6xl mx-auto py-12 px-6">
         <div className="px-6">
