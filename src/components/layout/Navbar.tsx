@@ -43,24 +43,24 @@ export default function Navbar() {
           <div className="flex items-center space-x-3">
             {/* Desktop group: moves to the right of the navbar */}
             <div className="hidden md:flex items-center space-x-6">
-              <a
-                href="#features"
+              <Link
+                href="/#features"
                 className="text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 Features
-              </a>
-              <a
-                href="#pricing"
+              </Link>
+              <Link
+                href="/#pricing"
                 className="text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 Pricing
-              </a>
-              <a
-                href="#contact"
+              </Link>
+              <Link
+                href="/#contact"
                 className="text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 Contact
-              </a>
+              </Link>
 
               <Button
                 asChild
@@ -146,27 +146,27 @@ export default function Navbar() {
         } w-full bg-background border-b border-border`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4 space-y-3">
-          <a
-            href="#features"
+          <Link
+            href="/#features"
             onClick={() => setOpen(false)}
             className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
           >
             Features
-          </a>
-          <a
-            href="#pricing"
+          </Link>
+          <Link
+            href="/#pricing"
             onClick={() => setOpen(false)}
             className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
           >
             Pricing
-          </a>
-          <a
-            href="#contact"
+          </Link>
+          <Link
+            href="/#contact"
             onClick={() => setOpen(false)}
             className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
           >
             Contact
-          </a>
+          </Link>
 
           <div className="pt-2">
             <Button

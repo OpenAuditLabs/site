@@ -35,7 +35,7 @@ export default function About() {
           A small group of engineers and designers.
         </p>
         <a
-          href="/contact"
+          href="#contact"
           className="inline-block rounded bg-primary text-primary-foreground px-5 py-2 text-sm font-medium hover:opacity-95"
         >
           Contact us

@@ -1,6 +1,4 @@
 import Hero from "@/components/landing/Hero";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
 import PricingSection from "./pricing/pricing";
 import About from "./about/about";
 import RevolutionaryFeatures from "./RevolutionaryFeatures/revolutionaryFeatures";
@@ -19,7 +17,6 @@ import Contact from "./contact/contact";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <Hero />
       <RevolutionaryFeatures />
       <OpenAuditAction />
@@ -27,7 +24,6 @@ export default function Home() {
       <PricingSection />
       <Contact />
       <About />
-      <Footer />
     </>
   );
 }
