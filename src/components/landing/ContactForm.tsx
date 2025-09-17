@@ -1,51 +1,39 @@
 "use client";
 
-import React from "react";
+import React, { useActionState, useEffect, useRef, useState, ChangeEvent } from "react";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Twitter, Linkedin, Github } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-
-const contactSchema = z.object({
-  firstName: z.string().trim().min(1, "First name is required"),
-  lastName: z.string().trim().min(1, "Last name is required"),
-  email: z.string().email("Please enter a valid email"),
-  phone: z
-    .string()
-    .trim()
-    .optional()
-    .refine((v) => v === undefined || v === "" || v.length >= 7, {
-      message: "Please enter a valid phone number",
-    }),
-  message: z.string().trim().min(10, "Message must be at least 10 characters"),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
+import Form from 'next/form';
+import { sendContactForm, type ContactActionState } from "@/app/actions/contact";
 
 export default function ContactForm(): React.JSX.Element {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      message: "",
-    },
+  const initialState: ContactActionState = { ok: false, message: "", fieldErrors: {} };
+  const [state, formAction, isPending] = useActionState(sendContactForm, initialState);
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
-  const onSubmit = async (data: ContactFormValues) => {
-    // Keep console.log to show what user has given input
-    // console.log("Contact form submitted:", data);
-    // Here you could call an API or show a success state. We'll reset the form for now.
-    reset();
-  };
+  function onInputChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  }
+
+  useEffect(() => {
+    if (state?.ok) {
+      // Reset the form inputs on success
+      formRef.current?.reset();
+      setFormValues({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+      setShowSuccess(true);
+      const t = setTimeout(() => setShowSuccess(false), 4000);
+      return () => clearTimeout(t);
+    }
+  }, [state?.ok]);
 
   return (
     <section aria-labelledby="contact-heading" className="w-full">
@@ -157,23 +145,36 @@ export default function ContactForm(): React.JSX.Element {
               </p>
             </div>
 
-            {/* Contact Form - with Zod validation and react-hook-form */}
-            <form
+            {/* Contact Form - Server Action + Zod validation on the server */}
+            <Form
               className="w-full"
-              onSubmit={handleSubmit(onSubmit)}
+              action={formAction}
               aria-label="Contact form"
               noValidate
+              ref={formRef}
             >
+              {showSuccess && (
+                <div className="mb-4 rounded-md border border-green-600/30 bg-green-600/10 px-3 py-2 text-sm text-green-700 dark:text-green-300">
+                  {state?.message || "Message sent successfully."}
+                </div>
+              )}
+              {!state?.ok && state?.message && (
+                <div className="mb-4 rounded-md border border-red-600/30 bg-red-600/10 px-3 py-2 text-sm text-red-700 dark:text-red-300">
+                  {state.message}
+                </div>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="relative">
                   <input
                     id="firstName"
-                    {...register("firstName")}
+                    name="firstName"
                     type="text"
                     placeholder=" "
                     aria-labelledby="label-firstName"
                     autoComplete="given-name"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                    value={formValues.firstName}
+                    onChange={onInputChange}
                   />
                   <label
                     id="label-firstName"
@@ -182,9 +183,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     First Name
                   </label>
-                  {errors.firstName && (
+                  {state?.fieldErrors?.firstName && (
                     <p className="mt-1 text-xs text-red-500" role="alert">
-                      {errors.firstName.message}
+                      {state.fieldErrors.firstName}
                     </p>
                   )}
                 </div>
@@ -192,12 +193,14 @@ export default function ContactForm(): React.JSX.Element {
                 <div className="relative">
                   <input
                     id="lastName"
-                    {...register("lastName")}
+                    name="lastName"
                     type="text"
                     placeholder=" "
                     aria-labelledby="label-lastName"
                     autoComplete="family-name"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                    value={formValues.lastName}
+                    onChange={onInputChange}
                   />
                   <label
                     id="label-lastName"
@@ -206,9 +209,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Last Name
                   </label>
-                  {errors.lastName && (
+                  {state?.fieldErrors?.lastName && (
                     <p className="mt-1 text-xs text-red-500" role="alert">
-                      {errors.lastName.message}
+                      {state.fieldErrors.lastName}
                     </p>
                   )}
                 </div>
@@ -218,12 +221,14 @@ export default function ContactForm(): React.JSX.Element {
                 <div className="relative">
                   <input
                     id="email2"
-                    {...register("email")}
+                    name="email"
                     type="email"
                     placeholder=" "
                     aria-labelledby="label-email2"
                     autoComplete="email"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                    value={formValues.email}
+                    onChange={onInputChange}
                   />
                   <label
                     id="label-email2"
@@ -232,9 +237,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Email
                   </label>
-                  {errors.email && (
+                  {state?.fieldErrors?.email && (
                     <p className="mt-1 text-xs text-red-500" role="alert">
-                      {errors.email.message}
+                      {state.fieldErrors.email}
                     </p>
                   )}
                 </div>
@@ -242,12 +247,14 @@ export default function ContactForm(): React.JSX.Element {
                 <div className="relative">
                   <input
                     id="phone2"
-                    {...register("phone")}
+                    name="phone"
                     type="tel"
                     placeholder=" "
                     aria-labelledby="label-phone2"
                     autoComplete="tel"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                    value={formValues.phone}
+                    onChange={onInputChange}
                   />
                   <label
                     id="label-phone2"
@@ -256,9 +263,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Phone Number
                   </label>
-                  {errors.phone && (
+                  {state?.fieldErrors?.phone && (
                     <p className="mt-1 text-xs text-red-500" role="alert">
-                      {errors.phone.message}
+                      {state.fieldErrors.phone}
                     </p>
                   )}
                 </div>
@@ -267,12 +274,14 @@ export default function ContactForm(): React.JSX.Element {
               <div className="mt-6 relative">
                 <textarea
                   id="message2"
-                  {...register("message")}
+                  name="message"
                   rows={4}
                   placeholder=" "
                   aria-labelledby="label-message2"
                   aria-describedby="message-help"
                   className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
+                  value={formValues.message}
+                  onChange={onInputChange}
                 />
                 <label
                   id="label-message2"
@@ -287,9 +296,9 @@ export default function ContactForm(): React.JSX.Element {
                 >
                   Write your message..
                 </p>
-                {errors.message && (
+                {state?.fieldErrors?.message && (
                   <p className="mt-1 text-xs text-red-500" role="alert">
-                    {errors.message.message}
+                    {state.fieldErrors.message}
                   </p>
                 )}
               </div>
@@ -299,11 +308,12 @@ export default function ContactForm(): React.JSX.Element {
                 <button
                   type="submit"
                   className="inline-flex items-center justify-center px-3 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-lg bg-primary text-primary-foreground shadow-lg hover:shadow-xl motion-safe:transform motion-safe:transition duration-200 motion-safe:hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 shrink-0 whitespace-nowrap"
+                  disabled={isPending}
                 >
-                  Send Message
+                  {isPending ? "Sending…" : "Send Message"}
                 </button>
               </div>
-            </form>
+            </Form>
           </div>
         </div>
       </div>
