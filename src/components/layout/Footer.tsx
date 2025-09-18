@@ -50,7 +50,6 @@ export default function Footer() {
                   { href: "/openauditlabs", label: "OpenAuditLabs" },
                   { href: "/audits", label: "audits" },
                   { href: "/#contact", label: "Contact" },
-                  { href: "/tos", label: "ToS" },
                 ].map((link) => (
                   <Link
                     key={link.href}
@@ -64,6 +63,17 @@ export default function Footer() {
                     </span>
                   </Link>
                 ))}
+                <button
+                  type="button"
+                  className="group flex items-center text-sm text-muted-foreground transition-all duration-300 ease-out hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
+                  aria-label="Terms of Service"
+                  onClick={() => setTosOpen(true)}
+                >
+                  <span className="relative">
+                    ToS
+                    <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-primary/60 transition-all duration-300 ease-out group-hover:w-full" />
+                  </span>
+                </button>
               </nav>
             </div>
 
