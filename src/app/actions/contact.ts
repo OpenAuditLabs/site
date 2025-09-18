@@ -1,6 +1,5 @@
 "use server";
 
-import { col } from "motion/react-client";
 import { z } from "zod";
 
 
@@ -118,12 +117,14 @@ export async function sendContactForm(
       } catch {}
       discordError = `Discord webhook failed: status ${res.status} ${res.statusText}. Body: ${bodyText}`;
     }
-  } catch (err: any) {
+  } catch (err) {
     clearTimeout(timeout);
-    if (err.name === "AbortError") {
+    if (err && typeof err === "object" && "name" in err && (err as { name?: string }).name === "AbortError") {
       discordError = "Discord webhook request timed out (5s).";
+    } else if (err && typeof err === "object" && "message" in err) {
+      discordError = `Discord webhook error: ${(err as { message?: string }).message || String(err)}`;
     } else {
-      discordError = `Discord webhook error: ${err?.message || String(err)}`;
+      discordError = `Discord webhook error: ${String(err)}`;
     }
   }
   if (discordError) {
