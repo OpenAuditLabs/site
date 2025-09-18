@@ -5,7 +5,7 @@ export default function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-hero-heading"
-      className="relative overflow-hidden py-16 sm:py-20"
+      className="scroll-mt-24 relative overflow-hidden py-16 sm:py-20"
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center">

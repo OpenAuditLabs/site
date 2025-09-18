@@ -26,9 +26,9 @@ export default function Footer() {
               </div>
 
               {/* Additional brand info */}
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <div className="h-2 w-2 rounded-full bg-primary/60" />
-                <span>Trusted by modern teams worldwide</span>
+              <div className="flex items-center text-sm text-muted-foreground">
+                <div className="h-2 rounded-full bg-primary/60" />
+                Trusted by modern teams worldwide
               </div>
             </div>
           </div>
@@ -42,11 +42,11 @@ export default function Footer() {
               </h4>
               <nav className="space-y-3">
                 {[
-                  { href: "/features", label: "Features" },
-                  { href: "/pricing", label: "Pricing" },
+                  { href: "/#features", label: "Features" },
+                  { href: "/#pricing", label: "Pricing" },
                   { href: "/openauditlabs", label: "OpenAuditLabs" },
                   { href: "/audits", label: "audits" },
-                  { href: "/contact", label: "Contact" },
+                  { href: "/#contact", label: "Contact" },
                   { href: "/tos", label: "ToS" },
                 ].map((link) => (
                   <Link
@@ -78,7 +78,7 @@ export default function Footer() {
                   { href: "https://www.youtube.com/", label: "YouTube" },
                   { href: "https://farcaster.com/", label: "Farcaster" },
                 ].map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     target="_blank"
@@ -103,7 +103,7 @@ export default function Footer() {
                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>
@@ -121,7 +121,7 @@ export default function Footer() {
                   },
                   { href: "/privacy", label: "Privacy Policy" },
                 ].map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
@@ -156,7 +156,7 @@ export default function Footer() {
                         />
                       </svg>
                     )}
-                  </a>
+                  </Link>
                 ))}
               </nav>
             </div>
@@ -183,7 +183,7 @@ export default function Footer() {
           {/* Social links or additional info */}
           <div className="flex items-center gap-1">
             <span className="text-xs text-muted-foreground/60">Built with</span>
-            <span className="text-xs text-primary/80 font-medium">:))</span>
+            <span className="text-xs text-muted-foreground/80 font-medium">:))</span>
             <span className="text-xs text-muted-foreground/60">
               for modern teams
             </span>
