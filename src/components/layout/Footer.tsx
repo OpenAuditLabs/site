@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import PrivacyPolicyModal from "@/components/common/PrivacyPolicyModal";
+import ToSModal from "@/components/common/ToSModal";
 
 export default function Footer() {
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [tosOpen, setTosOpen] = useState(false);
+  <ToSModal open={tosOpen} onClose={() => setTosOpen(false)} />
   return (
     <footer
       aria-label="site-footer"
