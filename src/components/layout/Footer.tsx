@@ -1,7 +1,10 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import Link from "next/link";
+import PrivacyPolicyModal from "@/components/common/PrivacyPolicyModal";
 
 export default function Footer() {
+  const [privacyOpen, setPrivacyOpen] = useState(false);
   return (
     <footer
       aria-label="site-footer"
@@ -114,50 +117,42 @@ export default function Footer() {
                 Resources
               </h4>
               <nav className="space-y-3">
-                {[
-                  {
-                    href: "https://www.researchgate.net/",
-                    label: "Research Gate",
-                  },
-                  { href: "/privacy", label: "Privacy Policy" },
-                ].map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={
-                      link.href.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    className="group flex items-center text-sm text-muted-foreground transition-all duration-300 ease-out hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
-                    aria-label={
-                      link.href.startsWith("http")
-                        ? `Open in new tab: ${link.label}`
-                        : link.label
-                    }
+                <button
+                  type="button"
+                  className="group flex items-center text-sm text-muted-foreground transition-all duration-300 ease-out hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
+                  aria-label="Privacy Policy"
+                  onClick={() => setPrivacyOpen(true)}
+                >
+                  <span className="relative">
+                    Privacy Policy
+                    <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-primary/60 transition-all duration-300 ease-out group-hover:w-full" />
+                  </span>
+                </button>
+                <Link
+                  href="https://www.researchgate.net/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center text-sm text-muted-foreground transition-all duration-300 ease-out hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
+                  aria-label="Open in new tab: Research Gate"
+                >
+                  <span className="relative">
+                    Research Gate
+                    <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-primary/60 transition-all duration-300 ease-out group-hover:w-full" />
+                  </span>
+                  <svg
+                    className="ml-1 h-3 w-3 opacity-0 transition-all duration-300 ease-out group-hover:opacity-60 group-hover:translate-x-0.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <span className="relative">
-                      {link.label}
-                      <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-primary/60 transition-all duration-300 ease-out group-hover:w-full" />
-                    </span>
-                    {link.href.startsWith("http") && (
-                      <svg
-                        className="ml-1 h-3 w-3 opacity-0 transition-all duration-300 ease-out group-hover:opacity-60 group-hover:translate-x-0.5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        />
-                      </svg>
-                    )}
-                  </Link>
-                ))}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </Link>
               </nav>
             </div>
           </div>
@@ -190,6 +185,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
     </footer>
   );
 }
