@@ -90,26 +90,7 @@ export default function HeroCarousel() {
 					/>
 				);
 			})}
-
-			{/* Controls */}
-			<div className="mt-3 flex items-center justify-center gap-3">
-				<Button
-					variant="outline"
-					size="sm"
-					aria-label="Previous slide"
-					onClick={() => setCurrent((c) => (c + slides.length - 1) % slides.length)}
-				>
-					Prev
-				</Button>
-				<Button
-					variant="outline"
-					size="sm"
-					aria-label="Next slide"
-					onClick={() => setCurrent((c) => (c + 1) % slides.length)}
-				>
-					Next
-				</Button>
-			</div>
+			
 		</div>
 	);
 }
