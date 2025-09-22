@@ -103,7 +103,7 @@ export default function Research({
                   </Button>
                 )
               ) : (
-                <Button asChild className="w-full sm:w-auto">
+                <Button asChild className="w-full sm:w-auto text-white">
                   <a
                     href="https://openauditlabs.com"
                     target="_blank"

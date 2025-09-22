@@ -7,11 +7,10 @@ import ToSModal from "@/components/common/ToSModal";
 export default function Footer() {
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [tosOpen, setTosOpen] = useState(false);
-  <ToSModal open={tosOpen} onClose={() => setTosOpen(false)} />
   return (
     <footer
       aria-label="site-footer"
-      className="relative border-t border-border/60 bg-primary"
+      className="relative border-t border-border/60 bg-primary text-white"
     >
       {/* Subtle backdrop pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.05),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_120%,rgba(80,200,160,0.15),transparent_60%)]" />
@@ -23,16 +22,16 @@ export default function Footer() {
           <div className="lg:col-span-5">
             <div className="space-y-6">
               <div>
-                <h3 className="text-3xl font-semibold tracking-tight bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-transparent">
+                <h3 className="text-3xl font-semibold tracking-tight text-white">
                   OpenAudit
                 </h3>
-                <p className="mt-4 text-base text-muted-foreground leading-relaxed max-w-md">
+                <p className="mt-4 text-base text-white leading-relaxed max-w-md">
                   AI-Driven Auditing Solution
                 </p>
               </div>
 
               {/* Additional brand info */}
-              <div className="flex items-center text-sm text-muted-foreground">
+              <div className="flex items-center text-sm text-white">
                 <div className="h-2 rounded-full bg-primary/60" />
                 Trusted by modern teams worldwide
               </div>
@@ -43,7 +42,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-8 lg:col-span-7 lg:grid-cols-3">
             {/* Quick Links column */}
             <div className="space-y-6">
-              <h4 className="text-sm font-semibold tracking-wide text-foreground/90 uppercase">
+              <h4 className="text-sm font-semibold tracking-wide text-white uppercase">
                 Quick Links
               </h4>
               <nav className="space-y-3">
@@ -57,7 +56,7 @@ export default function Footer() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="group flex items-center text-sm text-muted-foreground transition-all duration-300 ease-out hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
+                    className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
                     aria-label={link.label}
                   >
                     <span className="relative">
@@ -68,7 +67,7 @@ export default function Footer() {
                 ))}
                 <button
                   type="button"
-                  className="group flex items-center text-sm text-muted-foreground transition-all duration-300 ease-out hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
+                  className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
                   aria-label="Terms of Service"
                   onClick={() => setTosOpen(true)}
                 >
@@ -82,7 +81,7 @@ export default function Footer() {
 
             {/* Socials column */}
             <div className="space-y-6">
-              <h4 className="text-sm font-semibold tracking-wide text-foreground/90 uppercase">
+              <h4 className="text-sm font-semibold tracking-wide text-white uppercase">
                 Connect
               </h4>
               <nav className="space-y-3">
@@ -99,7 +98,7 @@ export default function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center text-sm text-muted-foreground transition-all duration-300 ease-out hover:text-foreground hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
+                    className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
                     aria-label={`Open in new tab: ${link.label}`}
                   >
                     <span className="relative">
@@ -126,13 +125,13 @@ export default function Footer() {
 
             {/* Resources column */}
             <div className="space-y-6 col-span-2 lg:col-span-1">
-              <h4 className="text-sm font-semibold tracking-wide text-foreground/90 uppercase">
+              <h4 className="text-sm font-semibold tracking-wide text-white uppercase">
                 Resources
               </h4>
               <nav className="space-y-3">
                 <button
                   type="button"
-                  className="group flex items-center text-sm text-muted-foreground transition-all duration-300 ease-out hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
+                  className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
                   aria-label="Privacy Policy"
                   onClick={() => setPrivacyOpen(true)}
                 >
@@ -145,7 +144,7 @@ export default function Footer() {
                   href="https://www.researchgate.net/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center text-sm text-muted-foreground transition-all duration-300 ease-out hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
+                  className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
                   aria-label="Open in new tab: Research Gate"
                 >
                   <span className="relative">
@@ -179,26 +178,27 @@ export default function Footer() {
         {/* Footer bottom */}
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-white">
               Copyright © {new Date().getFullYear()} OpenAudit
             </p>
-            <span className="hidden sm:block text-muted-foreground/40">•</span>
-            <p className="text-xs text-muted-foreground/80">
+            <span className="hidden sm:block text-white/80">•</span>
+            <p className="text-xs text-white/80">
               All rights reserved
             </p>
           </div>
 
           {/* Social links or additional info */}
           <div className="flex items-center gap-1">
-            <span className="text-xs text-muted-foreground/60">Built with</span>
-            <span className="text-xs text-muted-foreground/80 font-medium">:))</span>
-            <span className="text-xs text-muted-foreground/60">
+            <span className="text-xs text-white">Built with</span>
+            <span className="text-xs text-white font-medium">:))</span>
+            <span className="text-xs text-white">
               for modern teams
             </span>
           </div>
         </div>
       </div>
-      <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
-    </footer>
+  <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+  <ToSModal open={tosOpen} onClose={() => setTosOpen(false)} />
+  </footer>
   );
 }

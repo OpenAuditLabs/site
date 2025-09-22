@@ -64,7 +64,7 @@ export default function Navbar() {
 
               <Button
                 asChild
-                className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+                className="bg-primary text-white hover:bg-primary/90 font-medium"
               >
                 <Link href="/#open-audit-action">Get Started</Link>
               </Button>
