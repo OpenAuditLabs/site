@@ -36,7 +36,7 @@ export default function About() {
         </p>
         <a
           href="#contact"
-          className="inline-block text-white rounded bg-primary text-primary-foreground px-5 py-2 text-sm font-medium hover:opacity-95"
+          className="inline-block text-white rounded bg-primary px-5 py-2 text-sm font-medium hover:opacity-95"
         >
           Contact us
         </a>
