@@ -50,9 +50,9 @@ export default function ContactForm(): React.JSX.Element {
               className="object-cover"
               sizes="(min-width: 1024px) 40vw, 100vw"
             />
-            {/* Clean gradient overlay */}
-            <div className="absolute inset-0 bg-primary/85"></div>
           </div>
+
+          <div className="absolute inset-0 bg-accent/80"></div>
 
           {/* Content Overlay */}
           <div className="relative z-10 h-full flex flex-col justify-start p-6 sm:p-8 lg:p-10 text-primary-foreground min-h-[500px]">
@@ -307,7 +307,7 @@ export default function ContactForm(): React.JSX.Element {
                 <div className="flex-1" />
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center px-3 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-lg bg-primary text-primary-foreground shadow-lg hover:shadow-xl motion-safe:transform motion-safe:transition duration-200 motion-safe:hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 shrink-0 whitespace-nowrap"
+                  className="inline-flex text-white items-center justify-center px-3 py-1.5 md:px-6 md:py-2 text-sm md:text-base rounded-lg bg-primary text-primary-foreground shadow-lg hover:shadow-xl motion-safe:transform motion-safe:transition duration-200 motion-safe:hover:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 shrink-0 whitespace-nowrap"
                   disabled={isPending}
                 >
                   {isPending ? "Sending…" : "Send Message"}

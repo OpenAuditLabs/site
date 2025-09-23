@@ -97,12 +97,10 @@ const PricingCard = React.memo(function PricingCard({
       {label ? (
         <Badge
           variant="outline"
-          className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full px-3 py-1 text-sm font-medium border transition-all duration-300 z-20 backdrop-blur-sm shadow-sm ring-1 ring-background/80"
+          className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full px-3 py-1 text-sm font-medium border transition-all duration-300 z-20 backdrop-blur-sm shadow-sm ring-1 ring-background/80 text-white"
           style={{
             background: isBestValue ? "var(--chart-4)" : "var(--primary)",
-            color: isBestValue
-              ? "var(--on-chart-4)"
-              : "var(--primary-foreground)",
+            color: "white",
             borderColor: "var(--border)",
           }}
         >
@@ -153,7 +151,7 @@ const PricingCard = React.memo(function PricingCard({
 
       <CardFooter className="relative z-10 mt-auto">
         <Button
-          className="w-full font-semibold transition-all duration-300 group-hover:translate-y-[-1px] group-hover:shadow-sm"
+          className="w-full text-white font-semibold transition-all duration-300 group-hover:translate-y-[-1px] group-hover:shadow-sm"
           aria-label={`Start ${name}`}
         >
           Start {name}
