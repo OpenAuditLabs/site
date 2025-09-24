@@ -16,23 +16,15 @@ export default function Features({ features }: Props) {
           {features.map((f, i) => (
             <article
               key={f.id ?? i}
-              className="rounded-md p-4 shadow-sm"
-              style={{
-                backgroundColor: "var(--card)",
-                color: "var(--foreground)",
-              }}
+              className="rounded-md p-4 shadow-sm bg-card text-foreground"
             >
               <h3
-                className="text-lg font-semibold"
-                style={{ color: "var(--primary)" }}
+                className="text-lg font-semibold text-primary"
               >
                 {f.title}
               </h3>
               {f.description ? (
-                <p
-                  className="mt-2 text-sm"
-                  style={{ color: "var(--muted-foreground)" }}
-                >
+                <p className="mt-2 text-sm text-muted-foreground">
                   {f.description}
                 </p>
               ) : null}
