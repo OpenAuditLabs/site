@@ -84,18 +84,8 @@ export default function ContactForm(): React.JSX.Element {
                   className="flex items-center gap-4 text-sm lg:text-base underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
                 >
                   <Mail className="w-4 h-4 text-primary-foreground" />
-                  <span>demo@gmail.com</span>
+                  <span>demo@openaudit.com</span>
                 </a>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center w-5 h-5 text-primary-foreground mt-0.5">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div className="text-sm lg:text-base">
-                  <p>132 Dartmouth Street Boston,</p>
-                  <p>Massachusetts 02156 United States</p>
-                </div>
               </div>
             </address>
 
