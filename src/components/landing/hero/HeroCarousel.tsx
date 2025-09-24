@@ -108,7 +108,7 @@ function Slide({ className = "", src, alt, priority, ...props }: React.Component
 				height={788}
 				priority={priority}
 				sizes="(min-width:1536px) 1400px, (min-width:1280px) 1320px, (min-width:1024px) 1180px, (min-width:768px) 880px, (min-width:640px) 560px, 320px"
-				className="h-full w-full object-cover"
+				className="h-full w-full"
 				quality={90}
 			/>
 		</div>
