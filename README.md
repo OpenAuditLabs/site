@@ -82,51 +82,69 @@ This project follows Next.js best practices and modern development standards:
 
 Below is the main folder structure of the project:
 
+
 ```
 src/
-├── app/                    # Next.js App Router
+├── app/                        # Next.js App Router
 │   ├── favicon.ico
-│   ├── globals.css         # Global styles
-│   ├── layout.tsx          # Root layout
-│   └── page.tsx            # Homepage
+│   ├── layout.tsx               # Root layout
+│   ├── (landing)/               # Landing page and subpages
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── about/
+│   │   │   └── about.tsx
+│   │   ├── contact/
+│   │   │   └── contact.tsx
+│   │   ├── features/
+│   │   │   └── features.tsx
+│   │   ├── OpenAuditAction/
+│   │   │   └── OpenAuditAction.tsx
+│   │   ├── pricing/
+│   │   │   └── pricing.tsx
+│   │   ├── research/
+│   │   │   └── research.tsx
+│   │   └── RevolutionaryFeatures/
+│   │       └── revolutionaryFeatures.tsx
+│   ├── actions/
+│   │   └── contact.ts
+│   └── privacy/
+│       └── page.tsx
 │
-├── components/             # Reusable components
-│   ├── animations/         # Motion/animation components (client-side only)
-│   │   ├── FadeIn.tsx
-│   │   ├── StaggerAnimation.tsx
-│   │   └── index.ts
-│   │
-│   ├── layout/             # Layout components (SSR-friendly)
-│   │   ├── Header.tsx
+├── components/                 # Reusable components
+│   ├── common/
+│   │   ├── PrivacyPolicyModal.tsx
+│   │   ├── SectionHeading.tsx
+│   │   └── ToSModal.tsx
+│   ├── landing/
+│   │   ├── ContactForm.tsx
+│   │   ├── Hero.tsx
+│   │   ├── PricingTableCard.tsx
+│   │   ├── revFeaturesCard.tsx
+│   │   └── hero/
+│   │       └── HeroCarousel.tsx
+│   ├── layout/
 │   │   ├── Footer.tsx
-│   │   ├── Layout.tsx
-│   │   └── index.ts
-│   │
-│   ├── sections/           # Page sections (SSR-friendly)
-│   │   ├── HeroSection.tsx
-│   │   ├── ServicesSection.tsx
-│   │   ├── TechnologySection.tsx
-│   │   ├── PricingSection.tsx
-│   │   ├── ContactSection.tsx
-│   │   └── index.ts
-│   │
-│   └── ui/                 # Basic UI components (SSR-friendly)
-│       ├── Button.tsx
-│       ├── Badge.tsx
-│       ├── Card.tsx
-│       └── index.ts
+│   │   └── Navbar.tsx
+│   └── ui/
+│       ├── badge.tsx
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── form.tsx
+│       ├── input.tsx
+│       ├── label.tsx
+│       └── shadcn-io/
+│           └── code-editor/
+│               └── index.tsx
 │
-├── constants/              # Static data and configuration
-│   └── index.ts
-│
-├── hooks/                  # Custom React hooks (client-side only)
-│   └── index.ts
-│
-├── lib/                    # Utility functions
+├── lib/                        # Utility functions
 │   └── utils.ts
 │
-└── types/                  # TypeScript type definitions
-    └── index.ts
+├── providers/                  # Context providers
+│   └── theme-provider.tsx
+│
+└── styles/                     # CSS files
+   ├── animation.css
+   └── globals.css
 ```
 
 This structure ensures a clean and organized codebase, making it easier to maintain and scale the project.
