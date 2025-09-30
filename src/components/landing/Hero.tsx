@@ -20,7 +20,7 @@ export default function Hero() {
             Secure Your Smart Contracts with OpenAudit
           </h1>
         </div>
-        <div className="">
+        <div>
           <HeroCarousel />
         </div>
       </div>

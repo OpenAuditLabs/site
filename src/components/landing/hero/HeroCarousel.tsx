@@ -15,28 +15,14 @@ export default function HeroCarousel() {
 
 	// Track the center slide index and auto-rotate
 	const [current, setCurrent] = useState(0);
-  // Pause rotation on hover
-  const [paused, setPaused] = useState(false);
-
-	useEffect(() => {
-    if (paused) return;
-		const id = setInterval(() => {
-			setCurrent((c) => (c + 1) % slides.length);
-		}, 4000);
-		return () => clearInterval(id);
-	}, [slides.length, paused]);
-
+	// Pause rotation on hover
+	const [paused, setPaused] = useState(false);
 	return (
 		<div
-        className="relative mx-auto max-w-[300px] overflow-visible"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-			{/* Sizer to reserve layout space (matches scaled center slide height) */}
-			<div
-				className={`${baseWidths} invisible h-[150px] sm:h-[250px] md:h-[350px] lg:h-[450px] xl:h-[530px] 2xl:h-[600px]`}
-			/>
-
+			className="relative mx-auto max-w-[300px] overflow-visible"
+			onMouseEnter={() => setPaused(true)}
+			onMouseLeave={() => setPaused(false)}
+		>
 			{/* Animated slides layered absolutely; positions are derived from `current` */}
 			{slides.map((s, idx) => {
 				// Determine role of this slide relative to `current`
@@ -74,12 +60,7 @@ export default function HeroCarousel() {
 				return (
 					<Slide
 						key={s.src}
-						className={[
-							baseWidths,
-							transition,
-							"absolute",
-							posClasses,
-						].join(" ")}
+						className={[baseWidths, transition, "absolute", posClasses].join(" ")}
 						src={s.src}
 						alt={s.alt}
 						priority={isCenter}
@@ -90,7 +71,10 @@ export default function HeroCarousel() {
 					/>
 				);
 			})}
-			
+			{/* Sizer to reserve layout space (matches scaled center slide height) - moved below images to reduce gap */}
+			<div
+				className={`${baseWidths} invisible h-[150px] sm:h-[250px] md:h-[350px] lg:h-[450px] xl:h-[530px] 2xl:h-[600px]`}
+			/>
 		</div>
 	);
 }
