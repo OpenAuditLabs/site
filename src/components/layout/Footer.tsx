@@ -7,10 +7,11 @@ import ToSModal from "@/components/common/ToSModal";
 export default function Footer() {
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [tosOpen, setTosOpen] = useState(false);
+
   return (
     <footer
       aria-label="site-footer"
-      className="relative border-t border-border/60 bg-primary text-white"
+      className="relative border-t border-border bg-primary shadow-inner text-white"
     >
       {/* Subtle backdrop pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.05),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_120%,rgba(80,200,160,0.15),transparent_60%)]" />
@@ -22,16 +23,11 @@ export default function Footer() {
           <div className="lg:col-span-5">
             <div className="space-y-6">
               <div>
-                <h3 className="text-3xl font-semibold tracking-tight text-white">
-                  OpenAudit
-                </h3>
-                <p className="mt-4 text-base text-white leading-relaxed max-w-md">
-                  AI-Driven Auditing Solution
-                </p>
+                <h3 className="text-7xl font-semibold tracking-tight text-white">OpenAudit</h3>
+                <p className="mt-4 text-3xl text-white leading-relaxed max-w-md">AI-Driven Auditing Solution</p>
               </div>
-
               {/* Additional brand info */}
-              <div className="flex items-center text-sm text-white">
+              <div className="flex items-center text-xl text-white">
                 <div className="h-2 rounded-full bg-primary/60" />
                 Trusted by modern teams worldwide
               </div>
@@ -42,9 +38,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-8 lg:col-span-7 lg:grid-cols-3">
             {/* Quick Links column */}
             <div className="space-y-6">
-              <h4 className="text-sm font-semibold tracking-wide text-white uppercase">
-                Quick Links
-              </h4>
+              <h4 className="text-sm font-semibold tracking-wide text-white uppercase">Quick Links</h4>
               <nav className="space-y-3">
                 {[
                   { href: "/#features", label: "Features" },
@@ -56,18 +50,31 @@ export default function Footer() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
+                    className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5"
                     aria-label={link.label}
                   >
                     <span className="relative">
                       {link.label}
                       <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-primary/60 transition-all duration-300 ease-out group-hover:w-full" />
                     </span>
+                    <svg
+                      className="ml-1 h-3 w-3 opacity-0 transition-all duration-300 ease-out group-hover:opacity-60 group-hover:translate-x-0.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
                   </Link>
                 ))}
                 <button
                   type="button"
-                  className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
+                  className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
                   aria-label="Terms of Service"
                   onClick={() => setTosOpen(true)}
                 >
@@ -75,15 +82,25 @@ export default function Footer() {
                     ToS
                     <span className="absolute -bottom-0.5 left-0 h-0.5 w-0 bg-primary/60 transition-all duration-300 ease-out group-hover:w-full" />
                   </span>
+                  <svg
+                    className="ml-1 h-3 w-3 opacity-0 transition-all duration-300 ease-out group-hover:opacity-60 group-hover:translate-x-0.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
                 </button>
               </nav>
             </div>
-
             {/* Socials column */}
             <div className="space-y-6">
-              <h4 className="text-sm font-semibold tracking-wide text-white uppercase">
-                Connect
-              </h4>
+              <h4 className="text-sm font-semibold tracking-wide text-white uppercase">Connect</h4>
               <nav className="space-y-3">
                 {[
                   { href: "https://www.facebook.com/", label: "Facebook" },
@@ -122,12 +139,9 @@ export default function Footer() {
                 ))}
               </nav>
             </div>
-
             {/* Resources column */}
             <div className="space-y-6 col-span-2 lg:col-span-1">
-              <h4 className="text-sm font-semibold tracking-wide text-white uppercase">
-                Resources
-              </h4>
+              <h4 className="text-sm font-semibold tracking-wide text-white uppercase">Resources</h4>
               <nav className="space-y-3">
                 <button
                   type="button"
@@ -169,36 +183,27 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
         {/* Elegant divider with gradient */}
         <div className="mt-16 mb-8">
           <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </div>
-
         {/* Footer bottom */}
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-4">
-            <p className="text-sm text-white">
-              Copyright © {new Date().getFullYear()} OpenAudit
-            </p>
+            <p className="text-sm text-white">Copyright © {new Date().getFullYear()} OpenAudit</p>
             <span className="hidden sm:block text-white/80">•</span>
-            <p className="text-xs text-white/80">
-              All rights reserved
-            </p>
+            <p className="text-xs text-white/80">All rights reserved</p>
           </div>
-
           {/* Social links or additional info */}
           <div className="flex items-center gap-1">
             <span className="text-xs text-white">Built with</span>
             <span className="text-xs text-white font-medium">:))</span>
-            <span className="text-xs text-white">
-              for modern teams
-            </span>
+            <span className="text-xs text-white">for modern teams</span>
           </div>
         </div>
       </div>
-  <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
-  <ToSModal open={tosOpen} onClose={() => setTosOpen(false)} />
-  </footer>
+      <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+      <ToSModal open={tosOpen} onClose={() => setTosOpen(false)} />
+    </footer>
   );
 }
