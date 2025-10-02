@@ -13,10 +13,19 @@ export default function HeroCarousel() {
 	const baseWidths =
 	  "w-[320px] sm:w-[560px] md:w-[880px] lg:w-[1180px] xl:w-[1320px] 2xl:w-[1400px]";
 
-	// Track the center slide index and auto-rotate
-	const [current, setCurrent] = useState(0);
-	// Pause rotation on hover
-	const [paused, setPaused] = useState(false);
+		// Track the center slide index and auto-rotate
+		const [current, setCurrent] = useState(0);
+		// Pause rotation on hover
+		const [paused, setPaused] = useState(false);
+
+		// Auto-rotate carousel every 3 seconds unless paused
+		useEffect(() => {
+			if (paused) return;
+			const interval = setInterval(() => {
+				setCurrent((prev) => (prev + 1) % slides.length);
+			}, 3000);
+			return () => clearInterval(interval);
+		}, [paused, slides.length]);
 	return (
 		<div
 			className="relative mx-auto max-w-[300px] overflow-visible"
