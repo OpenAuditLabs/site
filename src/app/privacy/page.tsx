@@ -157,7 +157,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
           <p>
             If you have questions, requests, or complaints about this Privacy Policy or our
             data practices, please contact us at
-            <a className="underline decoration-dotted underline-offset-4" href="mailto:demo@gmail.com"> demo@gmail.com</a>.
+            <a className="underline decoration-dotted underline-offset-4" href="mailto:privacy@openaudits.xyz"> privacy@openaudits.xyz</a>.
           </p>
         </div>
       </section>
