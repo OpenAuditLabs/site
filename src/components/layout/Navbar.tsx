@@ -36,15 +36,14 @@ export default function Navbar() {
       aria-label="site-navigation"
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
     >
-      <div 
-        className={`transition-all duration-500 ease-in-out ${
-          isScrolled 
-            ? 'mx-4 mt-3 rounded-2xl bg-background/80 backdrop-blur-md border border-border/50 shadow-lg' 
-            : 'mx-0 mt-0 rounded-none bg-background/50 backdrop-blur-sm border-b border-border'
-        }`}
-      >
-        <div className={`transition-all duration-500 ease-in-out ${
-          isScrolled ? 'max-w-4xl mx-auto px-4 py-3' : 'max-w-7xl mx-auto px-6 py-4'
+            <div
+              className={`mx-4 mt-3 rounded-2xl transition-all duration-500 ease-in-out ${
+                isScrolled
+                  ? 'bg-background/80 backdrop-blur-md border border-border/50 shadow-lg'
+                  : 'bg-background/50 backdrop-blur-sm border-b border-transparent'
+              }`}
+            >        <div className={`max-w-7xl mx-auto transition-all duration-500 ease-in-out ${
+          isScrolled ? 'px-4 py-3' : 'px-6 py-4'
         }`}>
           <div className="relative flex items-center justify-between">
             {/* Left: Logo */}
