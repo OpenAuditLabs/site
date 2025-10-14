@@ -30,7 +30,103 @@ export default function HeroCarousel() {
 			className="relative mx-auto max-w-[300px] overflow-visible"
 			onMouseEnter={() => setPaused(true)}
 			onMouseLeave={() => setPaused(false)}
+			role="region"
+			aria-roledescription="carousel"
 		>
+			<h2 className="sr-only">OpenAudit Feature Carousel</h2>
+
+			{/* Carousel controls */}
+			<div className="absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 justify-between px-4">
+				<button
+					className="rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+					aria-label="Previous slide"
+					onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="h-6 w-6"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M15.75 19.5L8.25 12l7.5-7.5"
+						/>
+					</svg>
+				</button>
+				<button
+					className="rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+					aria-label="Next slide"
+					onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth={1.5}
+						stroke="currentColor"
+						className="h-6 w-6"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d="M8.25 4.5l7.5 7.5-7.5 7.5"
+						/>
+					</svg>
+				</button>
+			</div>
+
+			{/* Slide indicators and Play/Pause button */}
+			<div className="absolute inset-x-0 bottom-4 z-20 flex justify-center space-x-2">
+				<div role="group" aria-label="Carousel slide controls" className="flex space-x-2">
+					{slides.map((_, idx) => (
+						<button
+							key={idx}
+							className={`h-2 w-2 rounded-full ${idx === current ? "bg-white" : "bg-white/50"} focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black`}
+							aria-label={`Go to slide ${idx + 1}`}
+							aria-current={idx === current ? "true" : "false"}
+							onClick={() => setCurrent(idx)}
+						/>
+					))}
+				</div>
+				<button
+					className="rounded-full bg-black/50 p-1 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+					aria-label={paused ? "Play carousel" : "Pause carousel"}
+					onClick={() => setPaused((prev) => !prev)}
+				>
+					{paused ? (
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							className="h-4 w-4"
+						>
+							<path
+								fillRule="evenodd"
+								d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.47 1.45 2.47 2.973v9.349c0 1.523-.973 2.8-2.47 2.973a47.745 47.745 0 01-11.36 0c-1.497-.174-2.47-1.45-2.47-2.973V5.55c0-1.523.973-2.8 2.47-2.973z"
+								clipRule="evenodd"
+							/>
+						</svg>
+					) : (
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="currentColor"
+							className="h-4 w-4"
+						>
+							<path
+								fillRule="evenodd"
+								d="M4.5 5.653c0-1.426 1.529-2.38 2.872-1.667l11.55 6.468c1.295.723 1.295 2.518 0 3.24l-11.55 6.468c-1.343.713-2.872-.24-2.872-1.667V5.653z"
+								clipRule="evenodd"
+							/>
+						</svg>
+					)}
+				</button>
+			</div>
+
 			{/* Animated slides layered absolutely; positions are derived from `current` */}
 			{slides.map((s, idx) => {
 				// Determine role of this slide relative to `current`
@@ -73,8 +169,15 @@ export default function HeroCarousel() {
 						alt={s.alt}
 						priority={isCenter}
 						aria-hidden={!isCenter}
+						tabIndex={isCenter ? 0 : -1}
 						onClick={() => {
 							if (!isCenter) setCurrent(idx);
+						}}
+						onKeyDown={(e) => {
+							if (!isCenter && (e.key === "Enter" || e.key === " ")) {
+								e.preventDefault();
+								setCurrent(idx);
+							}
 						}}
 					/>
 				);
@@ -87,7 +190,7 @@ export default function HeroCarousel() {
 	);
 }
 
-function Slide({ className = "", src, alt, priority, ...props }: React.ComponentProps<"div"> & { src: string; alt: string; priority?: boolean }) {
+function Slide({ className = "", src, alt, priority, tabIndex, onKeyDown, ...props }: React.ComponentProps<"div"> & { src: string; alt: string; priority?: boolean }) {
 	return (
 		<div
 			className={`aspect-[16/9] overflow-hidden rounded-2xl border bg-card ${className}`}
