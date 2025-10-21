@@ -11,24 +11,11 @@ export default function ContactForm(): React.JSX.Element {
   const [state, formAction, isPending] = useActionState(sendContactForm, initialState);
   const formRef = useRef<HTMLFormElement | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [formValues, setFormValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-  company: "",
-  projectDetails: "",
-  });
-
-  function onInputChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
-  }
 
   useEffect(() => {
     if (state?.ok) {
       // Reset the form inputs on success
       formRef.current?.reset();
-  setFormValues({ firstName: "", lastName: "", email: "", company: "", projectDetails: "" });
       setShowSuccess(true);
       const t = setTimeout(() => setShowSuccess(false), 4000);
       return () => clearTimeout(t);
@@ -163,8 +150,6 @@ export default function ContactForm(): React.JSX.Element {
                     aria-labelledby="label-firstName"
                     autoComplete="given-name"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                    value={formValues.firstName}
-                    onChange={onInputChange}
                   />
                   <label
                     id="label-firstName"
@@ -189,8 +174,6 @@ export default function ContactForm(): React.JSX.Element {
                     aria-labelledby="label-lastName"
                     autoComplete="family-name"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                    value={formValues.lastName}
-                    onChange={onInputChange}
                   />
                   <label
                     id="label-lastName"
@@ -217,8 +200,6 @@ export default function ContactForm(): React.JSX.Element {
                     aria-labelledby="label-email2"
                     autoComplete="email"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                    value={formValues.email}
-                    onChange={onInputChange}
                   />
                   <label
                     id="label-email2"
@@ -243,8 +224,6 @@ export default function ContactForm(): React.JSX.Element {
                     aria-labelledby="label-company2"
                     autoComplete="organization"
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-                    value={formValues.company}
-                    onChange={onInputChange}
                   />
                   <label
                     id="label-company2"
@@ -270,8 +249,6 @@ export default function ContactForm(): React.JSX.Element {
                   aria-labelledby="label-projectDetails2"
                   aria-describedby="projectDetails-help"
                   className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
-                  value={formValues.projectDetails}
-                  onChange={onInputChange}
                 />
                 <label
                   id="label-projectDetails2"
