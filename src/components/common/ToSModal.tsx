@@ -1,7 +1,12 @@
 "use client";
 import React from "react";
 
-export default function ToSModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+interface ToSModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function ToSModal({ open, onClose }: ToSModalProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     if (open) {
@@ -45,6 +50,7 @@ export default function ToSModal({ open, onClose }: { open: boolean; onClose: ()
         ref={modalRef}
         role="dialog"
         aria-modal="true"
+        aria-labelledby="tos-modal-title"
         tabIndex={-1}
         className="bg-background rounded-xl shadow-xl max-w-2xl w-full p-8 overflow-y-auto max-h-[90vh] relative"
       >
@@ -55,11 +61,11 @@ export default function ToSModal({ open, onClose }: { open: boolean; onClose: ()
         >
           ×
         </button>
-        <h1 className="text-2xl font-bold mb-2">Terms of Service</h1>
+        <h1 id="tos-modal-title" className="text-2xl font-bold mb-2">Terms of Service</h1>
         <p className="mb-4 text-sm text-muted-foreground">Last updated: September 17, 2025</p>
         <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:scroll-mt-24">
           <p>
-            These Terms of Service (&quot;Terms&quot;) govern your use of OpenAudit (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) websites, products, and services (collectively, the &quot;Services&quot;). By accessing or using the Services, you agree to these Terms. If you do not agree, do not use the Services.
+            These Terms of Service ("Terms") govern your use of OpenAudit ("we", "us", or "our") websites, products, and services (collectively, the "Services"). By accessing or using the Services, you agree to these Terms. If you do not agree, do not use the Services.
           </p>
           <h2 id="eligibility" className="text-xl font-semibold">1. Eligibility</h2>
           <p>
