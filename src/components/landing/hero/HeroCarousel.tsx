@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
 export default function HeroCarousel() {
@@ -16,6 +15,7 @@ export default function HeroCarousel() {
 		const [current, setCurrent] = useState(0);
 		// Pause rotation on hover
 		const [paused, setPaused] = useState(false);
+		const carouselRef = useRef<HTMLDivElement>(null);
 
 		// Auto-rotate carousel every 3 seconds unless paused
 		useEffect(() => {
@@ -25,13 +25,39 @@ export default function HeroCarousel() {
 			}, 3000);
 			return () => clearInterval(interval);
 		}, [paused, slides.length]);
+
+		// Focus management for current slide
+		useEffect(() => {
+			if (carouselRef.current) {
+				const currentSlideElement = carouselRef.current.querySelector<HTMLElement>(
+					`[data-slide-index="${current}"]`
+				);
+				if (currentSlideElement) {
+					currentSlideElement.focus();
+				}
+			}
+		}, [current]);
+
+		const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+			if (e.key === "ArrowLeft") {
+				e.preventDefault();
+				setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+			} else if (e.key === "ArrowRight") {
+				e.preventDefault();
+				setCurrent((prev) => (prev + 1) % slides.length);
+			}
+		};
+
 	return (
 		<div
 			className="relative mx-auto max-w-[300px] overflow-visible"
 			onMouseEnter={() => setPaused(true)}
 			onMouseLeave={() => setPaused(false)}
+			onKeyDown={handleKeyDown}
 			role="region"
 			aria-roledescription="carousel"
+			tabIndex={0} // Make the carousel focusable
+			ref={carouselRef}
 		>
 			<h2 className="sr-only">OpenAudit Feature Carousel</h2>
 
@@ -170,6 +196,9 @@ export default function HeroCarousel() {
 						priority={isCenter}
 						aria-hidden={!isCenter}
 						tabIndex={isCenter ? 0 : -1}
+						data-slide-index={idx}
+						role="group"
+						aria-label={`Slide ${idx + 1} of ${slides.length}: ${s.alt}`}
 						onClick={() => {
 							if (!isCenter) setCurrent(idx);
 						}}
