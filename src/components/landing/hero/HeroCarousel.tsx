@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
 export default function HeroCarousel() {
@@ -16,6 +15,7 @@ export default function HeroCarousel() {
 		const [current, setCurrent] = useState(0);
 		// Pause rotation on hover
 		const [paused, setPaused] = useState(false);
+		const carouselRef = useRef<HTMLDivElement>(null);
 
 		// Auto-rotate carousel every 3 seconds unless paused
 		useEffect(() => {
@@ -25,13 +25,44 @@ export default function HeroCarousel() {
 			}, 3000);
 			return () => clearInterval(interval);
 		}, [paused, slides.length]);
+
+
+
+		// helper to focus a slide by index
+		const focusSlide = (index: number) => {
+			if (!carouselRef.current) return;
+			const el = carouselRef.current.querySelector<HTMLElement>(`[data-slide-index="${index}"]`);
+			if (el) el.focus();
+		};
+
+		// When advancing/retreating slides from a button click or keyboard event
+		const goToSlide = (index: number) => {
+			// set state first
+			setCurrent(index);
+			// ensure DOM updated before focusing — use requestAnimationFrame or setTimeout 0
+			requestAnimationFrame(() => focusSlide(index));
+		};
+
+		const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+			if (e.key === "ArrowLeft") {
+				e.preventDefault();
+				goToSlide((current - 1 + slides.length) % slides.length);
+			} else if (e.key === "ArrowRight") {
+				e.preventDefault();
+				goToSlide((current + 1) % slides.length);
+			}
+		};
+
 	return (
 		<div
 			className="relative mx-auto max-w-[300px] overflow-visible"
 			onMouseEnter={() => setPaused(true)}
 			onMouseLeave={() => setPaused(false)}
+			onKeyDown={handleKeyDown}
 			role="region"
 			aria-roledescription="carousel"
+			tabIndex={0} // Make the carousel focusable
+			ref={carouselRef}
 		>
 			<h2 className="sr-only">OpenAudit Feature Carousel</h2>
 
@@ -40,7 +71,7 @@ export default function HeroCarousel() {
 				<button
 					className="rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
 					aria-label="Previous slide"
-					onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
+					onClick={() => goToSlide((current - 1 + slides.length) % slides.length)}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +91,7 @@ export default function HeroCarousel() {
 				<button
 					className="rounded-full bg-black/50 p-2 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
 					aria-label="Next slide"
-					onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
+					onClick={() => goToSlide((current + 1) % slides.length)}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +119,7 @@ export default function HeroCarousel() {
 							className={`h-2 w-2 rounded-full ${idx === current ? "bg-white" : "bg-white/50"} focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black`}
 							aria-label={`Go to slide ${idx + 1}`}
 							aria-current={idx === current ? "true" : "false"}
-							onClick={() => setCurrent(idx)}
+							onClick={() => goToSlide(idx)}
 						/>
 					))}
 				</div>
@@ -170,13 +201,16 @@ export default function HeroCarousel() {
 						priority={isCenter}
 						aria-hidden={!isCenter}
 						tabIndex={isCenter ? 0 : -1}
+						data-slide-index={idx}
+						role="group"
+						aria-label={`Slide ${idx + 1} of ${slides.length}: ${s.alt}`}
 						onClick={() => {
-							if (!isCenter) setCurrent(idx);
+							if (!isCenter) goToSlide(idx);
 						}}
 						onKeyDown={(e) => {
 							if (!isCenter && (e.key === "Enter" || e.key === " ")) {
 								e.preventDefault();
-								setCurrent(idx);
+								goToSlide(idx);
 							}
 						}}
 					/>
@@ -190,7 +224,7 @@ export default function HeroCarousel() {
 	);
 }
 
-function Slide({ className = "", src, alt, priority, tabIndex, onKeyDown, ...props }: React.ComponentProps<"div"> & { src: string; alt: string; priority?: boolean }) {
+function Slide({ className = "", src, alt, priority, ...props }: React.ComponentProps<"div"> & { src: string; alt: string; priority?: boolean }) {
 	return (
 		<div
 			className={`aspect-[16/9] overflow-hidden rounded-2xl border bg-card ${className}`}

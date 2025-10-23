@@ -8,11 +8,12 @@ interface ToSModalProps {
 
 export default function ToSModal({ open, onClose }: ToSModalProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
+  const focusableElementsSelector = `button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])`;
   React.useEffect(() => {
     if (open) {
       // Trap focus inside modal
       const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        focusableElementsSelector
       );
       const first = focusable?.[0];
       const last = focusable?.[focusable.length - 1];

@@ -70,6 +70,7 @@ export default function Navbar() {
                   className={`font-medium text-foreground hover:text-primary transition-colors ${
                     isScrolled ? 'text-xs' : 'text-sm'
                   }`}
+                  aria-label="Navigate to Features section"
                 >
                   Features
                 </Link>
@@ -78,6 +79,7 @@ export default function Navbar() {
                   className={`font-medium text-foreground hover:text-primary transition-colors ${
                     isScrolled ? 'text-xs' : 'text-sm'
                   }`}
+                  aria-label="Navigate to Pricing section"
                 >
                   Pricing
                 </Link>
@@ -86,6 +88,7 @@ export default function Navbar() {
                   className={`font-medium text-foreground hover:text-primary transition-colors ${
                     isScrolled ? 'text-xs' : 'text-sm'
                   }`}
+                  aria-label="Navigate to Contact section"
                 >
                   Contact
                 </Link>
@@ -96,7 +99,7 @@ export default function Navbar() {
                     isScrolled ? 'h-8 px-3 text-xs' : 'h-10 px-4 text-sm'
                   }`}
                 >
-                  <Link href="/#open-audit-action">Get Started</Link>
+                  <Link href="/#open-audit-action" aria-label="Get Started with OpenAudit">Get Started</Link>
                 </Button>
 
                 <Button
@@ -211,6 +214,7 @@ export default function Navbar() {
             href="/#features"
             onClick={() => setOpen(false)}
             className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
+            aria-label="Navigate to Features section"
           >
             Features
           </Link>
@@ -218,6 +222,7 @@ export default function Navbar() {
             href="/#pricing"
             onClick={() => setOpen(false)}
             className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
+            aria-label="Navigate to Pricing section"
           >
             Pricing
           </Link>
@@ -225,6 +230,7 @@ export default function Navbar() {
             href="/#contact"
             onClick={() => setOpen(false)}
             className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
+            aria-label="Navigate to Contact section"
           >
             Contact
           </Link>
@@ -234,7 +240,7 @@ export default function Navbar() {
               asChild
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
             >
-              <Link href="/#open-audit-action" onClick={() => setOpen(false)}>
+              <Link href="/#open-audit-action" onClick={() => setOpen(false)} aria-label="Get Started with OpenAudit">
                 Get Started
               </Link>
             </Button>
