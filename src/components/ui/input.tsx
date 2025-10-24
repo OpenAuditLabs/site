@@ -1,9 +1,9 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { CommonVariantProps } from "./common-props";
 
-function Input({ className, type, variant, size, ...props }: React.ComponentProps<"input"> & CommonVariantProps) {
+
+function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input
       type={type}
