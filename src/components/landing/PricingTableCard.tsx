@@ -108,10 +108,10 @@ const PricingCard = React.memo(function PricingCard({
         </Badge>
       ) : null}
 
-      <CardHeader className="relative z-10 items-center gap-2 pb-2">
+      <CardHeader className="relative z-10 items-center gap-2 pb-2 px-4 sm:px-6">
         <CardTitle
           id={`plan-${id}`}
-          className="text-center text-lg font-semibold tracking-tight"
+          className="text-center text-base sm:text-lg font-semibold tracking-tight"
           style={{ color: "var(--foreground)" }}
         >
           {name}
@@ -121,9 +121,9 @@ const PricingCard = React.memo(function PricingCard({
         ) : null}
       </CardHeader>
 
-      <CardContent className="relative z-10 text-center">
+      <CardContent className="relative z-10 text-center px-4 sm:px-6">
         <div
-          className="mb-1 text-3xl font-extrabold tracking-tight"
+          className="mb-1 text-2xl sm:text-3xl font-extrabold tracking-tight"
           style={{ color: "var(--foreground)" }}
         >
           {currencyFmt.format(price)}
