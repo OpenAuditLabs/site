@@ -43,7 +43,7 @@ export default function ToSModal({ open, onClose }: ToSModalProps) {
         document.body.style.overflow = '';
       };
     }
-  }, [open, onClose]);
+  }, [open, onClose, focusableElementsSelector]);
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
@@ -66,7 +66,7 @@ export default function ToSModal({ open, onClose }: ToSModalProps) {
         <p className="mb-4 text-sm text-muted-foreground">Last updated: September 17, 2025</p>
         <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:scroll-mt-24">
           <p>
-            These Terms of Service ("Terms") govern your use of OpenAudit ("we", "us", or "our") websites, products, and services (collectively, the "Services"). By accessing or using the Services, you agree to these Terms. If you do not agree, do not use the Services.
+            These Terms of Service (&quot;Terms&quot;) govern your use of OpenAudit (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) websites, products, and services (collectively, the &quot;Services&quot;). By accessing or using the Services, you agree to these Terms. If you do not agree, do not use the Services.
           </p>
           <h2 id="eligibility" className="text-xl font-semibold">1. Eligibility</h2>
           <p>
