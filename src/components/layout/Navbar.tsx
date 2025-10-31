@@ -5,13 +5,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Sun, Moon, Laptop } from "lucide-react";
 import { useTheme } from "next-themes";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showThemeOptions, setShowThemeOptions] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -24,10 +24,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-
-
-  return (
     <nav
       aria-label="site-navigation"
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
@@ -79,82 +75,7 @@ export default function Navbar() {
                 >
                   Pricing
                 </Link>
-                <div className="relative">
-                  <Button
-                    variant="ghost"
-                    size={isScrolled ? "sm" : "icon"}
-                    aria-label="Toggle theme"
-                    title="Toggle theme"
-                    className={`transition-all duration-300 ${
-                      isScrolled ? 'p-1.5' : 'p-2'
-                    }`}
-                    type="button"
-                    onClick={() => setShowThemeOptions((prev) => !prev)}
-                    disabled={!mounted}
-                    aria-disabled={!mounted}
-                  >
-                    {mounted ? (
-                      resolvedTheme === "dark" ? (
-                        <Moon className={`transition-all duration-300 ${
-                          isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                        }`} />
-                      ) : resolvedTheme === "light" ? (
-                        <Sun className={`transition-all duration-300 ${
-                          isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                        }`} />
-                      ) : (
-                        <Laptop className={`transition-all duration-300 ${
-                          isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                        }`} />
-                      )
-                    ) : (
-                      <Sun className={`opacity-0 transition-all duration-300 ${
-                        isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                      }`} />
-                    )}
-                    <span className="sr-only">Toggle theme</span>
-                  </Button>
-                  {showThemeOptions && (
-                    <div className={`absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-background ring-1 ring-black ring-opacity-5 focus:outline-none ${
-                      isScrolled ? 'text-xs' : 'text-sm'
-                    }`}>
-                      <div className="py-1">
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          onClick={() => {
-                            setTheme("light");
-                            setShowThemeOptions(false);
-                          }}
-                        >
-                          <Sun className="mr-2 h-4 w-4" />
-                          <span>Light</span>
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          onClick={() => {
-                            setTheme("dark");
-                            setShowThemeOptions(false);
-                          }}
-                        >
-                          <Moon className="mr-2 h-4 w-4" />
-                          <span>Dark</span>
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          onClick={() => {
-                            setTheme("system");
-                            setShowThemeOptions(false);
-                          }}
-                        >
-                          <Laptop className="mr-2 h-4 w-4" />
-                          <span>System</span>
-                        </Button>
-                      </div>
-                    </div>
-                  )}
+                  <ThemeToggle isScrolled={isScrolled} mounted={mounted} />
                 </div>
               </div>
 
@@ -183,83 +104,7 @@ export default function Navbar() {
                   )}
                 </button>
 
-                <div className="relative">
-                  <Button
-                    variant="ghost"
-                    size={isScrolled ? "sm" : "icon"}
-                    aria-label="Toggle theme"
-                    title="Toggle theme"
-                    className={`transition-all duration-300 ${
-                      isScrolled ? 'p-1.5' : 'p-2'
-                    }`}
-                    type="button"
-                    onClick={() => setShowThemeOptions((prev) => !prev)}
-                    disabled={!mounted}
-                    aria-disabled={!mounted}
-                  >
-                    {mounted ? (
-                      resolvedTheme === "dark" ? (
-                        <Moon className={`transition-all duration-300 ${
-                          isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                        }`} />
-                      ) : resolvedTheme === "light" ? (
-                        <Sun className={`transition-all duration-300 ${
-                          isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                        }`} />
-                      ) : (
-                        <Laptop className={`transition-all duration-300 ${
-                          isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                        }`} />
-                      )
-                    ) : (
-                      <Sun className={`opacity-0 transition-all duration-300 ${
-                        isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                      }`} />
-                    )}
-                    <span className="sr-only">Toggle theme</span>
-                  </Button>
-                  {showThemeOptions && (
-                    <div className={`absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-background ring-1 ring-black ring-opacity-5 focus:outline-none ${
-                      isScrolled ? 'text-xs' : 'text-sm'
-                    }`}>
-                      <div className="py-1">
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          onClick={() => {
-                            setTheme("light");
-                            setShowThemeOptions(false);
-                          }}
-                        >
-                          <Sun className="mr-2 h-4 w-4" />
-                          <span>Light</span>
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          onClick={() => {
-                            setTheme("dark");
-                            setShowThemeOptions(false);
-                          }}
-                        >
-                          <Moon className="mr-2 h-4 w-4" />
-                          <span>Dark</span>
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          onClick={() => {
-                            setTheme("system");
-                            setShowThemeOptions(false);
-                          }}
-                        >
-                          <Laptop className="mr-2 h-4 w-4" />
-                          <span>System</span>
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <ThemeToggle isScrolled={isScrolled} mounted={mounted} />
               </div>
             </div>
           </div>
