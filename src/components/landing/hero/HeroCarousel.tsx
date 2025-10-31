@@ -18,15 +18,16 @@ export default function HeroCarousel() {
 		// Pause rotation on hover
 		const [paused, setPaused] = useState(false);
 		const carouselRef = useRef<HTMLDivElement>(null);
+		const [autoplayEnabled, setAutoplayEnabled] = useState(true);
 
-		// Auto-rotate carousel every 3 seconds unless paused
+		// Auto-rotate carousel every 3 seconds unless paused or autoplay is disabled
 		useEffect(() => {
-			if (paused) return;
+			if (paused || !autoplayEnabled) return;
 			const interval = setInterval(() => {
 				setCurrent((prev) => (prev + 1) % slides.length);
 			}, 3000);
 			return () => clearInterval(interval);
-		}, [paused, slides.length]);
+		}, [paused, autoplayEnabled, slides.length]);
 
 
 
@@ -57,12 +58,13 @@ export default function HeroCarousel() {
 
 	return (
 		<div
-			className="relative mx-auto max-w-[300px] overflow-visible"
+			className="relative mx-auto max-w-[300px] overflow-visible focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black"
 			onMouseEnter={() => setPaused(true)}
 			onMouseLeave={() => setPaused(false)}
 			onKeyDown={handleKeyDown}
 			role="region"
 			aria-roledescription="carousel"
+			aria-live="polite"
 			tabIndex={0} // Make the carousel focusable
 			ref={carouselRef}
 		>
@@ -127,10 +129,10 @@ export default function HeroCarousel() {
 				</div>
 				<button
 					className="rounded-full bg-black/50 p-1 text-white hover:bg-black/75 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
-					aria-label={paused ? "Play carousel" : "Pause carousel"}
-					onClick={() => setPaused((prev) => !prev)}
+					aria-label={autoplayEnabled ? "Pause autoplay" : "Start autoplay"}
+					onClick={() => setAutoplayEnabled((prev) => !prev)}
 				>
-					{paused ? (
+					{autoplayEnabled ? (
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
