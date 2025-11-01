@@ -16,11 +16,11 @@ export default function ContactForm(): React.JSX.Element {
 
   const validateForm = (formData: FormData) => {
     const errors: Record<string, string> = {};
-    const firstName = formData.get("firstName") as string;
-    const lastName = formData.get("lastName") as string;
-    const email = formData.get("email") as string;
-    const projectDetails = formData.get("projectDetails") as string;
-    const honeypot = formData.get("hpField") as string;
+    const firstName = (formData.get("firstName") as string | null) ?? "";
+    const lastName = (formData.get("lastName") as string | null) ?? "";
+    const email = (formData.get("email") as string | null) ?? "";
+    const projectDetails = (formData.get("projectDetails") as string | null) ?? "";
+    const honeypot = (formData.get("hpField") as string | null) ?? "";
 
     if (!firstName.trim()) {
       errors.firstName = "First Name is required.";
