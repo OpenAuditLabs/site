@@ -22,6 +22,7 @@ export interface Plan {
   credits: number;
   badge?: string | null;
   features: string[];
+  featured?: boolean;
 }
 
 const currencyFmt = new Intl.NumberFormat('en-US', {
@@ -38,6 +39,7 @@ const PricingCard = React.memo(function PricingCard({
   credits,
   badge,
   features,
+  featured = false,
 }: Plan) {
   const perCredit = React.useMemo(() => {
     if (!isFinite(price) || credits <= 0) return "";
@@ -46,21 +48,22 @@ const PricingCard = React.memo(function PricingCard({
   }, [price, credits]);
 
   const { label, isBestValue, isMostPopular } = React.useMemo(() => {
-    const label = (badge ?? "").trim();
+    const effectiveBadge = featured ? "Best Value" : badge ?? "";
+    const label = effectiveBadge.trim();
     const norm = label.toLowerCase();
     return {
       label,
       isBestValue: norm.includes("best value"),
       isMostPopular: norm.includes("most popular"),
     };
-  }, [badge]);
+  }, [badge, featured]);
 
   return (
     <Card
       className={`group relative h-full rounded-2xl ${
-        isMostPopular ? "lg:border-2 shadow-md" : ""
+        isMostPopular || featured ? "lg:border-2 shadow-md" : ""
       } transition-all duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:scale-[1.005] hover:shadow-lg ring-0 ring-transparent hover:ring-2 hover:ring-ring/20 hover:border-ring/30 hover:bg-gradient-to-b hover:from-accent/5 hover:to-transparent`}
-      style={{ borderColor: isMostPopular ? "var(--ring)" : undefined }}
+      style={{ borderColor: isMostPopular || featured ? "var(--ring)" : undefined }}
       onMouseMove={(e) => {
         const el = e.currentTarget as HTMLDivElement;
         const rect = el.getBoundingClientRect();
