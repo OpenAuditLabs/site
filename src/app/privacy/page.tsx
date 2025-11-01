@@ -1,4 +1,5 @@
 import React from "react";
+import SectionHeading from "@/components/common/SectionHeading";
 
 export const metadata = {
   title: "Privacy Policy | OpenAudit",
@@ -16,13 +17,33 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
 
         <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:scroll-mt-24">
           <p>
-            This Privacy Policy explains how OpenAudit (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects,
+            This Privacy Policy explains how OpenAudit ("we", "us", or "our") collects,
             uses, and protects your information when you use our websites, products, and
-            services (collectively, the &quot;Services&quot;). We are committed to safeguarding your
+            services (collectively, the "Services"). We are committed to safeguarding your
             privacy and being transparent about our data practices.
           </p>
 
-          <h2 id="summary" className="text-xl font-semibold">1. Summary</h2>
+          <nav className="mb-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <h3 className="text-lg font-semibold mb-2">Table of Contents</h3>
+            <ul className="list-disc list-inside space-y-1">
+              <li><a href="#summary" className="text-blue-600 hover:underline dark:text-blue-400">1. Summary</a></li>
+              <li><a href="#data-we-collect" className="text-blue-600 hover:underline dark:text-blue-400">2. Information We Collect</a></li>
+              <li><a href="#how-we-use" className="text-blue-600 hover:underline dark:text-blue-400">3. How We Use Information</a></li>
+              <li><a href="#legal-bases" className="text-blue-600 hover:underline dark:text-blue-400">4. Legal Bases (EEA/UK)</a></li>
+              <li><a href="#sharing" className="text-blue-600 hover:underline dark:text-blue-400">5. How We Share Information</a></li>
+              <li><a href="#ai-llm" className="text-blue-600 hover:underline dark:text-blue-400">6. AI, Model Providers, and Code Privacy</a></li>
+              <li><a href="#data-retention" className="text-blue-600 hover:underline dark:text-blue-400">7. Data Retention</a></li>
+              <li><a href="#security" className="text-blue-600 hover:underline dark:text-blue-400">8. Security</a></li>
+              <li><a href="#international" className="text-blue-600 hover:underline dark:text-blue-400">9. International Transfers</a></li>
+              <li><a href="#your-rights" className="text-blue-600 hover:underline dark:text-blue-400">10. Your Rights</a></li>
+              <li><a href="#cookies" className="text-blue-600 hover:underline dark:text-blue-400">11. Cookies</a></li>
+              <li><a href="#children" className="text-blue-600 hover:underline dark:text-blue-400">12. Children’s Privacy</a></li>
+              <li><a href="#changes" className="text-blue-600 hover:underline dark:text-blue-400">13. Changes to This Policy</a></li>
+              <li><a href="#contact" className="text-blue-600 hover:underline dark:text-blue-400">14. Contact Us</a></li>
+            </ul>
+          </nav>
+
+          <SectionHeading title="1. Summary" id="summary" />
           <p>
             We collect only what we need to deliver AI-driven smart contract auditing:
             contact information you provide (e.g., name, email, company), project details you
@@ -31,7 +52,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             the Services.
           </p>
 
-          <h2 id="data-we-collect" className="text-xl font-semibold">2. Information We Collect</h2>
+          <SectionHeading title="2. Information We Collect" id="data-we-collect" />
           <ul>
             <li>
               <strong>Account and Contact Information:</strong> Name, email address, company
@@ -39,7 +60,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             </li>
             <li>
               <strong>Project Inputs:</strong> Audit targets, code snippets, repository links,
-              configuration and context you share to perform an analysis (&quot;Audit Data&quot;).
+              configuration and context you share to perform an analysis ("Audit Data").
             </li>
             <li>
               <strong>Usage Data:</strong> Interactions with the Services, device/browser type,
@@ -55,7 +76,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             </li>
           </ul>
 
-          <h2 id="how-we-use" className="text-xl font-semibold">3. How We Use Information</h2>
+          <SectionHeading title="3. How We Use Information" id="how-we-use" />
           <ul>
             <li>Provide, operate, and improve the Services and audit results.</li>
             <li>Communicate with you about audits, updates, security, and support.</li>
@@ -64,7 +85,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             <li>Comply with legal obligations and enforce our Terms of Service.</li>
           </ul>
 
-          <h2 id="legal-bases" className="text-xl font-semibold">4. Legal Bases (EEA/UK)</h2>
+          <SectionHeading title="4. Legal Bases (EEA/UK)" id="legal-bases" />
           <p>
             Where applicable, we process personal data on the following legal bases: (a)
             performance of a contract (to provide the Services); (b) legitimate interests
@@ -72,7 +93,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             cookies or marketing); and (d) legal obligations.
           </p>
 
-          <h2 id="sharing" className="text-xl font-semibold">5. How We Share Information</h2>
+          <SectionHeading title="5. How We Share Information" id="sharing" />
           <ul>
             <li>
               <strong>Service Providers:</strong> Trusted vendors that assist with hosting,
@@ -90,7 +111,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             </li>
           </ul>
 
-          <h2 id="ai-llm" className="text-xl font-semibold">6. AI, Model Providers, and Code Privacy</h2>
+          <SectionHeading title="6. AI, Model Providers, and Code Privacy" id="ai-llm" />
           <p>
             Our analysis may use large language models (LLMs) and static analysis engines.
             We take measures to restrict Audit Data exposure: we minimize prompts to relevant
@@ -99,7 +120,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             improve their models (where supported) and set minimal retention.
           </p>
 
-          <h2 id="data-retention" className="text-xl font-semibold">7. Data Retention</h2>
+          <SectionHeading title="7. Data Retention" id="data-retention" />
           <p>
             We retain personal data only as long as necessary to provide the Services, comply
             with legal obligations, resolve disputes, and enforce agreements. Audit Data is
@@ -107,7 +128,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             support follow-ups, unless you request earlier deletion where applicable.
           </p>
 
-          <h2 id="security" className="text-xl font-semibold">8. Security</h2>
+          <SectionHeading title="8. Security" id="security" />
           <p>
             We implement technical and organizational measures designed to protect your
             information, including encryption in transit, access controls, and monitoring.
@@ -115,14 +136,14 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             credentials associated with your use of the Services.
           </p>
 
-          <h2 id="international" className="text-xl font-semibold">9. International Transfers</h2>
+          <SectionHeading title="9. International Transfers" id="international" />
           <p>
             We may process and store information in countries other than yours. Where required,
             we use appropriate safeguards (e.g., standard contractual clauses) for cross-border
             data transfers.
           </p>
 
-          <h2 id="your-rights" className="text-xl font-semibold">10. Your Rights</h2>
+          <SectionHeading title="10. Your Rights" id="your-rights" />
           <p>
             Depending on your location, you may have rights to access, correct, delete, or
             restrict processing of your personal data, and to portability. You may also object
@@ -131,21 +152,21 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             on a request.
           </p>
 
-          <h2 id="cookies" className="text-xl font-semibold">11. Cookies</h2>
+          <SectionHeading title="11. Cookies" id="cookies" />
           <p>
             We use essential cookies to enable core functionality and may use optional cookies
             or similar technologies (subject to your consent where required) to measure and
             improve performance. You can control cookies through your browser settings.
           </p>
 
-          <h2 id="children" className="text-xl font-semibold">12. Children’s Privacy</h2>
+          <SectionHeading title="12. Children’s Privacy" id="children" />
           <p>
             The Services are not directed to children under 16. We do not knowingly collect
             personal data from children. If you believe a child has provided us with personal
             data, please contact us and we will take appropriate steps to remove the data.
           </p>
 
-          <h2 id="changes" className="text-xl font-semibold">13. Changes to This Policy</h2>
+          <SectionHeading title="13. Changes to This Policy" id="changes" />
           <p>
             We may update this Privacy Policy from time to time. When we make material changes,
             we will update the “Last updated” date and, where appropriate, provide additional
@@ -153,7 +174,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             acceptance of the updated Policy.
           </p>
 
-          <h2 id="contact" className="scroll-mt-24 text-xl font-semibold">14. Contact Us</h2>
+          <SectionHeading title="14. Contact Us" id="contact" />
           <p>
             If you have questions, requests, or complaints about this Privacy Policy or our
             data practices, please contact us at
