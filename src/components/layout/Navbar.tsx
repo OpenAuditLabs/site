@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Laptop } from "lucide-react";
 import { useTheme } from "next-themes";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -23,15 +24,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const toggleTheme = () => {
-    // avoid toggling before client mount to prevent unintended theme flips
-    if (!mounted) return;
-    const next = resolvedTheme === "dark" ? "light" : "dark";
-    setTheme(next);
-  };
-
-  return (
     <nav
       aria-label="site-navigation"
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
@@ -83,55 +75,8 @@ export default function Navbar() {
                 >
                   Pricing
                 </Link>
-                <Link
-                  href="/#contact"
-                  className={`font-medium text-foreground hover:text-primary transition-colors ${
-                    isScrolled ? 'text-xs' : 'text-sm'
-                  }`}
-                  aria-label="Navigate to Contact section"
-                >
-                  Contact
-                </Link>
-
-                <Button
-                  asChild
-                  className={`bg-primary text-white hover:bg-primary/90 font-medium transition-all duration-300 ${
-                    isScrolled ? 'h-8 px-3 text-xs' : 'h-10 px-4 text-sm'
-                  }`}
-                >
-                  <Link href="/#open-audit-action" aria-label="Get Started with OpenAudit">Get Started</Link>
-                </Button>
-
-                <Button
-                  onClick={toggleTheme}
-                  variant="ghost"
-                  size={isScrolled ? "sm" : "icon"}
-                  aria-label="Toggle dark mode"
-                  title="Toggle dark mode"
-                  className={`transition-all duration-300 ${
-                    isScrolled ? 'p-1.5' : 'p-2'
-                  }`}
-                  type="button"
-                  aria-pressed={mounted ? resolvedTheme === "dark" : undefined}
-                  disabled={!mounted}
-                  aria-disabled={!mounted}
-                >
-                  {mounted ? (
-                    resolvedTheme === "dark" ? (
-                      <Sun className={`transition-all duration-300 ${
-                        isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                      }`} />
-                    ) : (
-                      <Moon className={`transition-all duration-300 ${
-                        isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                      }`} />
-                    )
-                  ) : (
-                    <Sun className={`opacity-0 transition-all duration-300 ${
-                      isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                    }`} />
-                  )}
-                </Button>
+                  <ThemeToggle isScrolled={isScrolled} mounted={mounted} />
+                </div>
               </div>
 
               {/* Mobile menu button + mobile theme (visible on small screens) */}
@@ -159,37 +104,7 @@ export default function Navbar() {
                   )}
                 </button>
 
-                {/* Mobile theme toggle to the right of menu icon */}
-                <Button
-                  onClick={toggleTheme}
-                  variant="ghost"
-                  size={isScrolled ? "sm" : "icon"}
-                  aria-label="Toggle dark mode"
-                  title="Toggle dark mode"
-                  className={`transition-all duration-300 ${
-                    isScrolled ? 'p-1.5' : 'p-2'
-                  }`}
-                  type="button"
-                  aria-pressed={mounted ? resolvedTheme === "dark" : undefined}
-                  disabled={!mounted}
-                  aria-disabled={!mounted}
-                >
-                  {mounted ? (
-                    resolvedTheme === "dark" ? (
-                      <Sun className={`transition-all duration-300 ${
-                        isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                      }`} />
-                    ) : (
-                      <Moon className={`transition-all duration-300 ${
-                        isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                      }`} />
-                    )
-                  ) : (
-                    <Sun className={`opacity-0 transition-all duration-300 ${
-                      isScrolled ? 'w-3.5 h-3.5' : 'w-4 h-4'
-                    }`} />
-                  )}
-                </Button>
+                <ThemeToggle isScrolled={isScrolled} mounted={mounted} />
               </div>
             </div>
           </div>
