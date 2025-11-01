@@ -11,12 +11,45 @@ export default function ContactForm(): React.JSX.Element {
   const [state, formAction, isPending] = useActionState(sendContactForm, initialState);
   const formRef = useRef<HTMLFormElement | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
+  const [honeypotValue, setHoneypotValue] = useState<string>("");
+
+  const validateForm = (formData: FormData) => {
+    const errors: Record<string, string> = {};
+    const firstName = (formData.get("firstName") as string | null) ?? "";
+    const lastName = (formData.get("lastName") as string | null) ?? "";
+    const email = (formData.get("email") as string | null) ?? "";
+    const projectDetails = (formData.get("projectDetails") as string | null) ?? "";
+    const honeypot = (formData.get("hpField") as string | null) ?? "";
+
+    if (!firstName.trim()) {
+      errors.firstName = "First Name is required.";
+    }
+    if (!lastName.trim()) {
+      errors.lastName = "Last Name is required.";
+    }
+    if (!email.trim()) {
+      errors.email = "Email is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Invalid email format.";
+    }
+    if (!projectDetails.trim()) {
+      errors.projectDetails = "Project Details are required.";
+    }
+    if (honeypot) {
+      errors.honeypot = "Bot detected.";
+    }
+
+    setClientErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   useEffect(() => {
     if (state?.ok) {
       // Reset the form inputs on success
       formRef.current?.reset();
       setShowSuccess(true);
+      setClientErrors({}); // Clear client errors on successful submission
       const t = setTimeout(() => setShowSuccess(false), 4000);
       return () => clearTimeout(t);
     }
@@ -129,7 +162,30 @@ export default function ContactForm(): React.JSX.Element {
               aria-label="Contact form"
               noValidate
               ref={formRef}
+              onSubmit={(event) => {
+                event.preventDefault();
+                const formData = new FormData(event.currentTarget);
+                if (validateForm(formData)) {
+                  formAction(formData);
+                }
+              }}
             >
+              {/* Honeypot field */}
+              <input
+                type="text"
+                name="hpField"
+                tabIndex={-1}
+                autoComplete="off"
+                style={{ display: "none" }}
+                value={honeypotValue}
+                onChange={(e) => setHoneypotValue(e.target.value)}
+                aria-hidden="true"
+              />
+              {clientErrors.honeypot && (
+                <div className="sr-only" aria-live="assertive">
+                  {clientErrors.honeypot}
+                </div>
+              )}
               {showSuccess && (
                 <div className="mb-4 rounded-md border border-green-600/30 bg-green-600/10 px-3 py-2 text-sm text-green-700 dark:text-green-300">
                   {state?.message || "Message sent successfully."}
@@ -149,6 +205,9 @@ export default function ContactForm(): React.JSX.Element {
                     placeholder=" "
                     aria-labelledby="label-firstName"
                     autoComplete="given-name"
+                    required
+                    aria-invalid={!!(state?.fieldErrors?.firstName || clientErrors.firstName)}
+                    aria-describedby={state?.fieldErrors?.firstName || clientErrors.firstName ? "firstName-error" : undefined}
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                   />
                   <label
@@ -158,9 +217,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     First Name
                   </label>
-                  {state?.fieldErrors?.firstName && (
-                    <p className="mt-1 text-xs text-red-500" role="alert">
-                      {state.fieldErrors.firstName}
+                  {(state?.fieldErrors?.firstName || clientErrors.firstName) && (
+                    <p id="firstName-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="assertive">
+                      {state?.fieldErrors?.firstName || clientErrors.firstName}
                     </p>
                   )}
                 </div>
@@ -173,6 +232,9 @@ export default function ContactForm(): React.JSX.Element {
                     placeholder=" "
                     aria-labelledby="label-lastName"
                     autoComplete="family-name"
+                    required
+                    aria-invalid={!!(state?.fieldErrors?.lastName || clientErrors.lastName)}
+                    aria-describedby={state?.fieldErrors?.lastName || clientErrors.lastName ? "lastName-error" : undefined}
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                   />
                   <label
@@ -182,9 +244,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Last Name
                   </label>
-                  {state?.fieldErrors?.lastName && (
-                    <p className="mt-1 text-xs text-red-500" role="alert">
-                      {state.fieldErrors.lastName}
+                  {(state?.fieldErrors?.lastName || clientErrors.lastName) && (
+                    <p id="lastName-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="assertive">
+                      {state?.fieldErrors?.lastName || clientErrors.lastName}
                     </p>
                   )}
                 </div>
@@ -199,6 +261,9 @@ export default function ContactForm(): React.JSX.Element {
                     placeholder=" "
                     aria-labelledby="label-email2"
                     autoComplete="email"
+                    required
+                    aria-invalid={!!(state?.fieldErrors?.email || clientErrors.email)}
+                    aria-describedby={state?.fieldErrors?.email || clientErrors.email ? "email-error" : undefined}
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                   />
                   <label
@@ -208,9 +273,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Email
                   </label>
-                  {state?.fieldErrors?.email && (
-                    <p className="mt-1 text-xs text-red-500" role="alert">
-                      {state.fieldErrors.email}
+                  {(state?.fieldErrors?.email || clientErrors.email) && (
+                    <p id="email-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="assertive">
+                      {state?.fieldErrors?.email || clientErrors.email}
                     </p>
                   )}
                 </div>
@@ -247,7 +312,9 @@ export default function ContactForm(): React.JSX.Element {
                   rows={4}
                   placeholder=" "
                   aria-labelledby="label-projectDetails2"
-                  aria-describedby="projectDetails-help"
+                  aria-describedby={state?.fieldErrors?.projectDetails || clientErrors.projectDetails ? "projectDetails-error" : "projectDetails-help"}
+                  required
+                  aria-invalid={!!(state?.fieldErrors?.projectDetails || clientErrors.projectDetails)}
                   className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
                 />
                 <label
@@ -263,9 +330,9 @@ export default function ContactForm(): React.JSX.Element {
                 >
                   Describe your project goals, scope, and timeline.
                 </p>
-                {state?.fieldErrors?.projectDetails && (
-                  <p className="mt-1 text-xs text-red-500" role="alert">
-                    {state.fieldErrors.projectDetails}
+                {(state?.fieldErrors?.projectDetails || clientErrors.projectDetails) && (
+                  <p id="projectDetails-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="assertive">
+                    {state?.fieldErrors?.projectDetails || clientErrors.projectDetails}
                   </p>
                 )}
               </div>
