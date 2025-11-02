@@ -66,6 +66,12 @@
   --shadow-opacity: var(--shadow-opacity);
   --color-shadow-color: var(--shadow-color);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-neutral: var(--neutral);
+  --color-neutral-foreground: var(--neutral-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
 }
 
 :root {
@@ -141,6 +147,13 @@
   /* Security Analysis Report panel colors */
   --report-panel-bg: #F3F4F6; /* light gray */
   --report-panel-header-bg: #D1D5DB; /* gray-300 */
+
+  --color-neutral: #F3F4F6; /* neutral background / light */
+  --color-neutral-foreground: #111827; /* neutral text / dark */
+  --color-success: #22C55E; /* green */
+  --color-success-foreground: #ffffff; /* contrast text */
+  --color-warning: #F59E0B; /* amber */
+  --color-warning-foreground: #111827; /* contrast text */
 }
 
 .dark {
@@ -213,6 +226,13 @@
   /* Security Analysis Report panel colors (dark mode) */
   --report-panel-bg: #232427; /* dark neutral */
   --report-panel-header-bg: #2F3136; /* slightly lighter for header */
+
+  --color-neutral: #374151;
+  --color-neutral-foreground: #F9FAFB;
+  --color-success: #16A34A;
+  --color-success-foreground: #0F172A;
+  --color-warning: #D97706;
+  --color-warning-foreground: #0F172A;
 }
 
 @layer base {
