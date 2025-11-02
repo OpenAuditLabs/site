@@ -75,7 +75,7 @@ export default function Footer() {
                 <button
                   type="button"
                   className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
-                  aria-label="Terms of Service"
+                  aria-label="Open Terms of Service Modal"
                   onClick={() => setTosOpen(true)}
                 >
                   <span className="relative">
@@ -146,7 +146,7 @@ export default function Footer() {
                 <button
                   type="button"
                   className="group flex items-center text-sm text-white transition-all duration-300 ease-out hover:text-white focus:outline-none focus:ring-2 focus:ring-ring/60 focus:ring-offset-2 focus:ring-offset-background rounded-md px-1 py-0.5 cursor-pointer"
-                  aria-label="Privacy Policy"
+                  aria-label="Open Privacy Policy Modal"
                   onClick={() => setPrivacyOpen(true)}
                 >
                   <span className="relative">
