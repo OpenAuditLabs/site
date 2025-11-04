@@ -51,17 +51,20 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
+
         <body
           className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
         >
+          <a href="#main-content" className="skip-to-content">Skip to content</a>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
             disableTransitionOnChange
           >
             <Navbar />
-            {children}
+            <main id="main-content">
+              {children}
+            </main>
             <Footer />
           </ThemeProvider>
         </body>

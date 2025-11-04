@@ -24,6 +24,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  return (
     <nav
       aria-label="site-navigation"
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out"
@@ -108,8 +109,6 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
       {/* Mobile menu panel */}
       <div

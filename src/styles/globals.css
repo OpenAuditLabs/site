@@ -249,7 +249,7 @@
   }
 
   * {
-    @apply border-border outline-ring/50;
+  outline-width: 2px;  outline-color: #007bff; /* Fallback for outline-ring */
   }
   body {
   font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
@@ -257,4 +257,15 @@
     color: var(--foreground);
     letter-spacing: var(--tracking-normal);
   }
+}
+
+.skip-to-content {
+  @apply absolute -left-[9999px] w-px h-px overflow-hidden;
+  @apply text-base z-[999];
+}
+
+.skip-to-content:focus {
+  @apply static w-auto h-auto px-4 py-2;
+  @apply bg-primary text-primary-foreground no-underline;
+  @apply outline-2 outline-ring;
 }
