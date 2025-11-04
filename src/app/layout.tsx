@@ -51,17 +51,45 @@ export default function RootLayout({
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
+        <head>
+          <style>
+            .skip-to-content {
+              position: absolute;
+              left: -9999px;
+              width: 1px;
+              height: 1px;
+              top: auto;
+              font-size: 1rem;
+              overflow: hidden;
+              z-index: 999;
+            }
+
+            .skip-to-content:focus {
+              position: static;
+              width: auto;
+              height: auto;
+              padding: 0.5rem 1rem;
+              background-color: #007bff; /* Example focus background */
+              color: white; /* Example focus text color */
+              text-decoration: none;
+              left: auto;
+              top: auto;
+            }
+          </style>
+        </head>
         <body
           className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
         >
+          <a href="#main-content" className="skip-to-content">Skip to content</a>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
             disableTransitionOnChange
           >
             <Navbar />
-            {children}
+            <main id="main-content">
+              {children}
+            </main>
             <Footer />
           </ThemeProvider>
         </body>
