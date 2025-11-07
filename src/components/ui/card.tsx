@@ -1,18 +1,62 @@
 "use client";
 
 import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 
 import { cn } from "@/lib/utils";
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+type CardProps =
+  | (React.ComponentPropsWithoutRef<"div"> & {
+      asChild?: false;
+      href?: never;
+      onClick?: React.MouseEventHandler<HTMLDivElement>;
+      "aria-label"?: string;
+    })
+  | (React.ComponentPropsWithoutRef<"a"> & {
+      asChild?: false;
+      href: string;
+      onClick?: never;
+      "aria-label"?: string;
+    })
+  | (React.ComponentPropsWithoutRef<typeof Slot> & {
+      asChild: true;
+      href?: never;
+      onClick?: never;
+      "aria-label"?: string;
+    });
+
+function Card({ className, asChild, ...props }: CardProps) {
+  const isClickableDiv = "onClick" in props && props.onClick !== undefined && !asChild;
+  const isAnchor = "href" in props && props.href !== undefined && !asChild;
+
+  const Comp = asChild ? Slot : isAnchor ? "a" : "div";
+
+  const interactiveProps: React.HTMLAttributes<HTMLElement> = {};
+
+  if (isClickableDiv) {
+    interactiveProps.role = "button";
+    if (props["aria-pressed"] !== undefined) {
+      interactiveProps["aria-pressed"] = props["aria-pressed"];
+    }
+    interactiveProps["aria-label"] = props["aria-label"];
+  }
+
+  if (isAnchor) {
+    interactiveProps.href = props.href;
+    interactiveProps.rel = "noopener noreferrer";
+    interactiveProps["aria-label"] = props["aria-label"];
+  }
+
   return (
-    <div
+    <Comp
       data-slot="card"
       className={cn(
         "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        (isAnchor || isClickableDiv) && "cursor-pointer hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className
       )}
       {...props}
+      {...interactiveProps}
     />
   );
 }
