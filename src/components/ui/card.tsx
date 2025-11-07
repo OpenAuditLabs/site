@@ -16,7 +16,7 @@ type CardProps =
       asChild?: false;
       href: string;
       onClick?: never;
-      "aria-label": string;
+      "aria-label"?: string;
     })
   | (React.ComponentPropsWithoutRef<typeof Slot> & {
       asChild: true;
@@ -31,11 +31,13 @@ function Card({ className, asChild, ...props }: CardProps) {
 
   const Comp = asChild ? Slot : isAnchor ? "a" : "div";
 
-  const interactiveProps: Record<string, any> = {};
+  const interactiveProps: React.HTMLAttributes<HTMLElement> = {};
 
   if (isClickableDiv) {
     interactiveProps.role = "button";
-    interactiveProps["aria-pressed"] = props["aria-pressed"] ?? false;
+    if (props["aria-pressed"] !== undefined) {
+      interactiveProps["aria-pressed"] = props["aria-pressed"];
+    }
     interactiveProps["aria-label"] = props["aria-label"];
   }
 
@@ -53,8 +55,8 @@ function Card({ className, asChild, ...props }: CardProps) {
         (isAnchor || isClickableDiv) && "cursor-pointer hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className
       )}
-      {...interactiveProps}
       {...props}
+      {...interactiveProps}
     />
   );
 }
