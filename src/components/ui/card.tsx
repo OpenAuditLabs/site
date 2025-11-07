@@ -1,17 +1,29 @@
 "use client";
 
 import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 
 import { cn } from "@/lib/utils";
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+function Card({
+  className,
+  asChild = false,
+  href,
+  ...props
+}: React.ComponentProps<"div"> & {
+  asChild?: boolean;
+  href?: string;
+}) {
+  const Comp = asChild ? Slot : href ? "a" : "div";
   return (
-    <div
+    <Comp
       data-slot="card"
       className={cn(
         "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        href && "hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
         className
       )}
+      {...(href && { href })}
       {...props}
     />
   );
