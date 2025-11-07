@@ -19,15 +19,25 @@ export default function HeroCarousel() {
 		const [paused, setPaused] = useState(false);
 		const carouselRef = useRef<HTMLDivElement>(null);
 		const [autoplayEnabled, setAutoplayEnabled] = useState(true);
+		const [reduceMotion, setReduceMotion] = useState(false);
+
+		useEffect(() => {
+			const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+			setReduceMotion(mediaQuery.matches);
+
+			const handleChange = () => setReduceMotion(mediaQuery.matches);
+			mediaQuery.addEventListener("change", handleChange);
+			return () => mediaQuery.removeEventListener("change", handleChange);
+		}, []);
 
 		// Auto-rotate carousel every 3 seconds unless paused or autoplay is disabled
 		useEffect(() => {
-			if (paused || !autoplayEnabled) return;
+			if (paused || !autoplayEnabled || reduceMotion) return;
 			const interval = setInterval(() => {
 				setCurrent((prev) => (prev + 1) % slides.length);
 			}, 3000);
 			return () => clearInterval(interval);
-		}, [paused, autoplayEnabled, slides.length]);
+		}, [paused, autoplayEnabled, slides.length, reduceMotion]);
 
 
 
@@ -171,7 +181,7 @@ export default function HeroCarousel() {
 
 				// Base transition styles so transforms/filters/opacity animate smoothly
 				const transition =
-					"transition-all duration-700 ease-in-out will-change-transform will-change-filter";
+					reduceMotion ? "transition-all duration-0 ease-in-out will-change-transform will-change-filter" : "transition-all duration-700 ease-in-out will-change-transform will-change-filter";
 
 				let posClasses = "";
 				if (isCenter) {
@@ -243,6 +253,8 @@ function Slide({ className = "", src, alt, priority, ...props }: React.Component
 				sizes="(min-width:1536px) 1400px, (min-width:1280px) 1320px, (min-width:1024px) 1180px, (min-width:768px) 880px, (min-width:640px) 560px, 320px"
 				className="w-full h-auto"
 				quality={90}
+				placeholder="blur"
+				blurDataURL="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
 			/>
 		</div>
 	);
