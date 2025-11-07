@@ -5,25 +5,55 @@ import { Slot } from "@radix-ui/react-slot";
 
 import { cn } from "@/lib/utils";
 
-function Card({
-  className,
-  asChild = false,
-  href,
-  ...props
-}: React.ComponentProps<"div"> & {
-  asChild?: boolean;
-  href?: string;
-}) {
-  const Comp = asChild ? Slot : href ? "a" : "div";
+type CardProps =
+  | (React.ComponentPropsWithoutRef<"div"> & {
+      asChild?: false;
+      href?: never;
+      onClick?: React.MouseEventHandler<HTMLDivElement>;
+      "aria-label"?: string;
+    })
+  | (React.ComponentPropsWithoutRef<"a"> & {
+      asChild?: false;
+      href: string;
+      onClick?: never;
+      "aria-label": string;
+    })
+  | (React.ComponentPropsWithoutRef<typeof Slot> & {
+      asChild: true;
+      href?: never;
+      onClick?: never;
+      "aria-label"?: string;
+    });
+
+function Card({ className, asChild, ...props }: CardProps) {
+  const isClickableDiv = "onClick" in props && props.onClick !== undefined && !asChild;
+  const isAnchor = "href" in props && props.href !== undefined && !asChild;
+
+  const Comp = asChild ? Slot : isAnchor ? "a" : "div";
+
+  const interactiveProps: Record<string, any> = {};
+
+  if (isClickableDiv) {
+    interactiveProps.role = "button";
+    interactiveProps["aria-pressed"] = props["aria-pressed"] ?? false;
+    interactiveProps["aria-label"] = props["aria-label"];
+  }
+
+  if (isAnchor) {
+    interactiveProps.href = props.href;
+    interactiveProps.rel = "noopener noreferrer";
+    interactiveProps["aria-label"] = props["aria-label"];
+  }
+
   return (
     <Comp
       data-slot="card"
       className={cn(
         "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
-        href && "hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+        (isAnchor || isClickableDiv) && "cursor-pointer hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className
       )}
-      {...(href && { href })}
+      {...interactiveProps}
       {...props}
     />
   );
