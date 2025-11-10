@@ -109,6 +109,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
+        </div> {/* This closes the div that starts on line 32 */}
 
       {/* Mobile menu panel */}
       <div

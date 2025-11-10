@@ -139,7 +139,7 @@ export default function ThemeToggle({ isScrolled, mounted }: ThemeToggleProps) {
               role="menuitem"
               variant="ghost"
               className="w-full justify-start"
-              ref={(el) => (itemRefs.current[0] = el)}
+              ref={(el) => { itemRefs.current[0] = el; }}
               tabIndex={focusedItemIndex === 0 ? 0 : -1}
               onClick={() => {
                 setTheme("light");
@@ -153,7 +153,7 @@ export default function ThemeToggle({ isScrolled, mounted }: ThemeToggleProps) {
               role="menuitem"
               variant="ghost"
               className="w-full justify-start"
-              ref={(el) => (itemRefs.current[1] = el)}
+              ref={(el) => { itemRefs.current[1] = el; }}
               tabIndex={focusedItemIndex === 1 ? 0 : -1}
               onClick={() => {
                 setTheme("dark");
@@ -167,7 +167,7 @@ export default function ThemeToggle({ isScrolled, mounted }: ThemeToggleProps) {
               role="menuitem"
               variant="ghost"
               className="w-full justify-start"
-              ref={(el) => (itemRefs.current[2] = el)}
+              ref={(el) => { itemRefs.current[2] = el; }}
               tabIndex={focusedItemIndex === 2 ? 0 : -1}
               onClick={() => {
                 setTheme("system");
