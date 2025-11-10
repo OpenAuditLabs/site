@@ -6,24 +6,20 @@ interface ToSModalProps {
   onClose: () => void;
 }
 
+const FOCUSABLE_ELEMENTS_SELECTOR = `button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])`;
+
 export default function ToSModal({ open, onClose }: ToSModalProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const focusableElementsSelector = `button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])`;
   React.useEffect(() => {
     if (open) {
       // Focus the modal container or the first focusable element
       if (modalRef.current) {
         modalRef.current.focus();
-      } else {
-        const acceptButton = modalRef.current?.querySelector<HTMLElement>(
-          '.mt-8 .bg-primary'
-        );
-        acceptButton?.focus();
       }
 
       // Trap focus inside modal
       const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
-        focusableElementsSelector
+        FOCUSABLE_ELEMENTS_SELECTOR
       );
       const first = focusable?.[0];
       const last = focusable?.[focusable.length - 1];
@@ -52,7 +48,7 @@ export default function ToSModal({ open, onClose }: ToSModalProps) {
         document.body.style.overflow = '';
       };
     }
-  }, [open, onClose, focusableElementsSelector]);
+  }, [open, onClose]);
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
