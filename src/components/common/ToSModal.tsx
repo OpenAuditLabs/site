@@ -37,7 +37,6 @@ export default function ToSModal({ open, onClose }: ToSModalProps) {
       };
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
-      first?.focus();
       return () => {
         window.removeEventListener('keydown', handleKeyDown);
         document.body.style.overflow = '';
@@ -52,10 +51,14 @@ export default function ToSModal({ open, onClose }: ToSModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="tos-modal-title"
-        tabIndex={-1}
         className="bg-background rounded-xl shadow-xl max-w-2xl w-full p-8 overflow-y-auto max-h-[90vh] relative"
       >
         <button
+          ref={(button) => {
+            if (button && open) {
+              button.focus();
+            }
+          }}
           className="absolute top-4 right-4 text-muted-foreground hover:text-foreground text-xl"
           onClick={onClose}
           aria-label="Close"
