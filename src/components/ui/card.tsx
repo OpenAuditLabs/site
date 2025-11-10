@@ -31,32 +31,46 @@ function Card({ className, asChild, ...props }: CardProps) {
 
   const Comp = asChild ? Slot : isAnchor ? "a" : "div";
 
-  const interactiveProps: React.HTMLAttributes<HTMLElement> = {};
+  const baseClassName = cn(
+    "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+    (isAnchor || isClickableDiv) && "cursor-pointer hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+    className
+  );
 
-  if (isClickableDiv) {
-    interactiveProps.role = "button";
-    if (props["aria-pressed"] !== undefined) {
-      interactiveProps["aria-pressed"] = props["aria-pressed"];
-    }
-    interactiveProps["aria-label"] = props["aria-label"];
+  if (asChild) {
+    return (
+      <Slot
+        data-slot="card"
+        className={baseClassName}
+        {...props}
+      />
+    );
   }
 
   if (isAnchor) {
-    interactiveProps.href = props.href;
-    interactiveProps.rel = "noopener noreferrer";
-    interactiveProps["aria-label"] = props["aria-label"];
+    const anchorProps = props as React.ComponentPropsWithoutRef<"a">;
+    return (
+      <a
+        data-slot="card"
+        className={baseClassName}
+        href={anchorProps.href}
+        rel="noopener noreferrer"
+        aria-label={anchorProps["aria-label"]}
+        {...anchorProps}
+      />
+    );
   }
 
+  const divProps = props as React.ComponentPropsWithoutRef<"div">;
   return (
-    <Comp
+    <div
       data-slot="card"
-      className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
-        (isAnchor || isClickableDiv) && "cursor-pointer hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        className
-      )}
-      {...props}
-      {...interactiveProps}
+      className={baseClassName}
+      role={isClickableDiv ? "button" : undefined}
+      aria-pressed={divProps["aria-pressed"]}
+      aria-label={divProps["aria-label"]}
+      onClick={divProps.onClick}
+      {...divProps}
     />
   );
 }

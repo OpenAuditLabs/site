@@ -17,9 +17,9 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
 
         <div className="prose prose-neutral dark:prose-invert max-w-none prose-headings:scroll-mt-24">
           <p>
-            This Privacy Policy explains how OpenAudit ("we", "us", or "our") collects,
+            This Privacy Policy explains how OpenAudit (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects,
             uses, and protects your information when you use our websites, products, and
-            services (collectively, the "Services"). We are committed to safeguarding your
+            services (collectively, the &quot;Services&quot;). We are committed to safeguarding your
             privacy and being transparent about our data practices.
           </p>
 
@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             </li>
             <li>
               <strong>Project Inputs:</strong> Audit targets, code snippets, repository links,
-              configuration and context you share to perform an analysis ("Audit Data").
+              configuration and context you share to perform an analysis (&quot;Audit Data&quot;).
             </li>
             <li>
               <strong>Usage Data:</strong> Interactions with the Services, device/browser type,
