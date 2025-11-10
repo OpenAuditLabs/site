@@ -6,14 +6,20 @@ interface ToSModalProps {
   onClose: () => void;
 }
 
+const FOCUSABLE_ELEMENTS_SELECTOR = `button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])`;
+
 export default function ToSModal({ open, onClose }: ToSModalProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const focusableElementsSelector = `button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])`;
   React.useEffect(() => {
     if (open) {
+      // Focus the modal container or the first focusable element
+      if (modalRef.current) {
+        modalRef.current.focus();
+      }
+
       // Trap focus inside modal
       const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
-        focusableElementsSelector
+        FOCUSABLE_ELEMENTS_SELECTOR
       );
       const first = focusable?.[0];
       const last = focusable?.[focusable.length - 1];
@@ -37,30 +43,27 @@ export default function ToSModal({ open, onClose }: ToSModalProps) {
       };
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
-      first?.focus();
       return () => {
         window.removeEventListener('keydown', handleKeyDown);
         document.body.style.overflow = '';
       };
     }
-  }, [open, onClose, focusableElementsSelector]);
+  }, [open, onClose]);
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div
-        ref={modalRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="tos-modal-title"
-        tabIndex={-1}
-        className="bg-background rounded-xl shadow-xl max-w-2xl w-full p-8 overflow-y-auto max-h-[90vh] relative"
-      >
-        <button
-          className="absolute top-4 right-4 text-muted-foreground hover:text-foreground text-xl"
-          onClick={onClose}
-          aria-label="Close"
-        >
-          ×
+              <div
+                ref={modalRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="tos-modal-title"
+                tabIndex={-1}
+                className="bg-background rounded-xl shadow-xl max-w-2xl w-full p-8 overflow-y-auto max-h-[90vh] relative"      >
+                  <button
+                    className="absolute top-4 right-4 text-muted-foreground hover:text-foreground text-xl"
+                    onClick={onClose}
+                    aria-label="Close"
+                  >          ×
         </button>
         <h1 id="tos-modal-title" className="text-2xl font-bold mb-2">Terms of Service</h1>
         <p className="mb-4 text-sm text-muted-foreground">Last updated: September 17, 2025</p>
