@@ -52,9 +52,25 @@ export default function Research({
 }: ResearchProps): React.ReactElement {
   return (
     <section
+      id="research-section"
       aria-labelledby="research-heading"
   className="relative overflow-hidden py-10 sm:py-12"
     >
+      <nav className="max-w-7xl mx-auto px-6 mb-8">
+        <ul className="flex space-x-4">
+          <li>
+            <Link href="#research-heading" className="text-primary hover:underline">
+              Overview
+            </Link>
+          </li>
+          <li>
+            <Link href="#research-details" className="text-primary hover:underline">
+              Details
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
       {/* Decorative gradient */}
       <div className="absolute inset-0 pointer-events-none -z-10">
         <div className="absolute left-0 top-0 w-72 h-72 bg-gradient-to-tr from-primary/20 via-transparent to-transparent rounded-full blur-3xl opacity-60 transform -translate-x-1/3 -translate-y-1/3" />
@@ -77,7 +93,7 @@ export default function Research({
         </div>
 
         <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="flex flex-col justify-center">
+          <div id="research-details" className="flex flex-col justify-center">
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-large font-bold leading-relaxed text-foreground mb-20">
               {body}
             </p>
