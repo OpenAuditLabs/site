@@ -27,6 +27,7 @@ const contactSchema = z.object({
     .string()
     .trim()
     .min(10, "Project details must be at least 10 characters"),
+  botField: z.string().optional(),
 });
 
 export async function sendContactForm(
@@ -38,28 +39,37 @@ export async function sendContactForm(
     lastName: formData.get("lastName")?.toString() ?? "",
     email: formData.get("email")?.toString() ?? "",
   company: formData.get("company")?.toString() ?? "",
-  projectDetails: formData.get("projectDetails")?.toString() ?? "",
-  };
-
-  const parsed = contactSchema.safeParse(payload);
-  if (!parsed.success) {
-    const flat = parsed.error.flatten();
-    return {
-      ok: false,
-      message:
-        flat.formErrors.join(" ") || "Please fix the errors and try again.",
-      fieldErrors: {
-        firstName: flat.fieldErrors.firstName?.[0],
-        lastName: flat.fieldErrors.lastName?.[0],
-        email: flat.fieldErrors.email?.[0],
-  company: flat.fieldErrors.company?.[0],
-  projectDetails: flat.fieldErrors.projectDetails?.[0],
-      },
+    projectDetails: formData.get("projectDetails")?.toString() ?? "",
+    botField: formData.get("botField")?.toString() ?? "",
     };
-  }
-
-  const name = `${parsed.data.firstName} ${parsed.data.lastName}`.trim();
-  const email = parsed.data.email;
+  
+    const parsed = contactSchema.safeParse(payload);
+    if (!parsed.success) {
+      const flat = parsed.error.flatten();
+      return {
+        ok: false,
+        message:
+          flat.formErrors.join(" ") || "Please fix the errors and try again.",
+        fieldErrors: {
+          firstName: flat.fieldErrors.firstName?.[0],
+          lastName: flat.fieldErrors.lastName?.[0],
+          email: flat.fieldErrors.email?.[0],
+          company: flat.fieldErrors.company?.[0],
+          projectDetails: flat.fieldErrors.projectDetails?.[0],
+        },
+      };
+    }
+  
+    // Honeypot check
+    if (parsed.data.botField) {
+      console.warn("Bot detected via honeypot field.");
+      return {
+        ok: false,
+        message: "Submission rejected: bot activity detected.",
+      };
+    }
+  
+    const name = `${parsed.data.firstName} ${parsed.data.lastName}`.trim();  const email = parsed.data.email;
   const company = parsed.data.company?.trim() || "—";
   const projectDetails = parsed.data.projectDetails.trim();
 
