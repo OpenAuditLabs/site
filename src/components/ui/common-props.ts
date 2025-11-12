@@ -79,7 +79,7 @@ export interface WithAriaProps {
   /**
    * Indicates whether an input has entered the user's desired range.
    */
-  "aria-invalid"?: boolean;
+  "aria-invalid"?: boolean | "grammar" | "spelling";
   /**
    * Indicates the orientation of a component.
    */
@@ -108,18 +108,8 @@ export interface WithAriaProps {
    * Indicates an element's number or position in the current set of listitems or treeitems.
    */
   "aria-posinset"?: number;
-  /**
-   * Indicates the current value for a slider, spinbutton, or progressbar.
-   */
-  "aria-valuetext"?: string;
-  /**
-   * Indicates whether an element is a drag-and-drop target.
-   */
-  "aria-dropeffect"?: "copy" | "execute" | "link" | "move" | "none" | "popup";
-  /**
-   * Indicates the kind of operations supported by a drag-and-drop enabled element.
-   */
-  "aria-grabbed"?: boolean;
+
+
   /**
    * Indicates the current state of a live region.
    */
@@ -169,11 +159,12 @@ export interface WithAriaProps {
 /**
  * A generic type for polymorphic components, allowing them to be rendered as different HTML elements or React components.
  * @template T The type of the component or HTML element.
+ * @template P The type of the custom props.
  */
-export type PolymorphicProps<T extends React.ElementType> = {
+export type PolymorphicProps<T extends React.ElementType = "div", P = {}> = {
   /**
    * The component or HTML element to render.
    * @default "div"
    */
   as?: T;
-};
+} & Omit<React.ComponentPropsWithoutRef<T>, keyof P>;
