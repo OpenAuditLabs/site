@@ -109,6 +109,11 @@ export interface WithAriaProps {
    */
   "aria-posinset"?: number;
 
+  /**
+   * Identifies the element (or elements) whose contents or presence are controlled by the current element.
+   */
+  "aria-controls"?: string;
+
 
   /**
    * Indicates the current state of a live region.
@@ -119,7 +124,7 @@ export interface WithAriaProps {
    */
   "aria-relevant"?: "additions" | "all" | "removals" | "text";
   /**
-   * Indicates whether an element is a section header.
+   * Identifies the element (or elements) that label the current element.
    */
   "aria-labelledby"?: string;
   /**
