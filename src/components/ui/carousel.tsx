@@ -186,10 +186,11 @@ function CarouselItem({
   className,
   index,
   ...props
-}: React.ComponentProps<"div"> & { index: number }) {
+}: React.ComponentProps<"div"> & { index?: number }) {
   const { orientation, selectedIndex, api, scrollSnaps } = useCarousel()
 
   const handleItemClick = React.useCallback(() => {
+    if (index === undefined) return
     api?.scrollTo(index)
   }, [api, index])
 
@@ -197,14 +198,14 @@ function CarouselItem({
     <div
       role="group"
       aria-roledescription="slide"
-      aria-label={`Slide ${index + 1} of ${api?.scrollSnapList().length ?? scrollSnaps.length ?? 0}`}
+      aria-label={`Slide ${(index ?? 0) + 1} of ${api?.scrollSnapList().length ?? scrollSnaps.length ?? 0}`}
       data-slot="carousel-item"
       className={cn(
         "min-w-0 shrink-0 grow-0 basis-full",
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className
       )}
-      tabIndex={index === selectedIndex ? 0 : -1}
+      tabIndex={index === undefined ? -1 : (index === selectedIndex ? 0 : -1)}
       onClick={handleItemClick}
       {...props}
     />
