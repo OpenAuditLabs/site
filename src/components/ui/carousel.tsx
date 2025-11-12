@@ -19,6 +19,7 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: "horizontal" | "vertical"
   setApi?: (api: CarouselApi) => void
+  ariaLive?: boolean
 }
 
 type CarouselContextProps = {
@@ -28,6 +29,8 @@ type CarouselContextProps = {
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
+  selectedIndex: number
+  scrollSnaps: number[]
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -49,6 +52,7 @@ function Carousel({
   plugins,
   className,
   children,
+  ariaLive = true,
   ...props
 }: React.ComponentProps<"div"> & CarouselProps) {
   const [carouselRef, api] = useEmblaCarousel(
@@ -60,11 +64,14 @@ function Carousel({
   )
   const [canScrollPrev, setCanScrollPrev] = React.useState(false)
   const [canScrollNext, setCanScrollNext] = React.useState(false)
+  const [selectedIndex, setSelectedIndex] = React.useState(0)
+  const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
 
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api) return
     setCanScrollPrev(api.canScrollPrev())
     setCanScrollNext(api.canScrollNext())
+    setSelectedIndex(api.selectedScrollSnap())
   }, [])
 
   const scrollPrev = React.useCallback(() => {
@@ -96,6 +103,7 @@ function Carousel({
   React.useEffect(() => {
     if (!api) return
     onSelect(api)
+    setScrollSnaps(api.scrollSnapList())
     api.on("reInit", onSelect)
     api.on("select", onSelect)
 
@@ -116,23 +124,35 @@ function Carousel({
         scrollNext,
         canScrollPrev,
         canScrollNext,
+        selectedIndex,
+        scrollSnaps,
       }}
     >
       <div
-        onKeyDownCapture={handleKeyDown}
+        onKeyDown={handleKeyDown}
         className={cn("relative", className)}
         role="region"
         aria-roledescription="carousel"
+        aria-live={ariaLive ? "polite" : "off"}
         data-slot="carousel"
         {...props}
       >
         {children}
+        {ariaLive && (
+          <span className="sr-only" aria-atomic="true">
+            {`Slide ${selectedIndex + 1} of ${scrollSnaps.length}`}
+          </span>
+        )}
       </div>
     </CarouselContext.Provider>
   )
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
+function CarouselContent({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"div">) {
   const { carouselRef, orientation } = useCarousel()
 
   return (
@@ -140,6 +160,8 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
       ref={carouselRef}
       className="overflow-hidden"
       data-slot="carousel-content"
+      role="group"
+      aria-label="Carousel content"
     >
       <div
         className={cn(
@@ -148,24 +170,42 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
           className
         )}
         {...props}
-      />
+      >
+        {React.Children.map(children, (child, index) => {
+          if (React.isValidElement(child)) {
+            return React.cloneElement(child, { index })
+          }
+          return child
+        })}
+      </div>
     </div>
   )
 }
 
-function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
-  const { orientation } = useCarousel()
+function CarouselItem({
+  className,
+  index,
+  ...props
+}: React.ComponentProps<"div"> & { index: number }) {
+  const { orientation, selectedIndex, api } = useCarousel()
+
+  const handleItemClick = React.useCallback(() => {
+    api?.scrollTo(index)
+  }, [api, index])
 
   return (
     <div
       role="group"
       aria-roledescription="slide"
+      aria-label={`Slide ${index + 1} of ${api?.scrollSnapList().length}`}
       data-slot="carousel-item"
       className={cn(
         "min-w-0 shrink-0 grow-0 basis-full",
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className
       )}
+      tabIndex={index === selectedIndex ? 0 : -1}
+      onClick={handleItemClick}
       {...props}
     />
   )
@@ -193,6 +233,7 @@ function CarouselPrevious({
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      aria-label="Previous slide"
       {...props}
     >
       <ArrowLeft />
@@ -223,6 +264,7 @@ function CarouselNext({
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      aria-label="Next slide"
       {...props}
     >
       <ArrowRight />
