@@ -67,13 +67,13 @@ export default function About() {
               role: 'Co-founder & CEO',
               image: '/image/contactDesign.png', // Placeholder image
               description: 'Leading with a vision for accessible and powerful developer tools,',
-            }
+            },
             {
               name: 'Bob Williams',
               role: 'Lead Engineer',
               image: '/image/contractCode.svg', // Placeholder image
               description: 'Crafting robust and scalable solutions with a focus on performance,',
-            }
+            },
             {
               name: 'Charlie Brown',
               role: 'Product Designer',
