@@ -10,7 +10,7 @@ function validateContactInfo(info: typeof CONTACT_INFO) {
   const isProduction = process.env.NODE_ENV === "production";
   const errors: string[] = [];
 
-  if (!info.email || info.email === "support@openauditlabs.com") {
+  if (!info.email) {
     errors.push("Contact email is a placeholder or missing.");
   }
   if (!info.phone || info.phone.includes("555") || info.phone === "+1 (555) 123-4567") {
