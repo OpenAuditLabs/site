@@ -173,7 +173,7 @@ function CarouselContent({
       >
         {React.Children.map(children, (child, index) => {
           if (React.isValidElement(child)) {
-            return React.cloneElement(child, { index })
+            return React.cloneElement(child as React.ReactElement<{ index?: number }>, { index })
           }
           return child
         })}
