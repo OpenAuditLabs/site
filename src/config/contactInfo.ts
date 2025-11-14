@@ -1,10 +1,36 @@
-export const CONTACT_INFO = {
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
-  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE,
-  address: process.env.NEXT_PUBLIC_OFFICE_ADDRESS,
-  googleMapsEmbedUrl: process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL,
-  googleMapsPlaceId: process.env.NEXT_PUBLIC_GOOGLE_MAPS_PLACE_ID,
+interface ContactInfo {
+  email: string;
+  phone: string;
+  address: string;
+  googleMapsEmbedUrl: string;
+  googleMapsPlaceId: string;
+}
+
+const createContactInfo = (): ContactInfo => {
+  const requiredEnvVars = [
+    'NEXT_PUBLIC_CONTACT_EMAIL',
+    'NEXT_PUBLIC_CONTACT_PHONE',
+    'NEXT_PUBLIC_OFFICE_ADDRESS',
+    'NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL',
+    'NEXT_PUBLIC_GOOGLE_MAPS_PLACE_ID',
+  ];
+
+  for (const envVar of requiredEnvVars) {
+    if (!process.env[envVar]) {
+      throw new Error(`Missing required environment variable: ${envVar}`);
+    }
+  }
+
+  return {
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL as string,
+    phone: process.env.NEXT_PUBLIC_CONTACT_PHONE as string,
+    address: process.env.NEXT_PUBLIC_OFFICE_ADDRESS as string,
+    googleMapsEmbedUrl: process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL as string,
+    googleMapsPlaceId: process.env.NEXT_PUBLIC_GOOGLE_MAPS_PLACE_ID as string,
+  };
 };
+
+export const CONTACT_INFO: ContactInfo = createContactInfo();
 
 function validateContactInfo(info: typeof CONTACT_INFO) {
   const isProduction = process.env.NODE_ENV === "production";
@@ -30,7 +56,7 @@ function validateContactInfo(info: typeof CONTACT_INFO) {
     const errorMessage = "Placeholder contact information detected:\n" + errors.join("\n");
     if (isProduction) {
       console.error(errorMessage);
-      process.exit(1); // Exit in production
+      throw new Error(errorMessage); // Throw an error instead of exiting
     } else {
       console.warn(errorMessage); // Warn in development
     }
