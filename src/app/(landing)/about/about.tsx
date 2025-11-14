@@ -53,7 +53,7 @@ export default function About() {
 
       {/* Team Grid */}
       <div className="mt-20 w-full max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-extrabold tracking-tight mb-10 bg-clip-text text-transparent bg-gradient-to-r from-foreground via-primary to-muted-foreground" aria-label="Our Team">
+        <h2 className="text-4xl font-extrabold tracking-tight mb-10 bg-clip-text text-transparent bg-gradient-to-r from-foreground via-primary to-muted-foreground">
           Meet Our Visionaries
         </h2>
         <p className="text-lg md:text-xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto">
@@ -65,23 +65,23 @@ export default function About() {
             {
               name: 'Alice Johnson',
               role: 'Co-founder & CEO',
-              image: '/public/image/contactDesign.png', // Placeholder image
-              description: 'Leading with a vision for accessible and powerful developer tools.',
-            },
+              image: '/image/contactDesign.png', // Placeholder image
+              description: 'Leading with a vision for accessible and powerful developer tools,',
+            }
             {
               name: 'Bob Williams',
               role: 'Lead Engineer',
-              image: '/public/image/contractCode.svg', // Placeholder image
-              description: 'Crafting robust and scalable solutions with a focus on performance.',
-            },
+              image: '/image/contractCode.svg', // Placeholder image
+              description: 'Crafting robust and scalable solutions with a focus on performance,',
+            }
             {
               name: 'Charlie Brown',
               role: 'Product Designer',
-              image: '/public/image/research_image.svg', // Placeholder image
-              description: 'Designing intuitive user experiences that delight and empower.',
-            },
-          ].map((member, index) => (
-            <div key={index} className="backdrop-blur-md bg-background/70 border border-border rounded-xl p-8 shadow-lg flex flex-col items-center text-center">
+              image: '/image/research_image.svg', // Placeholder image
+              description: 'Designing intuitive user experiences that delight and empower,',
+            }
+          ].map((member) => (
+            <div key={member.name} className="backdrop-blur-md bg-background/70 border border-border rounded-xl p-8 shadow-lg flex flex-col items-center text-center">
               <Image
                 src={member.image}
                 alt={`Avatar of ${member.name}`}
@@ -89,7 +89,7 @@ export default function About() {
                 height={120}
                 className="rounded-full mb-6 border-4 border-primary/50 shadow-md"
               />
-              <h3 className="text-2xl font-semibold mb-2 tracking-wide" aria-label={`Name: ${member.name}`}>{member.name}</h3>
+              <h3 className="text-2xl font-semibold mb-2 tracking-wide">{member.name}</h3>
               <p className="text-primary mb-3 text-base font-medium">{member.role}</p>
               <p className="text-muted-foreground text-sm leading-relaxed">{member.description}</p>
             </div>
