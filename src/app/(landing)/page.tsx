@@ -10,9 +10,9 @@ import SectionHeading from "@/components/common/SectionHeading";
 
 const sections = [
   { id: "hero", title: "Hero", component: Hero },
-  { id: "revolutionary-features", title: "Revolutionary Features", component: RevolutionaryFeatures },
+  { id: "features", title: "Revolutionary Features", component: RevolutionaryFeatures },
   { id: "open-audit-action", title: "Open Audit Action", component: OpenAuditAction },
-  { id: "research", title: "Research", component: Research },
+  { id: "research-section", title: "Research", component: Research },
   { id: "pricing", title: "Pricing", component: PricingSection },
   { id: "contact", title: "Contact", component: Contact },
   { id: "about", title: "About", component: About },
@@ -42,14 +42,7 @@ export default function Home() {
       </nav>
       {sections.map((section) => {
         const SectionComponent = section.component;
-        return (
-          <section key={section.id} id={section.id} aria-labelledby={`${section.id}-heading`}>
-            {section.title !== "Hero" && (
-              <SectionHeading id={`${section.id}-heading`} title={section.title} />
-            )}
-            <SectionComponent />
-          </section>
-        );
+        return <SectionComponent key={section.id} id={section.id} />;
       })}
     </>
   );

@@ -55,10 +55,10 @@ const plans: Plan[] = [
   },
 ];
 
-export default function PricingSection() {
+export default function PricingSection({ id }: { id: string }) {
   return (
     <section
-      id="pricing"
+      id={id}
       aria-labelledby="pricing-heading"
     className="scroll-mt-24 relative overflow-hidden py-16 sm:py-20"
     >

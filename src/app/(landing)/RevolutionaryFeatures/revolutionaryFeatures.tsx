@@ -2,9 +2,9 @@ import React from "react";
 import RevFeatureCard from "@/components/landing/revFeaturesCard";
 import { Cpu, Zap, DollarSign } from "lucide-react";
 
-export default function RevolutionaryFeatures(): React.ReactElement {
+export default function RevolutionaryFeatures({ id }: { id: string }): React.ReactElement {
   return (
-  <section id="features" className="scroll-mt-24 max-w-6xl mx-auto py-12 px-6">
+  <section id={id} className="scroll-mt-24 max-w-6xl mx-auto py-12 px-6">
       <div className="px-6">
         <div className="text-center">
           <h2

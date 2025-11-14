@@ -8,9 +8,9 @@ import {
   CardContent,
 } from "@/components/ui/card";
 
-export default function OpenAuditAction(): React.ReactElement {
+export default function OpenAuditAction({ id }: { id: string }): React.ReactElement {
   return (
-  <section id="open-audit-action" className="scroll-mt-24 max-w-6xl mx-auto py-12 px-6">
+  <section id={id} className="scroll-mt-24 max-w-6xl mx-auto py-12 px-6">
       <div className="px-6">
         <div className="text-center">
           <h2
