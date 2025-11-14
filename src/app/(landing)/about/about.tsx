@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function About() {
   return (
     <section className="relative container mx-auto py-24 px-4 flex flex-col items-center justify-center min-h-[80vh]">
@@ -34,17 +36,65 @@ export default function About() {
         </div>
       </div>
 
-      <div className="mt-16 max-w-3xl mx-auto text-center backdrop-blur-lg bg-background/80 border border-border rounded-2xl shadow-xl p-10">
-        <h3 className="text-2xl font-semibold mb-4 tracking-wide">Team</h3>
-        <p className="text-muted-foreground mb-6 text-base">
-          A small group of engineers and designers passionate about building the future.
+      {/* Quick Stats Band */}
+      <div className="mt-20 w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        {[
+          { value: '100+', label: 'Projects Completed' },
+          { value: '500K+', label: 'Lines of Code Audited' },
+          { value: '99.9%', label: 'Client Satisfaction' },
+          { value: '24/7', label: 'Support Available' },
+        ].map((stat, index) => (
+          <div key={index} className="backdrop-blur-md bg-background/70 border border-border rounded-xl p-6 shadow-lg">
+            <p className="text-4xl font-bold text-primary mb-2">{stat.value}</p>
+            <p className="text-lg text-muted-foreground">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Team Grid */}
+      <div className="mt-20 w-full max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-extrabold tracking-tight mb-10 bg-clip-text text-transparent bg-gradient-to-r from-foreground via-primary to-muted-foreground">
+          Meet Our Visionaries
+        </h2>
+        <p className="text-lg md:text-xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto">
+          A dedicated group of engineers, designers, and strategists, united by a passion for innovation and a commitment to excellence.
         </p>
-        <a
-          href="#contact"
-          className="inline-block rounded-xl bg-primary px-6 py-2 text-sm font-semibold text-white shadow-md hover:scale-105 transition-transform"
-        >
-          Contact us
-        </a>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {[
+            {
+              name: 'Alice Johnson',
+              role: 'Co-founder & CEO',
+              image: '/image/contactDesign.png', // Placeholder image
+              description: 'Leading with a vision for accessible and powerful developer tools,',
+            },
+            {
+              name: 'Bob Williams',
+              role: 'Lead Engineer',
+              image: '/image/contractCode.svg', // Placeholder image
+              description: 'Crafting robust and scalable solutions with a focus on performance,',
+            },
+            {
+              name: 'Charlie Brown',
+              role: 'Product Designer',
+              image: '/image/research_image.svg', // Placeholder image
+              description: 'Designing intuitive user experiences that delight and empower,',
+            }
+          ].map((member) => (
+            <div key={member.name} className="backdrop-blur-md bg-background/70 border border-border rounded-xl p-8 shadow-lg flex flex-col items-center text-center">
+              <Image
+                src={member.image}
+                alt={`Avatar of ${member.name}`}
+                width={120}
+                height={120}
+                className="rounded-full mb-6 border-4 border-primary/50 shadow-md"
+              />
+              <h3 className="text-2xl font-semibold mb-2 tracking-wide">{member.name}</h3>
+              <p className="text-primary mb-3 text-base font-medium">{member.role}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{member.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
