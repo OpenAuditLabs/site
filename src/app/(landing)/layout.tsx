@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     siteName: "OpenAuditLabs",
     images: [
       {
-        url: "https://openauditlabs.com/og-image.jpg", // Replace with your actual Open Graph image
+        url: "https://openauditlabs.com/Dashboard.png",
         width: 1200,
         height: 630,
         alt: "OpenAuditLabs",
@@ -30,7 +30,7 @@ export default function LandingLayout({
 }) {
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
-      <main id="landing-main">{children}</main>
+      {children}
     </div>
   );
 
