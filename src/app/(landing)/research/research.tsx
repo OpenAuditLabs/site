@@ -43,16 +43,17 @@ const DEFAULTS: Required<
  * @returns A React element representing the Research section.
  */
 export default function Research({
+  id,
   imageSrc = DEFAULTS.imageSrc,
   heading = DEFAULTS.heading,
   subheading = DEFAULTS.subheading,
   body = DEFAULTS.body,
   primaryCta,
   secondaryCta,
-}: ResearchProps): React.ReactElement {
+}: ResearchProps & { id: string }): React.ReactElement {
   return (
     <section
-      id="research-section"
+      id={id}
       aria-labelledby="research-heading"
   className="relative overflow-hidden py-10 sm:py-12"
     >

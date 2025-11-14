@@ -1,9 +1,9 @@
 import React from "react";
 import HeroCarousel from "@/components/landing/hero/HeroCarousel";
 
-export default function Hero() {
+export default function Hero({ id }: { id: string }) {
   return (
-    <section aria-label="Hero" className="relative overflow-hidden">
+    <section id={id} aria-label="Hero" className="relative overflow-hidden">
       {/* soft radial backdrop similar to mock */}
       <div
         aria-hidden
