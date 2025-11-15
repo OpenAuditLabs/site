@@ -1,4 +1,6 @@
 import ContactForm from "@/components/landing/ContactForm";
+import { CONTACT_INFO } from "@/config/contactInfo";
+import { SOCIAL_PROOF_METRICS } from "@/config/socialProof";
 
 export default function Contact() {
   return (
@@ -22,9 +24,47 @@ export default function Contact() {
           </p>
         </div>
 
-        {/* Contact Form Section */}
-        <div className="mt-16 lg:mt-20">
-          <ContactForm />
+        {/* Contact Content */}
+        <div className="mt-16 lg:mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div>
+            <ContactForm />
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-10">
+            {/* Contact Info */}
+            <div className="bg-card p-6 rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
+              <p className="text-muted-foreground mb-2">
+                <span className="font-semibold text-foreground">Email:</span> {CONTACT_INFO.email}
+              </p>
+              <p className="text-muted-foreground">
+                <span className="font-semibold text-foreground">Phone:</span> {CONTACT_INFO.phone}
+              </p>
+            </div>
+
+            {/* Map Placeholder */}
+            <div className="bg-card p-6 rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold mb-4">Our Location</h2>
+              <div className="w-full">
+                <iframe
+                  src={CONTACT_INFO.googleMapsEmbedUrl}
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  title="Our Location"
+                  className="rounded-lg"
+                ></iframe>
+                <p className="mt-2 text-muted-foreground text-center">{CONTACT_INFO.address}</p>
+              </div>
+            </div>
+
+
+          </div>
         </div>
       </div>
     </section>
