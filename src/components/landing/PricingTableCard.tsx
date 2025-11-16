@@ -18,7 +18,8 @@ export interface Plan {
   name: string;
   subtitle?: string | null;
   /** Price in dollars */
-  price: number;
+  monthlyPrice: number;
+  yearlyPrice: number;
   credits: number;
   badge?: string | null;
   features: string[];
