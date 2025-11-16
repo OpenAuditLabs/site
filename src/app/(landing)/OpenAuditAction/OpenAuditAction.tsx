@@ -19,11 +19,16 @@ export default function OpenAuditAction({ id }: { id: string }): React.ReactElem
       if (isPlaying) {
         videoRef.current.pause();
         setAnnouncement('Video paused.');
+        setIsPlaying(false);
       } else {
-        videoRef.current.play();
-        setAnnouncement('Video playing.');
+        videoRef.current.play().then(() => {
+          setAnnouncement('Video playing.');
+          setIsPlaying(true);
+        }).catch((error) => {
+          console.error('Video playback failed:', error);
+          setAnnouncement('Video playback failed. Please try again.');
+        });
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -68,7 +73,7 @@ export default function OpenAuditAction({ id }: { id: string }): React.ReactElem
             <video
               ref={videoRef}
               src="/videos/OpenAuditTeaser.mp4" // Assuming a video exists here
-              poster="/public/Dashboard.png" // Placeholder image
+              poster="/Dashboard.png" // Placeholder image
               loop
               className="h-full w-full rounded-lg object-cover"
               aria-describedby="video-description"
