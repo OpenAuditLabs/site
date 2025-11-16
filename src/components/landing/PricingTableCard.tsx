@@ -24,6 +24,7 @@ export interface Plan {
   badge?: string | null;
   features: string[];
   featured?: boolean;
+  price: number;
 }
 
 const currencyFmt = new Intl.NumberFormat('en-US', {

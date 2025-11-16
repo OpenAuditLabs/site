@@ -65,15 +65,16 @@ const plans: Plan[] = [
 ];
 
 export default function PricingSection({ id }: { id: string }) {
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>(() => {
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const savedBillingCycle = localStorage.getItem("billingCycle");
       if (savedBillingCycle === "monthly" || savedBillingCycle === "yearly") {
-        return savedBillingCycle;
+        setBillingCycle(savedBillingCycle);
       }
     }
-    return "monthly";
-  });
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
