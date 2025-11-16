@@ -32,16 +32,18 @@ export default function OpenAuditAction({ id }: { id: string }): React.ReactElem
     }
   };
 
-  const [activeFilters, setActiveFilters] = useState<string[]>(['Critical', 'Medium', 'Small']);
+  const severities = ['Critical', 'Medium', 'Small'];
+  const [activeFilters, setActiveFilters] = useState<string[]>(severities);
 
   const handleFilterToggle = (severity: string) => {
+    const willBeApplied = !activeFilters.includes(severity);
     setActiveFilters((prevFilters) => {
       const newFilters = prevFilters.includes(severity)
         ? prevFilters.filter((f) => f !== severity)
         : [...prevFilters, severity];
-      setAnnouncement(`${severity} filter ${newFilters.includes(severity) ? 'applied' : 'removed'}.`);
       return newFilters;
     });
+    setAnnouncement(`${severity} filter ${willBeApplied ? 'applied' : 'removed'}.`);
   };
 
   return (
@@ -147,7 +149,7 @@ export default function OpenAuditAction({ id }: { id: string }): React.ReactElem
                 <CardDescription>Found 3 issues in your code</CardDescription>
               </CardHeader>
               <div className="flex justify-center gap-2 p-4">
-                {['Critical', 'Medium', 'Small'].map((severity) => (
+                {severities.map((severity) => (
                   <Button
                     key={severity}
                     onClick={() => handleFilterToggle(severity)}
