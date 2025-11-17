@@ -51,15 +51,13 @@ const allFeatures: Feature[] = [
 
 export default function RevolutionaryFeatures({ id }: { id: string }): React.ReactElement {
   const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [filteredFeatures, setFilteredFeatures] = useState<Feature[]>(allFeatures);
-
-  useEffect(() => {
+  const filteredFeatures = React.useMemo(() => {
     if (activeCategory === "All") {
-      setFilteredFeatures(allFeatures);
+      return allFeatures;
     } else {
-      setFilteredFeatures(allFeatures.filter((feature) => feature.category === activeCategory));
+      return allFeatures.filter((feature) => feature.category === activeCategory);
     }
-  }, [activeCategory]);
+  }, [activeCategory, allFeatures]);
 
   return (
   <section id={id} className="scroll-mt-24 max-w-6xl mx-auto py-12 px-6">
