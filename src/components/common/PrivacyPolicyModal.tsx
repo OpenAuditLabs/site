@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+import { useEffect, useRef } from "react";
 
 export default function PrivacyPolicyModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const modalRef = React.useRef<HTMLDivElement>(null);
-  React.useEffect(() => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
     if (open) {
       // Trap focus inside modal
       const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
