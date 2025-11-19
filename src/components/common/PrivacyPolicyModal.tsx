@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function PrivacyPolicyModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const modalRef = React.useRef<HTMLDivElement>(null);
