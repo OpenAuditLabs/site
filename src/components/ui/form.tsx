@@ -61,7 +61,28 @@ const useFormField = () => {
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
+    formHintId: `${id}-form-item-hint`,
+    formLegendId: `${id}-form-item-legend`,
     ...fieldState,
+  }
+}
+
+const useFormItemIds = () => {
+  const itemContext = React.useContext(FormItemContext)
+
+  if (!itemContext) {
+    throw new Error("useFormItemIds should be used within <FormItem>")
+  }
+
+  const { id } = itemContext
+
+  return {
+    id,
+    formItemId: `${id}-form-item`,
+    formDescriptionId: `${id}-form-item-description`,
+    formMessageId: `${id}-form-item-message`,
+    formHintId: `${id}-form-item-hint`,
+    formLegendId: `${id}-form-item-legend`,
   }
 }
 
@@ -155,6 +176,42 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   )
 }
 
+function FormFieldset({ className, ...props }: React.ComponentProps<"fieldset">) {
+  return (
+    <fieldset
+      data-slot="form-fieldset"
+      className={cn("grid gap-2", className)}
+      {...props}
+    />
+  )
+}
+
+function FormLegend({ className, ...props }: React.ComponentProps<"legend">) {
+  const { formLegendId } = useFormItemIds()
+
+  return (
+    <legend
+      data-slot="form-legend"
+      id={formLegendId}
+      className={cn("text-lg font-semibold", className)}
+      {...props}
+    />
+  )
+}
+
+function FormHint({ className, ...props }: React.ComponentProps<"p">) {
+  const { formHintId } = useFormItemIds()
+
+  return (
+    <p
+      data-slot="form-hint"
+      id={formHintId}
+      className={cn("text-muted-foreground text-sm", className)}
+      {...props}
+    />
+  )
+}
+
 export {
   useFormField,
   Form,
@@ -164,4 +221,8 @@ export {
   FormDescription,
   FormMessage,
   FormField,
+  FormFieldset,
+  FormLegend,
+  FormHint,
+  useFormItemIds,
 }
