@@ -44,7 +44,6 @@ const FormField = <
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)
-  const itemContext = React.useContext(FormItemContext)
   const { getFieldState } = useFormContext()
   const formState = useFormState({ name: fieldContext.name })
   const fieldState = getFieldState(fieldContext.name, formState)
@@ -53,16 +52,16 @@ const useFormField = () => {
     throw new Error("useFormField should be used within <FormField>")
   }
 
-  const { id } = itemContext
+  const { id, formItemId, formDescriptionId, formMessageId, formHintId, formLegendId } = useFormItemIds()
 
   return {
     id,
     name: fieldContext.name,
-    formItemId: `${id}-form-item`,
-    formDescriptionId: `${id}-form-item-description`,
-    formMessageId: `${id}-form-item-message`,
-    formHintId: `${id}-form-item-hint`,
-    formLegendId: `${id}-form-item-legend`,
+    formItemId,
+    formDescriptionId,
+    formMessageId,
+    formHintId,
+    formLegendId,
     ...fieldState,
   }
 }
@@ -187,12 +186,9 @@ function FormFieldset({ className, ...props }: React.ComponentProps<"fieldset">)
 }
 
 function FormLegend({ className, ...props }: React.ComponentProps<"legend">) {
-  const { formLegendId } = useFormItemIds()
-
   return (
     <legend
       data-slot="form-legend"
-      id={formLegendId}
       className={cn("text-lg font-semibold", className)}
       {...props}
     />

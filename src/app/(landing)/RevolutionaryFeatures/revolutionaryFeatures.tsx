@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect, useRef } from "react";
 import RevFeatureCard from "@/components/landing/revFeaturesCard";
 import { Cpu, Zap, DollarSign, ShieldCheck, Code, Lightbulb } from "lucide-react";
