@@ -44,7 +44,6 @@ const FormField = <
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)
-  const itemContext = React.useContext(FormItemContext)
   const { getFieldState } = useFormContext()
   const formState = useFormState({ name: fieldContext.name })
   const fieldState = getFieldState(fieldContext.name, formState)
@@ -53,15 +52,36 @@ const useFormField = () => {
     throw new Error("useFormField should be used within <FormField>")
   }
 
-  const { id } = itemContext
+  const { id, formItemId, formDescriptionId, formMessageId, formHintId, formLegendId } = useFormItemIds()
 
   return {
     id,
     name: fieldContext.name,
+    formItemId,
+    formDescriptionId,
+    formMessageId,
+    formHintId,
+    formLegendId,
+    ...fieldState,
+  }
+}
+
+const useFormItemIds = () => {
+  const itemContext = React.useContext(FormItemContext)
+
+  if (!itemContext) {
+    throw new Error("useFormItemIds should be used within <FormItem>")
+  }
+
+  const { id } = itemContext
+
+  return {
+    id,
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
-    ...fieldState,
+    formHintId: `${id}-form-item-hint`,
+    formLegendId: `${id}-form-item-legend`,
   }
 }
 
@@ -155,6 +175,39 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   )
 }
 
+function FormFieldset({ className, ...props }: React.ComponentProps<"fieldset">) {
+  return (
+    <fieldset
+      data-slot="form-fieldset"
+      className={cn("grid gap-2", className)}
+      {...props}
+    />
+  )
+}
+
+function FormLegend({ className, ...props }: React.ComponentProps<"legend">) {
+  return (
+    <legend
+      data-slot="form-legend"
+      className={cn("text-lg font-semibold", className)}
+      {...props}
+    />
+  )
+}
+
+function FormHint({ className, ...props }: React.ComponentProps<"p">) {
+  const { formHintId } = useFormItemIds()
+
+  return (
+    <p
+      data-slot="form-hint"
+      id={formHintId}
+      className={cn("text-muted-foreground text-sm", className)}
+      {...props}
+    />
+  )
+}
+
 export {
   useFormField,
   Form,
@@ -164,4 +217,8 @@ export {
   FormDescription,
   FormMessage,
   FormField,
+  FormFieldset,
+  FormLegend,
+  FormHint,
+  useFormItemIds,
 }
