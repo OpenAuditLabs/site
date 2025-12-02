@@ -94,6 +94,8 @@ export default function HeroCarousel() {
 						strokeWidth={1.5}
 						stroke="currentColor"
 						className="h-6 w-6"
+						aria-hidden="true"
+						focusable="false"
 					>
 						<path
 							strokeLinecap="round"
@@ -114,6 +116,8 @@ export default function HeroCarousel() {
 						strokeWidth={1.5}
 						stroke="currentColor"
 						className="h-6 w-6"
+						aria-hidden="true"
+						focusable="false"
 					>
 						<path
 							strokeLinecap="round"
@@ -148,6 +152,8 @@ export default function HeroCarousel() {
 							viewBox="0 0 24 24"
 							fill="currentColor"
 							className="h-4 w-4"
+							aria-hidden="true"
+							focusable="false"
 						>
 							<path
 								fillRule="evenodd"
@@ -161,6 +167,8 @@ export default function HeroCarousel() {
 							viewBox="0 0 24 24"
 							fill="currentColor"
 							className="h-4 w-4"
+							aria-hidden="true"
+							focusable="false"
 						>
 							<path
 								fillRule="evenodd"
