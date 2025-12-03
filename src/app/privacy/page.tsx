@@ -43,7 +43,6 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
             </ul>
           </nav>
 
-          <section>
             <SectionHeading title="1. Summary" id="summary" />
             <p>
               We collect only what we need to deliver AI-driven smart contract auditing:
@@ -52,9 +51,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
               your data. We share data with service providers strictly to operate and improve
               the Services.
             </p>
-          </section>
 
-          <section>
             <SectionHeading title="2. Information We Collect" id="data-we-collect" />
             <ul>
               <li>
@@ -78,9 +75,7 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
                 storage to maintain sessions, preferences, and gather aggregate analytics.
               </li>
             </ul>
-          </section>
 
-          <section>
             <SectionHeading title="3. How We Use Information" id="how-we-use" />
             <ul>
               <li>Provide, operate, and improve the Services and audit results.</li>
@@ -89,7 +84,6 @@ export default function PrivacyPolicyPage(): React.JSX.Element {
               <li>Monitor performance, debug issues, and maintain reliability and security.</li>
               <li>Comply with legal obligations and enforce our Terms of Service.</li>
             </ul>
-          </section>
 
           <section>
             <SectionHeading title="4. Legal Bases (EEA/UK)" id="legal-bases" />
