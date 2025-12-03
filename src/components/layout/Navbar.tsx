@@ -3,14 +3,14 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Menu, X, Sun, Moon, Laptop } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import { ThemeDropdown } from "@/components/common/ThemeDropdown";
 
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -78,29 +78,9 @@ export default function Navbar() {
                   Pricing
                 </Link>
                 {mounted && (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                        <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                        <span className="sr-only">Toggle theme</span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => setTheme("light")}>
-                        Light
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setTheme("dark")}>
-                        Dark
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setTheme("system")}>
-                        System
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <ThemeDropdown />
                 )}
 
-                </div>
               </div>
 
               {/* Mobile menu button + mobile theme (visible on small screens) */}
@@ -128,30 +108,11 @@ export default function Navbar() {
                   )}
                 </button>
 
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                      <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                      <span className="sr-only">Toggle theme</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => setTheme("light")}>
-                      Light
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTheme("dark")}>
-                      Dark
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setTheme("system")}>
-                      System
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                {mounted && (
+                  <ThemeDropdown />
+                )}
               </div>
-            </div>
-          </div>
-        </div> {/* This closes the div that starts on line 32 */}
+              
 
       {/* Mobile menu panel */}
       <div
