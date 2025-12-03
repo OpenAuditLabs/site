@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sun, Moon, Laptop } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
-import ThemeToggle from "./ThemeToggle";
+import { ThemeDropdown } from "@/components/common/ThemeDropdown";
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -76,8 +77,10 @@ export default function Navbar() {
                 >
                   Pricing
                 </Link>
-                  <ThemeToggle isScrolled={isScrolled} mounted={mounted} />
-                </div>
+                {mounted && (
+                  <ThemeDropdown />
+                )}
+
               </div>
 
               {/* Mobile menu button + mobile theme (visible on small screens) */}
@@ -105,11 +108,11 @@ export default function Navbar() {
                   )}
                 </button>
 
-                <ThemeToggle isScrolled={isScrolled} mounted={mounted} />
+                {mounted && (
+                  <ThemeDropdown />
+                )}
               </div>
-            </div>
-          </div>
-        </div> {/* This closes the div that starts on line 32 */}
+              
 
       {/* Mobile menu panel */}
       <div
