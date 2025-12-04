@@ -63,7 +63,11 @@ const PricingCard = React.memo(function PricingCard({
   return (
     <Card
       className={`group relative h-full rounded-2xl ${
-        isMostPopular || featured ? "lg:border-2 shadow-md" : ""
+        featured
+          ? "ring-2 ring-ring/40 shadow-lg"
+          : isMostPopular
+          ? "lg:border-2 shadow-md"
+          : ""
       } transition-all duration-300 ease-out will-change-transform hover:-translate-y-0.5 hover:scale-[1.005] hover:shadow-lg ring-0 ring-transparent hover:ring-2 hover:ring-ring/20 hover:border-ring/30 hover:bg-gradient-to-b hover:from-accent/5 hover:to-transparent`}
       style={{ borderColor: isMostPopular || featured ? "var(--ring)" : undefined }}
       onMouseMove={(e) => {
