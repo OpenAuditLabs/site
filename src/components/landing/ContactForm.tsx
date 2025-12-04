@@ -37,7 +37,7 @@ export default function ContactForm(): React.JSX.Element {
       errors.projectDetails = "Project Details are required.";
     }
     if (honeypot) {
-      errors.honeypot = "Bot detected.";
+      errors.honeypot = "Bot detected. Please do not fill out this field.";
     }
 
     setClientErrors(errors);
@@ -50,10 +50,12 @@ export default function ContactForm(): React.JSX.Element {
       formRef.current?.reset();
       setShowSuccess(true);
       setClientErrors({}); // Clear client errors on successful submission
+      // Clear server action errors as well on success, to prevent stale errors on next interaction
+      formAction(new FormData()); // Re-run with empty data to reset the state
       const t = setTimeout(() => setShowSuccess(false), 4000);
       return () => clearTimeout(t);
     }
-  }, [state?.ok]);
+  }, [state?.ok, formAction]);
 
   return (
     <section aria-labelledby="contact-heading" className="w-full">
