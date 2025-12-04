@@ -51,7 +51,7 @@ export default function ContactForm(): React.JSX.Element {
       setShowSuccess(true);
       setClientErrors({}); // Clear client errors on successful submission
       // Clear server action errors as well on success, to prevent stale errors on next interaction
-      formAction(new FormData()); // Re-run with empty data to reset the state
+
       const t = setTimeout(() => setShowSuccess(false), 4000);
       return () => clearTimeout(t);
     }
@@ -208,8 +208,8 @@ export default function ContactForm(): React.JSX.Element {
                     aria-labelledby="label-firstName"
                     autoComplete="given-name"
                     required
-                    aria-invalid={!!(state?.fieldErrors?.firstName || clientErrors.firstName)}
-                    aria-describedby={state?.fieldErrors?.firstName || clientErrors.firstName ? "firstName-error" : undefined}
+                    aria-invalid={!!((!state?.ok && state?.fieldErrors?.firstName) || clientErrors.firstName)}
+                    aria-describedby={((!state?.ok && state?.fieldErrors?.firstName) || clientErrors.firstName) ? "firstName-error" : undefined}
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                   />
                   <label
@@ -219,9 +219,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     First Name
                   </label>
-                  {(state?.fieldErrors?.firstName || clientErrors.firstName) && (
+                  {((!state?.ok && state?.fieldErrors?.firstName) || clientErrors.firstName) && (
                     <p id="firstName-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="assertive">
-                      {state?.fieldErrors?.firstName || clientErrors.firstName}
+                      {(!state?.ok && state?.fieldErrors?.firstName) || clientErrors.firstName}
                     </p>
                   )}
                 </div>
@@ -235,8 +235,8 @@ export default function ContactForm(): React.JSX.Element {
                     aria-labelledby="label-lastName"
                     autoComplete="family-name"
                     required
-                    aria-invalid={!!(state?.fieldErrors?.lastName || clientErrors.lastName)}
-                    aria-describedby={state?.fieldErrors?.lastName || clientErrors.lastName ? "lastName-error" : undefined}
+                    aria-invalid={!!((!state?.ok && state?.fieldErrors?.lastName) || clientErrors.lastName)}
+                    aria-describedby={((!state?.ok && state?.fieldErrors?.lastName) || clientErrors.lastName) ? "lastName-error" : undefined}
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                   />
                   <label
@@ -246,9 +246,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Last Name
                   </label>
-                  {(state?.fieldErrors?.lastName || clientErrors.lastName) && (
+                  {((!state?.ok && state?.fieldErrors?.lastName) || clientErrors.lastName) && (
                     <p id="lastName-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="assertive">
-                      {state?.fieldErrors?.lastName || clientErrors.lastName}
+                      {(!state?.ok && state?.fieldErrors?.lastName) || clientErrors.lastName}
                     </p>
                   )}
                 </div>
@@ -264,8 +264,8 @@ export default function ContactForm(): React.JSX.Element {
                     aria-labelledby="label-email2"
                     autoComplete="email"
                     required
-                    aria-invalid={!!(state?.fieldErrors?.email || clientErrors.email)}
-                    aria-describedby={state?.fieldErrors?.email || clientErrors.email ? "email-error" : undefined}
+                    aria-invalid={!!((!state?.ok && state?.fieldErrors?.email) || clientErrors.email)}
+                    aria-describedby={((!state?.ok && state?.fieldErrors?.email) || clientErrors.email) ? "email-error" : undefined}
                     className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
                   />
                   <label
@@ -275,9 +275,9 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Email
                   </label>
-                  {(state?.fieldErrors?.email || clientErrors.email) && (
+                  {((!state?.ok && state?.fieldErrors?.email) || clientErrors.email) && (
                     <p id="email-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="assertive">
-                      {state?.fieldErrors?.email || clientErrors.email}
+                      {(!state?.ok && state?.fieldErrors?.email) || clientErrors.email}
                     </p>
                   )}
                 </div>
@@ -299,7 +299,7 @@ export default function ContactForm(): React.JSX.Element {
                   >
                     Company Name (optional)
                   </label>
-                  {state?.fieldErrors?.company && (
+                  {(!state?.ok && state?.fieldErrors?.company) && (
                     <p className="mt-1 text-xs text-red-500" role="alert">
                       {state.fieldErrors.company}
                     </p>
@@ -314,9 +314,9 @@ export default function ContactForm(): React.JSX.Element {
                   rows={4}
                   placeholder=" "
                   aria-labelledby="label-projectDetails2"
-                  aria-describedby={state?.fieldErrors?.projectDetails || clientErrors.projectDetails ? "projectDetails-error" : "projectDetails-help"}
+                  aria-describedby={((!state?.ok && state?.fieldErrors?.projectDetails) || clientErrors.projectDetails) ? "projectDetails-error" : "projectDetails-help"}
                   required
-                  aria-invalid={!!(state?.fieldErrors?.projectDetails || clientErrors.projectDetails)}
+                  aria-invalid={!!((!state?.ok && state?.fieldErrors?.projectDetails) || clientErrors.projectDetails)}
                   className="peer w-full bg-transparent border-b border-border px-0 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
                 />
                 <label
@@ -332,9 +332,9 @@ export default function ContactForm(): React.JSX.Element {
                 >
                   Describe your project goals, scope, and timeline.
                 </p>
-                {(state?.fieldErrors?.projectDetails || clientErrors.projectDetails) && (
+                {((!state?.ok && state?.fieldErrors?.projectDetails) || clientErrors.projectDetails) && (
                   <p id="projectDetails-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="assertive">
-                    {state?.fieldErrors?.projectDetails || clientErrors.projectDetails}
+                    {(!state?.ok && state?.fieldErrors?.projectDetails) || clientErrors.projectDetails}
                   </p>
                 )}
               </div>

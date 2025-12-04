@@ -147,5 +147,6 @@ export async function sendContactForm(
   return {
     ok: true,
     message: "Thanks for reaching out — we\'ll get back to you soon.",
+    fieldErrors: {},
   };
 }
