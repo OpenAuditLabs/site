@@ -41,8 +41,14 @@
   display: inline-block; /* keep icons/layout stable */
 }
 
-/* Usage: Apply this class to an element to make it fade in and move up slightly. */
-/* Example: <div class="animate-fade-in-up">...</div> */
+/*
+ * .animate-fade-in-up:
+ *   Applies a fade-in-up animation to an element.
+ *   Usage: Add this class to any HTML element, e.g., <div class="animate-fade-in-up">...</div>
+ *   The animation makes the element fade in while moving slightly upwards.
+ *   Consideration for prefers-reduced-motion: This animation is automatically disabled
+ *   for users who have "reduced motion" enabled in their system preferences, ensuring accessibility.
+ */
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
 }
