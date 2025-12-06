@@ -55,6 +55,7 @@ export default function RootLayout({
         <body
           className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
         >
+          <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-0 focus:top-0 focus:z-50 focus:bg-primary focus:p-4 focus:text-primary-foreground">Skip to content</a>
           <a href="#main-content" className="skip-to-content">Skip to content</a>
           <ThemeProvider
             attribute="class"
