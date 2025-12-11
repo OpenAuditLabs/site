@@ -111,11 +111,8 @@ export default function Navbar() {
                 {mounted && (
                   <ThemeDropdown />
                 )}
-              </div>
-              
-
-      {/* Mobile menu panel */}
-      <div
+                                        </div>
+                                  {/* Mobile menu panel */}      <div
         id="mobile-menu"
         className={`md:hidden ${
           open ? "block" : "hidden"
@@ -165,6 +162,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </nav>
+      </div>
+</nav>
   );
 }
