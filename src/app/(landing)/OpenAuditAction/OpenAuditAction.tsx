@@ -166,7 +166,9 @@ export default function OpenAuditAction({ id }: { id: string }): React.ReactElem
               <CardContent className="space-y-5 pt-6">
                 {/* Critical */}
                 <div
-                  className={`rounded-2xl border p-5 ${!activeFilters.includes('Critical') ? 'hidden' : ''} ${activeFilters.includes('Critical') ? 'ring-2 ring-blue-500 ring-offset-2' : ''}`}
+                  className={`rounded-2xl border p-5 ${!activeFilters.includes('Critical') ? 'hidden' : ''} ${
+                    activeFilters.includes('Critical') ? 'ring-2 ring-blue-500 ring-offset-2' : ''
+                  }`}
                   style={{
                     backgroundColor: "var(--report-critical-bg)",
                     borderColor: "var(--report-critical-stroke)",
@@ -195,7 +197,9 @@ export default function OpenAuditAction({ id }: { id: string }): React.ReactElem
 
                 {/* Medium */}
                 <div
-                  className={`rounded-2xl border p-5 ${!activeFilters.includes('Medium') ? 'hidden' : ''} ${activeFilters.includes('Medium') ? 'ring-2 ring-blue-500 ring-offset-2' : ''}`}
+                  className={`rounded-2xl border p-5 ${!activeFilters.includes('Medium') ? 'hidden' : ''} ${
+                    activeFilters.includes('Medium') ? 'ring-2 ring-blue-500 ring-offset-2' : ''
+                  }`}
                   style={{
                     backgroundColor: "var(--report-medium-bg)",
                     borderColor: "var(--report-medium-stroke)",
@@ -222,7 +226,9 @@ export default function OpenAuditAction({ id }: { id: string }): React.ReactElem
 
                 {/* Small */}
                 <div
-                  className={`rounded-2xl border p-5 ${!activeFilters.includes('Small') ? 'hidden' : ''} ${activeFilters.includes('Small') ? 'ring-2 ring-blue-500 ring-offset-2' : ''}`}
+                  className={`rounded-2xl border p-5 ${!activeFilters.includes('Small') ? 'hidden' : ''} ${
+                    activeFilters.includes('Small') ? 'ring-2 ring-blue-500 ring-offset-2' : ''
+                  }`}
                   style={{
                     backgroundColor: "var(--report-small-bg)",
                     borderColor: "var(--report-small-stroke)",
