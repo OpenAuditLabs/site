@@ -1,3 +1,18 @@
+/* Progress Indeterminate: continuous movement for indeterminate state */
+@keyframes progressIndeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Utility classes */
+.animate-progress-indeterminate {
+  animation: progressIndeterminate 1.5s ease-in-out infinite;
+}
+
 /* # Keyframes & transitions */
 
 /* Fade-in: subtle entrance used for cards, sections, heroes */
@@ -62,7 +77,8 @@
   .fade-in,
   .spin-slow,
   .animate-fade-in-up,
-  .animate-fade-in {
+  .animate-fade-in,
+  .animate-progress-indeterminate {
     animation: none !important;
   }
 }
