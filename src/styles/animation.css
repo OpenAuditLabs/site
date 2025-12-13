@@ -77,7 +77,8 @@
   .fade-in,
   .spin-slow,
   .animate-fade-in-up,
-  .animate-fade-in {
+  .animate-fade-in,
+  .animate-progress-indeterminate {
     animation: none !important;
   }
 }
